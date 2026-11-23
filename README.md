@@ -4,12 +4,13 @@ Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, 
 
 | Muốn làm gì? | Mở từ đây |
 |---|---|
+| Rà từng yêu cầu của mẫu, đối chiếu cả bảy pilot và chạy mã gốc Pilot 7 | [Bản rà trước khi nộp và lệnh tái lập](docs/ra-soat-truoc-khi-nop.md) · [Kết quả theo pilot](evidence/pilot-outcomes.csv) |
 | Hiểu dự án từ quyết định tài trợ tới lúc kết thúc | [Phân tích vòng đời](FAME_Phan_tich_vong_doi_du_an.md) |
 | Xem quyết định của PM, phép thử, phản chứng và điều kiện nghiệm thu theo mười miền | [Phân tích quản lý chuyên sâu](docs/phan-tich-quan-ly.md) |
 | Truy một con số về đúng tài liệu, trang và phạm vi | [Sổ nguồn](evidence/README.md) |
 | Xem các số được chương trình tính lại | [Bảng kết quả](results/ket-qua.md) · [Dữ liệu JSON](results/pm_results.json) · [Thử trọng số trên 604 dòng](results/ranking_sensitivity.json) |
 | Kiểm tra quy tắc và trường hợp biên | [Mã phân tích](fame_pm/) · [Bộ kiểm thử](tests/) |
-| Chạy trực tiếp trên GitHub | [Verify FAME analysis](https://github.com/dinhvanan307/FAME_PM/actions/workflows/verify.yml). Trong Run workflow, chọn kiểm tra CSV gốc nếu muốn tải lại dữ liệu Zenodo. |
+| Chạy trực tiếp trên GitHub | [Verify FAME analysis](https://github.com/dinhvanan307/FAME_PM/actions/workflows/verify.yml). Trong Run workflow, chọn `original_data` để tải CSV Zenodo hoặc `pilot_sources` để kiểm ba PDF và chạy thành phần gốc của Pilot 7. |
 | Xuất lại tài liệu nộp | [Cách dựng Word và PDF](report/README.md) |
 
 ## Từ bản clone đến kết quả

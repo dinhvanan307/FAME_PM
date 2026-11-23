@@ -1,0 +1,21 @@
+{
+  "upstream": "https://github.com/giorgosfatouros/IIoT-Data-Quality-Assessment",
+  "commit": "d5eb4c69addf9078c5d80042ea2229f50a43ed41",
+  "configuration": "backend/config/tags.csv",
+  "function": "worker.src.quality_assessment.QualityAssessmentEngine.validate_value",
+  "configured_rows": 82,
+  "tested_tags": 79,
+  "non_numeric_thresholds": {
+    "75PI823": {
+      "LOW_THRESHOLD": "1,799,999,952,316,280",
+      "HIGH_THRESHOLD": ""
+    }
+  },
+  "tags_without_threshold_type": [
+    "22SI101",
+    "75PI808"
+  ],
+  "boundaries": 93,
+  "passed_boundary_cases": 279,
+  "observations": "Constructed boundary values; historical plant telemetry was not used."
+}

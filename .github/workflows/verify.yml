@@ -9,6 +9,10 @@ on:
         description: Verify original Zenodo CSV files
         type: boolean
         default: false
+      pilot_sources:
+        description: Verify all seven pilots from FAME PDFs and replay the upstream Pilot 7 component
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -26,3 +30,24 @@ jobs:
       - if: ${{ github.event_name == 'workflow_dispatch' && inputs.original_data }}
         run: python -m fame_pm --check --download --data-dir du_lieu
       - run: python report/build_report.py --out build
+
+  pilot-sources:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.pilot_sources }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r report/requirements.txt
+      - run: python -m fame_pm.portfolio --data-dir du_lieu/portfolio --download --check
+      - uses: actions/checkout@v5
+        with:
+          repository: giorgosfatouros/IIoT-Data-Quality-Assessment
+          ref: d5eb4c69addf9078c5d80042ea2229f50a43ed41
+          path: du_lieu/pilot7-upstream
+          persist-credentials: false
+      - run: python -m venv du_lieu/pilot7-env
+      - run: du_lieu/pilot7-env/bin/python -m pip install -r du_lieu/pilot7-upstream/worker/requirements.txt
+      - run: du_lieu/pilot7-env/bin/python -m fame_pm.pilot7 --checkout du_lieu/pilot7-upstream --check

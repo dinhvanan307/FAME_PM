@@ -1,6 +1,7 @@
 """Build the course submission using the published analysis and the editable UET layout."""
 
 import argparse
+import csv
 from datetime import date
 from decimal import Decimal, ROUND_HALF_UP
 import json
@@ -71,6 +72,69 @@ def fill(doc, fields):
         text.text = re.sub(r"\[\[([a-zA-Z0-9_]+)\]\]", substitute, text.text or "")
     if not used or "[[" in "".join(doc.element.body.itertext()):
         raise ValueError("Missing or fragmented report fields")
+
+
+def append_portfolio(doc):
+    portfolio = json.loads((ROOT / "results/pilot_portfolio.json").read_text(encoding="utf-8"))
+    upstream = json.loads((ROOT / "results/pilot7_boundaries.json").read_text(encoding="utf-8"))
+    with (ROOT / "evidence/pilot-outcomes.csv").open(encoding="utf-8", newline="") as source:
+        findings = {int(row["pilot"]): row for row in csv.DictReader(source)}
+    if list(findings) != [p["pilot"] for p in portfolio["pilots"]]:
+        raise ValueError("Pilot findings do not match the PDF index")
+
+    def title(text):
+        paragraph = doc.add_paragraph(text, style="Heading 2")
+        paragraph.paragraph_format.page_break_before = True
+
+    title("F  Kết quả của bảy thí điểm FAME")
+    doc.add_paragraph(
+        f"Bảng 1 của D6.4 liệt kê {len(findings)} pilot với {portfolio['total_use_cases']} ca sử dụng. "
+        "D6.2 mô tả vận hành từng pilot. D6.3 ghi kết quả đánh giá. Các dẫn trang dưới đây "
+        "dùng số trang của tệp PDF, tính cả trang bìa. Số liệu trong câu đầu mỗi mục do "
+        "FAME báo cáo. Phần tiếp theo nêu nhận định quản lý của người viết."
+    )
+    for pilot in portfolio["pilots"]:
+        n = pilot["pilot"]
+        row = findings[n]
+        if n == 5:
+            title("F  Kết quả thí điểm tài chính và dữ liệu công nghiệp")
+        paragraph = doc.add_paragraph()
+        paragraph.add_run(f"Pilot {n} · {row['name_vi']}. ").bold = True
+        paragraph.add_run(row["consortium_observation"])
+        page = row["evaluation_pdf_page"]
+        # Table 5 contains the three reported Pilot 5 figures on separate pages.
+        locator = f"{page}–54" if n == 5 else page
+        paragraph.add_run(f" [D6.3, Bảng {n}, tr. PDF {locator}]")
+        doc.add_paragraph(row["author_assessment"])
+    tested = upstream["tested_tags"]
+    checks = upstream["passed_boundary_cases"]
+    doc.add_paragraph(
+        f"Thực nghiệm Pilot 7. Hàm kiểm tra ngưỡng từ kho mã IIoT của đối tác cho "
+        f"kết quả dự kiến ở {checks}/{checks} ca biên trên {tested}/{upstream['configured_rows']} "
+        "cảm biến cấu hình. Giá trị đầu vào do người viết tạo từ ngưỡng của tác giả. "
+        "Hai cảm biến thiếu loại ngưỡng. Ở mã 75PI823, giá trị CSV có dấu phẩy khác với "
+        "SQL khởi tạo. Đề xuất giữ mở ngoại lệ tới khi bên vận hành xác nhận đơn vị và cách nạp. "
+        "[D6.4, Bảng 53, tr. PDF 80–81]"
+    )
+    from docx.opc.constants import RELATIONSHIP_TYPE
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
+    paragraph = doc.add_paragraph("Nguồn và cách chạy. ", style="Minicap")
+    for label, url in [
+        ("D6.2", portfolio["sources"]["d62"]["url"]),
+        ("D6.3", portfolio["sources"]["d63"]["url"]),
+        ("D6.4", portfolio["sources"]["d64"]["url"]),
+        ("Mã Pilot 7", upstream["upstream"] + "/tree/" + upstream["commit"]),
+        ("Bản rà và lệnh tái lập", "https://github.com/dinhvanan307/FAME_PM/blob/main/docs/ra-soat-truoc-khi-nop.md"),
+    ]:
+        link = OxmlElement("w:hyperlink")
+        link.set(qn("r:id"), paragraph.part.relate_to(url, RELATIONSHIP_TYPE.HYPERLINK, is_external=True))
+        run = paragraph.add_run(label)
+        run.font.underline = True
+        link.append(run._r)
+        paragraph._p.append(link)
+        if label != "Bản rà và lệnh tái lập":
+            paragraph.add_run(" · ")
 
 
 def export_pdf(binary, docx, directory):
@@ -146,6 +210,7 @@ def main():
     data = json.loads((ROOT / "results/pm_results.json").read_text(encoding="utf-8"))
     doc = Document(ROOT / "report/mau_bien_tap.docx")
     fill(doc, report_fields(data))
+    append_portfolio(doc)
     with tempfile.TemporaryDirectory(dir=args.out) as tmp:
         directory = Path(tmp)
         word = directory / (STEM + ".docx")

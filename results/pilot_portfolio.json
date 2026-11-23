@@ -1,0 +1,496 @@
+{
+  "sources": {
+    "d62": {
+      "url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.2-_-Integrated-Pilot-Systems-and-Pilot-Operations.pdf",
+      "sha256": "756dfdeb1954f80a90e5a62211862d1e8655c49c6b4a7386ebe2014e5d86c6a6"
+    },
+    "d63": {
+      "url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf",
+      "sha256": "c84810db23c1bbae3f980da26771193a1f7125c02543d6d7d7584531d70b0a5b"
+    },
+    "d64": {
+      "url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf",
+      "sha256": "85153ef591b23c4b15316ee0ac88b83b44a47b534af244946c2292742862256d"
+    }
+  },
+  "summary_pdf_page": 12,
+  "annex_pdf_page": 89,
+  "total_use_cases": 14,
+  "total_distinct_annex_identifiers": 128,
+  "pilots": [
+    {
+      "pilot": 1,
+      "lead": "MC",
+      "use_cases": [
+        1,
+        2
+      ],
+      "annex_identifiers": {
+        "P1_BR1": [
+          90
+        ],
+        "P1_BR2": [
+          90
+        ],
+        "P1_BR3": [
+          90
+        ],
+        "P1_BR4": [
+          90
+        ],
+        "P1_BR5": [
+          90
+        ],
+        "P1_BR6": [
+          90
+        ],
+        "P1_BR7": [
+          90
+        ],
+        "P1_BR8": [
+          90
+        ],
+        "P1_BR9": [
+          90
+        ],
+        "P1_BR10": [
+          90
+        ],
+        "P1_BR11": [
+          90
+        ],
+        "P1_BR12": [
+          90
+        ],
+        "P1_BR13": [
+          90
+        ],
+        "P1_BR14": [
+          90
+        ],
+        "P1_BR15": [
+          90
+        ],
+        "P1_BR16": [
+          91
+        ],
+        "P1_BR17": [
+          91
+        ],
+        "P1_BR18": [
+          91
+        ],
+        "P1_BR19": [
+          91
+        ],
+        "P1_BR20": [
+          91
+        ],
+        "P1_BR21": [
+          91
+        ],
+        "P1_BR22": [
+          91
+        ],
+        "P1_BR23": [
+          91
+        ],
+        "P1_BR24": [
+          91
+        ],
+        "P1_BR25": [
+          91
+        ],
+        "P1_BR26": [
+          91
+        ],
+        "P1_BR27": [
+          91
+        ],
+        "P1_BR28": [
+          91
+        ],
+        "P1_BR29": [
+          91
+        ],
+        "P1_BR30": [
+          91
+        ],
+        "P1_BR31": [
+          91
+        ],
+        "P1_BR32": [
+          91
+        ],
+        "P1_BR33": [
+          91
+        ]
+      },
+      "operations_pdf_page": 16,
+      "target_table_pdf_page": 22,
+      "outcome_table_end_pdf_page": 20
+    },
+    {
+      "pilot": 2,
+      "lead": "DAEM",
+      "use_cases": [
+        1,
+        2
+      ],
+      "annex_identifiers": {
+        "P2_BR1": [
+          92
+        ],
+        "P2_BR2": [
+          92
+        ],
+        "P2_BR3": [
+          92
+        ],
+        "P2_BR4": [
+          92
+        ],
+        "P2_BR5": [
+          92
+        ],
+        "P2_BR6": [
+          92
+        ],
+        "P2_BR7": [
+          92
+        ],
+        "P2_BR8": [
+          92
+        ],
+        "P2_BR9": [
+          92
+        ],
+        "P2_BR11": [
+          92
+        ],
+        "P2_BR12": [
+          92
+        ],
+        "P2_BR13": [
+          92
+        ],
+        "P2_BR16": [
+          92
+        ],
+        "P2_BR17": [
+          92
+        ],
+        "P2_BR18": [
+          92
+        ]
+      },
+      "operations_pdf_page": 20,
+      "target_table_pdf_page": 37,
+      "outcome_table_end_pdf_page": 28
+    },
+    {
+      "pilot": 3,
+      "lead": "BPFI",
+      "use_cases": [
+        1,
+        2
+      ],
+      "annex_identifiers": {},
+      "operations_pdf_page": 31,
+      "target_table_pdf_page": 48,
+      "outcome_table_end_pdf_page": 37
+    },
+    {
+      "pilot": 4,
+      "lead": "INNEUROPE",
+      "use_cases": [
+        1
+      ],
+      "annex_identifiers": {
+        "P4_BR1": [
+          93
+        ],
+        "P4_BR2": [
+          93
+        ],
+        "P4_BR3": [
+          93
+        ],
+        "P4_BR4": [
+          93
+        ],
+        "P4_BR5": [
+          94
+        ],
+        "P4_BR6": [
+          94
+        ],
+        "P4_BR7": [
+          94
+        ]
+      },
+      "operations_pdf_page": 38,
+      "target_table_pdf_page": 57,
+      "outcome_table_end_pdf_page": 45
+    },
+    {
+      "pilot": 5,
+      "lead": "KM",
+      "use_cases": [
+        1,
+        2
+      ],
+      "annex_identifiers": {
+        "P5_BR1": [
+          94
+        ],
+        "P5_BR2": [
+          94
+        ],
+        "P5_BR3": [
+          94
+        ],
+        "P5_BR4": [
+          94
+        ],
+        "P5_BR5": [
+          94
+        ],
+        "P5_BR6": [
+          94
+        ],
+        "P5_BR7": [
+          94
+        ],
+        "P5_BR8": [
+          94
+        ],
+        "P5_BR9": [
+          94
+        ],
+        "P5_BR10": [
+          94
+        ],
+        "P5_BR11": [
+          95
+        ],
+        "P5_BR12": [
+          95
+        ],
+        "P5_BR13": [
+          95
+        ],
+        "P5_BR14": [
+          95
+        ],
+        "P5_BR15": [
+          95
+        ],
+        "P5_BR16": [
+          95
+        ],
+        "P5_BR17": [
+          95
+        ],
+        "P5_BR18": [
+          95
+        ],
+        "P5_BR19": [
+          95
+        ],
+        "P5_BR20": [
+          95
+        ],
+        "P5_BR21": [
+          95
+        ]
+      },
+      "operations_pdf_page": 42,
+      "target_table_pdf_page": 69,
+      "outcome_table_end_pdf_page": 54
+    },
+    {
+      "pilot": 6,
+      "lead": "NRS",
+      "use_cases": [
+        1,
+        2,
+        3
+      ],
+      "annex_identifiers": {
+        "P6_BR1": [
+          95
+        ],
+        "P6_BR2": [
+          96
+        ],
+        "P6_BR3": [
+          96
+        ],
+        "P6_BR4": [
+          96
+        ],
+        "P6_BR5": [
+          96
+        ],
+        "P6_BR6": [
+          96
+        ],
+        "P6_BR7": [
+          96
+        ],
+        "P6_BR8": [
+          96
+        ],
+        "P6_BR9": [
+          96
+        ],
+        "P6_BR10": [
+          96
+        ],
+        "P6_BR11": [
+          96
+        ],
+        "P6_BR12": [
+          96
+        ],
+        "P6_BR13": [
+          96
+        ],
+        "P6_BR14": [
+          96
+        ],
+        "P6_BR15": [
+          96
+        ],
+        "P6_BR16": [
+          96
+        ],
+        "P6_BR17": [
+          97
+        ],
+        "P6_BR18": [
+          97
+        ],
+        "P6_BR19": [
+          97
+        ],
+        "P6_BR20": [
+          97
+        ],
+        "P6_BR21": [
+          97
+        ],
+        "P6_BR22": [
+          97
+        ],
+        "P6_BR23": [
+          97
+        ],
+        "P6_BR24": [
+          97
+        ],
+        "P6_BR25": [
+          97
+        ],
+        "P6_BR26": [
+          97
+        ],
+        "P6_BR27": [
+          97
+        ],
+        "P6_BR28": [
+          97
+        ],
+        "P6_BR29": [
+          97
+        ],
+        "P6_BR30": [
+          97
+        ],
+        "P6_BR31": [
+          97
+        ],
+        "P6_BR32": [
+          97
+        ],
+        "P6_BR33": [
+          97
+        ],
+        "P6_BR34": [
+          97
+        ],
+        "P6_BR35": [
+          97
+        ]
+      },
+      "operations_pdf_page": 50,
+      "target_table_pdf_page": 76,
+      "outcome_table_end_pdf_page": 61
+    },
+    {
+      "pilot": 7,
+      "lead": "MOH",
+      "use_cases": [
+        1,
+        2
+      ],
+      "annex_identifiers": {
+        "P7_BR1": [
+          98
+        ],
+        "P7_BR2": [
+          98
+        ],
+        "P7_BR3": [
+          98
+        ],
+        "P7_BR4": [
+          98
+        ],
+        "P7_BR5": [
+          98
+        ],
+        "P7_BR6": [
+          98
+        ],
+        "P7_BR7": [
+          98
+        ],
+        "P7_BR8": [
+          98
+        ],
+        "P7_BR9": [
+          98
+        ],
+        "P7_BR10": [
+          98
+        ],
+        "P7_BR11": [
+          98
+        ],
+        "P7_BR12": [
+          98
+        ],
+        "P7_BR13": [
+          98
+        ],
+        "P7_BR14": [
+          98
+        ],
+        "P7_BR15": [
+          99
+        ],
+        "P7_BR16": [
+          99
+        ],
+        "P7_BR17": [
+          99
+        ]
+      },
+      "operations_pdf_page": 54,
+      "target_table_pdf_page": 85,
+      "outcome_table_end_pdf_page": 67
+    }
+  ]
+}
