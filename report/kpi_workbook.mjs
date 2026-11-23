@@ -8,6 +8,7 @@ const rows = JSON.parse(await readFile(source, "utf8"));
 const book = Workbook.create();
 const summary = book.worksheets.add("Tong hop");
 const matrix = book.worksheets.add("Ma tran");
+const review = book.worksheets.add("Ra soat 25 KPI");
 const states = ["Đạt", "Không đạt", "Thiếu bằng chứng", "Không áp dụng theo FAME"];
 const ink = "#17344B", teal = "#14666B", pale = "#EDF5F4";
 const keys = ["id", "pilot", "kpi", "target", "actual", "assessment", "rationale", "period",
@@ -31,7 +32,7 @@ function mergedText(sheet, address, text) {
   range.getCell(0, 0).values = [[text]];
   return range;
 }
-for (const sheet of [summary, matrix]) sheet.showGridLines = false;
+for (const sheet of [summary, matrix, review]) sheet.showGridLines = false;
 summary.tabColor = ink;
 matrix.tabColor = teal;
 matrix.getRange("A1:N1").values = [headers];
@@ -93,16 +94,42 @@ const notes=[
   "Thiếu bằng chứng giữ mở hồ sơ khi thiếu mẫu số, thiếu một vế của mục tiêu hoặc dùng thước đo khác. Số 0 là kết quả khi nguồn ghi rõ 0.",
   "Không áp dụng theo FAME dùng cho phép thử dữ liệu ngoài ở Pilot 1. Nguồn chưa ghi nhận quyết định miễn trừ.",
   "Kỳ đánh giá là khoảng dự án công bố. Khi thiếu ngày vận hành hoặc ngày lấy mẫu riêng, ma trận ghi rõ giới hạn đó.",
-  "P1-01 đến P7-04 là mã của bài. Cột cuối nối sáu KPI Pilot 5 với workbook nghiệm thu trước đây."
+  "P1-01 đến P7-04 là mã của bài. Cột cuối nối sáu KPI Pilot 5 với workbook nghiệm thu trước đây.",
+  "Ra soat 25 KPI ghi bằng chứng, điều kiện còn thiếu và nguồn cho từng hồ sơ mở ở lần trước, bắt đầu bằng Pilot 3 và 5."
 ];
 notes.forEach((value,i)=>{
   const r=15+i;const line=mergedText(summary,`A${r}:F${r}`,value);
   line.format.wrapText=true;line.format.verticalAlignment="center";line.format.rowHeight=i===0?26:34;
   if(i===0)heading(line);else {line.format.font={name:"Calibri",size:11,color:ink};if(i%2)line.format.fill=pale;}
 });
+const reviewed = rows.filter(r => r.review).sort((a, b) => a.review.order - b.review.order);
+review.tabColor = "#98662A";
+review.getRange("A1:J1").values = [["Mã KPI","Chỉ tiêu","Mục tiêu gốc","Kỳ đánh giá","Kết luận trước rà",
+  "Kết luận sau rà","Bằng chứng đối chiếu","Quyết định và điều kiện còn thiếu","Nguồn đối chiếu 1","Nguồn đối chiếu 2"]];
+const last = reviewed.length + 1;
+review.getRange(`A2:J${last}`).values = reviewed.map(row => [row.id, row.kpi, row.target, row.period, row.review.before,
+  row.assessment, row.review.finding, row.review.resolution, ...row.review.sources.map(source => source.label)]);
+const reviewTable = review.tables.add(`A1:J${last}`, true, "BangRaSoat");
+reviewTable.style = "TableStyleMedium2";
+reviewTable.showFilterButton = true;
+widths(review, [85,220,325,250,150,158,380,390,225,225]);
+const reviewBody = review.getRange(`A2:J${last}`);
+reviewBody.format.wrapText = true;
+reviewBody.format.verticalAlignment = "center";
+reviewBody.format.rowHeight = 85;
+reviewBody.format.font = {name:"Calibri",size:11,color:ink};
+review.getRange(`I2:J${last}`).format.font = {name:"Calibri",size:11,color:"#155B88",underline:"single"};
+heading(review.getRange("A1:J1"));
+review.getRange("A1:J1").format.rowHeight = 32;
+for (const [i, row] of reviewed.entries()) {
+  const cell = review.getCell(i + 1, 5);
+  cell.format.fill = row.assessment === states[0] ? "#D9EFE4" : "#FFF0CB";
+  cell.format.font = {name:"Calibri",size:11,bold:true,color:ink};
+}
+review.freezePanes.freezeRows(1);
 book.recalculate();
 if(preview){
-  const png = await book.render({sheetName:"Tong hop",range:"A1:F21",scale:1,format:"png"});
+  const png = await book.render({sheetName:"Tong hop",range:"A1:F22",scale:1,format:"png"});
   await writeFile(preview,new Uint8Array(await png.arrayBuffer()));
 }
 await (await SpreadsheetFile.exportXlsx(book)).save(output);

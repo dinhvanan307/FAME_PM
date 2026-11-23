@@ -17,7 +17,7 @@ Lệnh thứ ba tạo Word. Lệnh thứ tư tạo cả Word và PDF bằng Libr
 
 Phụ lục F dùng chỉ mục của ba PDF trong [pilot_portfolio.json](../results/pilot_portfolio.json), [bản chép kết quả và diễn giải theo pilot](../evidence/pilot-outcomes.csv) và [kết quả chạy mã gốc Pilot 7](../results/pilot7_boundaries.json). Xem [bản rà theo mẫu và hướng dẫn tái lập](../docs/ra-soat-truoc-khi-nop.md) để tính lại hai tệp JSON.
 
-Phụ lục G dựng toàn bộ 65 dòng từ [CSV nghiệm thu](../evidence/kpi_matrix.csv). Lệnh `python -m fame_pm.kpi_matrix` kiểm tra bản Excel phát hành. Có thể dựng lại Word/PDF bằng Python từ CSV theo các lệnh đầu trang. Bộ dựng Excel dùng Node có `@oai/artifact-tool` (môi trường tạo tệp), rồi gắn liên kết PDF vào từng ô nguồn. Từ thư mục gốc, khi đã có thư mục `build`:
+Phụ lục G dựng toàn bộ 65 dòng từ [CSV nghiệm thu](../evidence/kpi_matrix.csv). Lệnh `python -m fame_pm.kpi_matrix` kiểm tra bản Excel phát hành. Có thể dựng lại Word/PDF bằng Python từ CSV theo các lệnh đầu trang. Phụ lục H và trang thứ ba của Excel dùng [25 hồ sơ trước rà](../evidence/kpi_review.csv) và [danh mục nguồn](../evidence/kpi_review_sources.csv). Bộ dựng Excel dùng Node có `@oai/artifact-tool` (môi trường tạo tệp), rồi gắn liên kết PDF vào từng ô nguồn. Từ thư mục gốc, khi đã có thư mục `build`:
 
 ```bash
 python -m fame_pm.kpi_matrix --json > build/kpi.json

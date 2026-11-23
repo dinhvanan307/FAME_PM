@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import unicodedata
 
+from .kpi_review import read_review
 from .portfolio import ROOT, SOURCES, BASE, pages
 
 COUNTS = (5, 8, 10, 7, 23, 8, 4)
@@ -90,6 +91,11 @@ def read_matrix():
                 old["observation_source"],
             ):
                 raise ValueError(f"Conflict with the six-KPI case: {r['id']}")
+    review = read_review()
+    for r in rows:
+        r["review"] = review.get(r["id"])
+        if r["review"] and r["review"]["after"] != r["assessment"]:
+            raise ValueError(f"Review decision and matrix disagree: {r['id']}")
     return rows
 
 
@@ -155,6 +161,35 @@ def verify_workbook(rows):
                         )
             elif str(cell.value or "") != row[key]:
                 raise ValueError(f"Excel differs at {cell.coordinate} for {row['id']}")
+    detail = book["Ra soat 25 KPI"]
+    reviewed = sorted(
+        (r for r in rows if r["review"]), key=lambda r: r["review"]["order"]
+    )
+    if (
+        detail.max_row != len(reviewed) + 1
+        or not detail.tables
+        or not detail.freeze_panes
+    ):
+        raise ValueError("Review worksheet is incomplete")
+    for i, row in enumerate(reviewed, 2):
+        r = row["review"]
+        values = (
+            row["id"],
+            row["kpi"],
+            row["target"],
+            row["period"],
+            r["before"],
+            row["assessment"],
+            r["finding"],
+            r["resolution"],
+            *(s["label"] for s in r["sources"]),
+        )
+        if tuple(detail.cell(i, j).value for j in range(1, 11)) != values:
+            raise ValueError(f"Review worksheet differs for {row['id']}")
+        for j, source in enumerate(r["sources"], 9):
+            link = detail.cell(i, j).hyperlink
+            if not link or link.target != source["url"]:
+                raise ValueError(f"Wrong review hyperlink at {i}, {j}")
     summary = load_workbook(BOOK, data_only=True)["Tong hop"]
     for i in range(1, 8):
         counts = Counter(r["assessment"] for r in rows if int(r["pilot"]) == i)

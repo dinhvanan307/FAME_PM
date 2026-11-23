@@ -24,7 +24,7 @@ Một phiên bản đặc tả mới có thể thay mục tiêu nhưng vẫn gi�
 
 ## Ma trận nghiệm thu 65 KPI
 
-[Ma trận Excel](../FAME_Ma_tran_65_KPI.xlsx) có hai trang tính. **Tong hop** đếm kết luận theo pilot bằng công thức, **Ma tran** cho lọc theo pilot và trạng thái. Bấm các ô nguồn để mở trang PDF, tính từ bìa. Khoảng trang được ghi khi dòng tiếp tục sang trang kế tiếp. [CSV nguồn](kpi_matrix.csv) là dữ liệu biên tập dùng để dựng cả Excel và Phụ lục G.
+[Ma trận Excel](../FAME_Ma_tran_65_KPI.xlsx) có ba trang tính. **Tong hop** đếm kết luận theo pilot bằng công thức, **Ma tran** cho lọc theo pilot và trạng thái. **Ra soat 25 KPI** ghi lần đối chiếu tiếp theo, xếp Pilot 3 và 5 trước. Bấm các ô nguồn để mở trang PDF, tính từ bìa. Khoảng trang được ghi khi dòng tiếp tục sang trang kế tiếp. [CSV nguồn](kpi_matrix.csv) là dữ liệu biên tập dùng để dựng cả Excel và Phụ lục G.
 
 Mục tiêu lấy từ D6.4 bản 1.0, bảng 11, 25, 31, 35, 43, 49 và 56. Kết quả lấy từ D6.3 bản 3.0, bảng 1–7. Cột kỳ đo ghi giai đoạn đánh giá được nêu trong hồ sơ. P2 có kỳ 6–12/2025, P4 có kỳ 7–11/2025 và P5 có kỳ 4–12/2025. Bốn pilot còn lại chỉ gắn với pha 2 khi trang phương pháp không nêu khoảng ngày riêng cho KPI. Các số đếm có đơn vị thời gian như phiên/tuần hay lợi ích/năm giữ đơn vị đó ở cột mục tiêu.
 
@@ -40,3 +40,18 @@ python -m fame_pm.kpi_matrix --source-dir du_lieu/portfolio
 ```
 
 Lệnh đầu sau khi cài thư viện kiểm tra số dòng, sáu mã đối chiếu, giá trị giữa CSV và Excel, liên kết và tổng theo pilot. Chế độ có PDF xác thực dấu SHA-256 của ba tài liệu, định vị tên từng KPI trên trang bắt đầu và kiểm tra ngữ cảnh nguồn kỳ đo. Việc đọc, chuyển ngữ và đánh giá nội dung của từng dòng do người viết thực hiện.
+
+### Rà tiếp 25 hồ sơ ngày 23/11/2026
+
+Mốc so sánh là [ma trận trước rà](https://github.com/dinhvanan307/FAME_PM/blob/6c929eac2a47fc215f269062b242cdd17e822e0b/evidence/kpi_matrix.csv). Pilot 3 có 8 hồ sơ, Pilot 5 có 11, Pilot 2 có 2, Pilot 4 có 3 và Pilot 7 có 1. [Sổ đối chiếu](kpi_review.csv) ghi phát hiện, bằng chứng cần bổ sung hoặc lý do đóng và hai mã nguồn cho từng dòng. [Danh mục nguồn](kpi_review_sources.csv) lưu URL, trang PDF tính từ bìa hoặc đường dẫn bên trong gói mã, cùng SHA-256. Cột `after` được kiểm tra với kết luận hiện hành trong ma trận chính theo mã KPI.
+
+Người viết chốt P5-04 và P5-05 ở cấp pilot. D6.3 bảng 5 tr. 52 ghi 28 người xem và 25 người dùng chức năng so sánh. Tr. 53 đếm 9 bảng khuyến nghị ESG theo chỉ tiêu về số bảng so sánh. D1.4 bảng 27–35 mô tả tên và loại của chín bảng. Dòng kề bên về 9 bộ trọng số danh mục đo sản phẩm khác. Nguồn chưa phân bổ từng bảng cho từng người. 23 hồ sơ còn lại có điều kiện đóng riêng trong Excel. [D6.3 tr. 52–53](https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=52) · [D1.4 tr. 47–57](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=47)
+
+Để kiểm chứng nguồn đã dùng, chạy từ thư mục gốc của repo:
+
+```bash
+python -m fame_pm.kpi_matrix
+python -m fame_pm.kpi_review --source-dir du_lieu/ra-soat-25 --download
+```
+
+Lệnh thứ hai lấy 17 tệp công khai, kiểm tra 31 vị trí trích dẫn, đối chiếu mã SHA-256, trang PDF, đường dẫn trong ZIP và chín tiêu đề bảng xếp hạng trong D1.4. Mã còn xác minh ba số đếm 28, 25 và 9 trên đúng dòng bảng 5 của D6.3. Có thể chạy ngoại tuyến bằng cách bỏ `--download` khi thư mục đã có tệp. Mã kiểm tra xác nhận danh tính dữ liệu và vị trí trích dẫn. Quyết định nghiệm thu là đánh giá của người viết. FAME công bố mã chung trong các gói FAME-integration, FDAC-Open-API và FAME-dashboard. Với Pilot 7, mã nguồn được ghim tới commit của đối tác. Với Pilot 5, D1.4 bảng 36 xác định API KM/JRC là tài sản độc quyền. [Phần mềm FAME công bố](https://www.fame-horizon.eu/index.html%40p%3D3257.html) · [D1.4 tr. 58](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=58)

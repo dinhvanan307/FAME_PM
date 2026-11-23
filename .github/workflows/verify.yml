@@ -44,6 +44,7 @@ jobs:
       - run: python -m pip install -r report/requirements.txt
       - run: python -m fame_pm.portfolio --data-dir du_lieu/portfolio --download --check
       - run: python -m fame_pm.kpi_matrix --source-dir du_lieu/portfolio
+      - run: python -m fame_pm.kpi_review --source-dir du_lieu/portfolio --download
       - uses: actions/checkout@v5
         with:
           repository: giorgosfatouros/IIoT-Data-Quality-Assessment

@@ -177,3 +177,9 @@ Báo cáo kỳ cuối ghi nhận **7 thí điểm đã triển khai**, **21 mô 
 [eval49]: https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=53
 [eval50]: https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=54
 [less]: https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=73
+
+### Nghiệm thu bổ sung trên toàn dự án
+
+Ngày 23/11/2026, người viết đối chiếu lại 25/65 dòng còn mở ở phiên bản trước. Hai dòng về xem và so sánh bảng ESG (P5-04, P5-05) đủ căn cứ theo ngưỡng ở cấp pilot. D6.3 bảng 5 ghi 28 người xem, 25 người dùng chức năng so sánh và 9 bảng ESG được so sánh trong cùng kỳ. D1.4 bảng 27–35 cho phép nhận diện cả chín bảng. Kết quả hồi cứu là 32 đạt, 9 không đạt, 23 thiếu bằng chứng và 1 không áp dụng theo FAME. [Đặc tả và kết quả từng KPI](evidence/kpi_matrix.csv) · [Trang nguồn và điều kiện đóng](evidence/README.md#rà-tiếp-25-hồ-sơ-ngày-23112026)
+
+Trong quản lý chất lượng, việc gắn đúng đơn vị đo đã giúp chốt hai hồ sơ mà chưa cần yêu cầu nhật ký cá nhân. Với Pilot 3, bằng chứng triển khai AWS và trình diễn hai ca sử dụng vẫn để ngỏ số dịch vụ, số thao tác và kết quả thử tải. Với Pilot 5, báo cáo backtest có lợi suất một năm nhưng chưa đối soát đủ thay đổi ESG và rủi ro. Tỷ lệ 2/25 (8%) đo mức hoàn thiện hồ sơ của bài phân tích. Muốn đánh giá tác động vận hành của dự án phải có số đo trước và sau cùng định nghĩa. [Sổ rà soát 25 dòng](evidence/kpi_review.csv)

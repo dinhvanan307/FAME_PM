@@ -82,7 +82,7 @@ def append_register(doc):
         f"Đối chiếu toàn dự án. Trong {len(rows)} KPI của bảy pilot, người viết xếp "
         f"{counts[STATUSES[0]]} đạt, {counts[STATUSES[1]]} không đạt, "
         f"{counts[STATUSES[2]]} thiếu bằng chứng và {counts[STATUSES[3]]} không áp dụng theo FAME. "
-        "Phụ lục G ghi mục tiêu, kết quả, kỳ đánh giá và trang nguồn cho từng chỉ tiêu."
+        "Phụ lục G ghi từng chỉ tiêu. Phụ lục H giải thích vì sao 2 trong 25 hồ sơ đã được đóng sau khi đối chiếu thêm nguồn."
     )
     conclusion = next(
         p for p in doc.paragraphs if p.text.startswith("Kết quả so sánh quản lý.")
@@ -172,3 +172,86 @@ def append_register(doc):
                 td(measurement, "Kết quả. " + r["actual"], second=True)
                 td(decision, r["assessment"], bold=True)
                 td(decision, r["rationale"], second=True)
+
+    append_review(doc, rows)
+
+
+def append_review(doc, rows):
+    reviewed = sorted(
+        (r for r in rows if r["review"]), key=lambda r: r["review"]["order"]
+    )
+    closed = [r for r in reviewed if r["assessment"] != r["review"]["before"]]
+    heading(doc, "H  Rà soát bằng chứng cho 25 KPI còn mở")
+    doc.add_paragraph(
+        f"Lần rà ngày 23/11/2026 lấy phiên bản 6c929ea của ma trận làm mốc. "
+        f"Trong {len(reviewed)} hồ sơ đang mở, người viết đổi kết luận của {len(closed)} KPI "
+        f"và giữ mở {len(reviewed) - len(closed)} KPI. Phần G ghi kết luận hiện hành cho toàn bộ dự án. "
+        "Các trang dưới đây ghi từng bằng chứng mới và điều kiện cần để quyết định."
+    )
+    doc.add_paragraph(
+        "Hai quyết định thay đổi thuộc Pilot 5. Trong cùng bảng 5 của D6.3, trang 52 ghi "
+        "28 người xem và 25 người dùng chức năng so sánh. Trang 53 ghi 9 bảng khuyến nghị "
+        "ESG đã so sánh. D1.4 định danh chín bảng này theo nhóm tích cực, cân bằng và thận trọng "
+        "ở các bảng 27–35. Chín bộ trọng số danh mục được báo cáo ở một dòng riêng."
+    )
+    p = compact(doc.add_paragraph())
+    example = next(r for r in reviewed if r["id"] == "P5-05")
+    for label, url in [
+        ("D6.3 · tr. 52", example["actual_url"]),
+        *((s["label"], s["url"]) for s in example["review"]["sources"]),
+    ]:
+        source_link(p, label, url)
+        p.add_run("   ")
+    doc.add_paragraph(
+        "Quy tắc của người viết. Đặc tả đặt hai ngưỡng tổng ở cấp pilot. Hồ sơ được đóng khi "
+        "có số người và số bảng cùng loại thực sự dùng trong cùng kỳ, kể cả khi dự án ghi chúng "
+        "ở hai dòng khác nhau. Dữ liệu công bố chỉ cho kết luận về cả nhóm. Muốn biết từng người "
+        "đã xem bao nhiêu bảng, cần nhật ký có mã người dùng và mã bảng."
+    )
+    doc.add_paragraph(
+        "Pilot 3 có sơ đồ, nguyên mẫu trực tuyến và triển khai AWS. Số endpoint trong mã chung, "
+        "số khách mời hội nghị và số bản ghi trong bộ dữ liệu đều có thể đếm được, nhưng mỗi đại "
+        "lượng trả lời một câu hỏi khác. Với chỉ tiêu đo sử dụng hoặc kiểm thử, người viết tìm "
+        "bản ghi của đúng pilot, đúng thao tác và đúng kỳ."
+    )
+    p = compact(doc.add_paragraph())
+    source_link(
+        p,
+        "Quản lý dữ liệu đánh giá WP6 · D1.4, tr. 33",
+        example["review"]["sources"][1]["url"].split("#")[0] + "#page=33",
+    )
+    doc.add_paragraph(
+        "Ý nghĩa quản lý. Tỷ lệ hồ sơ cũ được chốt là 2/25 (8%) theo tính toán của người viết. "
+        "Con số này đo mức hoàn thiện hồ sơ nghiệm thu. Phép rà tài liệu không đo biến động hiệu suất của FAME. "
+        "Để đóng các dòng còn lại, nhóm nghiệm thu có thể chuyển yêu cầu ở cột cuối cho bên phụ trách "
+        "pilot và chỉ cập nhật khi nhận được bằng chứng cùng phạm vi."
+    )
+    for pilot in (3, 5, 2, 4, 7):
+        group = [r for r in reviewed if int(r["pilot"]) == pilot]
+        for start in range(0, len(group), 4):
+            page = group[start : start + 4]
+            heading(doc, f"H · Pilot {pilot} · {PILOTS[pilot - 1]}")
+            p = compact(doc.add_paragraph())
+            ids = ", ".join(r["id"] for r in page)
+            p.add_run(f"{ids}   ·   Trước rà: Thiếu bằng chứng").bold = True
+            t = table(
+                doc,
+                [
+                    "KPI và nguồn đối chiếu",
+                    "Bằng chứng tìm thấy",
+                    "Kết luận của người viết",
+                ],
+                [4.0, 5.7, 5.55],
+            )
+            for r in page:
+                row = t.add_row()
+                row._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
+                code, finding, decision = row.cells
+                td(code, r["id"] + " · " + r["kpi"], bold=True)
+                for source in r["review"]["sources"]:
+                    source_link(
+                        compact(code.add_paragraph()), source["label"], source["url"]
+                    )
+                td(finding, r["review"]["finding"])
+                td(decision, r["assessment"], bold=True)
+                td(decision, r["review"]["resolution"], second=True)
