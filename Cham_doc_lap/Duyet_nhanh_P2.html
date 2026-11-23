@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAME · Phiếu P2</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f2;color:#172e2b;font:17px/1.5 "DM Sans",system-ui,sans-serif}
+main{max-width:680px;margin:clamp(12px,6vh,64px) auto;padding:20px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #c5d2cc;padding-bottom:12px}
+header strong{letter-spacing:.08em}header span,small{font-size:14px;color:#445955}
+article{margin:18px 0;background:white;border:1px solid #d3ddd8;border-radius:14px;padding:clamp(18px,4vw,32px)}
+h1{font-size:clamp(24px,4vw,33px);line-height:1.19;margin:9px 0 22px}h2{font-size:15px;margin:18px 0 3px}p{margin:4px 0 12px}.evidence{margin-top:17px;border-left:3px solid #6c9080;padding-left:14px}
+a{color:#185c54;text-underline-offset:3px}small a{display:inline-block;margin-right:14px}
+aside{background:#eff5ef;border-radius:8px;padding:12px 15px;margin-top:18px}aside p{margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 0}
+button{font:inherit;font-weight:650;min-height:46px;border:2px solid #28534c;border-radius:8px;background:#fff;color:#244b44;padding:9px 20px;cursor:pointer;flex:1}
+#yes,.primary{background:#244e46;color:white}button:focus-visible,a:focus-visible{outline:3px solid #ad630b;outline-offset:3px}
+footer{font-size:14px;color:#485d57}.progress{height:5px;border-radius:4px;background:#d8e3dd;margin:15px 0}.progress span{display:block;height:100%;background:#4b7a65}
+[hidden]{display:none!important}
+</style>
+<main>
+<header><strong>FAME · Pilot 5</strong><span>Phiếu P2</span></header>
+<article id="card">
+<small id="position"></small>
+<div class="progress" aria-hidden="true"><span id="bar"></span></div>
+<h1 id="title" aria-live="polite"></h1>
+<h2>Ngưỡng nghiệm thu</h2><p id="target"></p>
+<div class="evidence"><h2>Ghi nhận trong hồ sơ FAME</h2><p id="observed"></p>
+<small><a id="spec" target="_blank" rel="noopener noreferrer">D6.4 · Bảng 43</a><a id="evaluation" target="_blank" rel="noopener noreferrer"></a></small></div>
+<aside id="check" hidden><strong>Kiểm tra trước khi duyệt</strong><p>Đã đối chiếu hai nguồn? Có số đo hoặc cận? Đúng đơn vị? Đúng đối tượng và kỳ đo?</p></aside>
+<h2>Đã đủ bằng chứng để nghiệm thu KPI này chưa?</h2>
+<p><small>Duyệt khi bằng chứng xác nhận đạt ngưỡng. Không duyệt khi kết quả dưới yêu cầu hoặc hồ sơ chưa đủ để kết luận.</small></p>
+<div class="actions"><button id="yes" type="button">Duyệt</button><button id="no" type="button">Không duyệt</button></div>
+</article>
+<article id="summary" hidden>
+<h1>Đã chấm đủ 6 KPI</h1><p>Gửi riêng tệp kết quả CSV cho người điều phối. Có thể mở tệp bằng Excel.</p>
+<div class="actions"><button class="primary" id="export" type="button">Tải lại kết quả</button></div>
+</article>
+<footer id="foot">Thời gian tính từ lúc mỗi KPI xuất hiện đến lúc bạn bấm. Thời gian tra nguồn được tính vào lượt chấm.</footer>
+<noscript>Cần bật JavaScript trong trình duyệt để ghi nhận quyết định.</noscript>
+</main>
+<script>
+'use strict';
+const form = {"person": "P2", "spec": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=69", "evaluation": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=52", "items": [{"id": "K04", "title": "Tỷ lệ người dùng mục tiêu sử dụng công cụ ESG", "target": "≥ 70%", "observed": "Nhóm dự án mô tả phản hồi và mức tiếp nhận theo hướng tích cực.", "page": "48", "round": 1, "method": "B"}, {"id": "K02", "title": "Mức hài lòng với công cụ", "target": "≥ 4,0 trên thang 5", "observed": "Khảo sát sau thử nghiệm ghi nhận trung bình 4,2 trên thang 5.", "page": "49", "round": 1, "method": "B"}, {"id": "K01", "title": "Thời gian trung bình từ nhập dữ liệu đến tạo báo cáo", "target": "≤ 1 giờ", "observed": "Trước thử nghiệm trên 2 giờ. Sau thử nghiệm dưới 45 phút.", "page": "50", "round": 1, "method": "B"}, {"id": "K06", "title": "Cải thiện hiệu quả tối ưu danh mục", "target": "≥ 3% mỗi năm", "observed": "Nhóm dự án báo cáo đã trình diễn công cụ trong môi trường thử nghiệm.", "page": "49", "round": 2, "method": "A"}, {"id": "K05", "title": "Tương quan giữa tín hiệu tin tức và hiệu suất", "target": "≥ 50%", "observed": "Nhóm dự án mô tả tín hiệu ban đầu theo hướng tích cực.", "page": "50", "round": 2, "method": "A"}, {"id": "K03", "title": "Số bên liên quan tích cực dùng nền tảng hoặc công cụ", "target": "≥ 30", "observed": "Báo cáo đánh giá ghi nhận 35 bên liên quan sử dụng tích cực.", "page": "48", "round": 2, "method": "A"}]};
+const key = 'fame-pilot5-binary-v1-' + form.person;
+const el = id => document.getElementById(id);
+let storageAvailable = true;
+let state;
+
+function readState() {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw) return JSON.parse(raw);
+  } catch { storageAvailable = false; }
+  return null;
+}
+
+function save() {
+  try { localStorage.setItem(key, JSON.stringify(state)); }
+  catch { storageAvailable = false; }
+}
+
+function render() {
+  const index = state.rows.length;
+  const item = form.items[index];
+  el('card').hidden = !item;
+  el('summary').hidden = !!item;
+  el('foot').hidden = !item && storageAvailable;
+  if (!storageAvailable) el('foot').textContent = 'Trình duyệt chưa lưu được tiến độ trên máy. Giữ trang này mở cho tới khi tải kết quả.';
+  if (!item) return;
+  el('position').textContent = 'Lượt ' + item.round + ' · KPI ' + (index + 1) + '/6 · ' + item.id;
+  el('bar').style.width = ((index + 1) / form.items.length * 100) + '%';
+  el('title').textContent = item.title;
+  el('target').textContent = item.target;
+  el('observed').textContent = item.observed;
+  el('spec').href = form.spec;
+  el('evaluation').href = form.evaluation.replace(/#page=.*/, '#page=' + (Number(item.page) + 4));
+  el('evaluation').textContent = 'D6.3 · Bảng 5, tr. ' + item.page;
+  el('check').hidden = item.method !== 'B';
+}
+
+function exportResults() {
+  const records = [['Phiếu','Lượt','Cách chấm','KPI','Quyết định','Bắt đầu (UTC)','Kết thúc (UTC)','Thời gian (giây)']];
+  for (const [i, row] of state.rows.entries()) {
+    const item = form.items[i];
+    records.push([form.person, item.round, item.method === 'A' ? 'Thông thường' : 'Có gợi ý checklist',
+      item.id, row.choice, new Date(row.start).toISOString(), new Date(row.end).toISOString(), (row.end - row.start) / 1000]);
+  }
+  const content = records.map(row => row.map(value => '"' + String(value).replaceAll('"','""') + '"').join(',')).join('\r\n');
+  const url = URL.createObjectURL(new Blob(['\uFEFF', content], {type:'text/csv;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'FAME_' + form.person + '_duyet_nhanh.csv';
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+}
+
+function decide(event) {
+  if (event.detail > 1 || state.rows.length >= form.items.length) return;
+  const current = readState();
+  if (current && current.rows.length !== state.rows.length) {
+    state = current;
+    render();
+    return;
+  }
+  const now = Date.now();
+  state.rows.push({choice:event.currentTarget.textContent, start:state.start, end:Math.max(now, state.start)});
+  state.start = now;
+  save();
+  render();
+  if (state.rows.length === form.items.length) exportResults();
+}
+
+state = readState() || {rows:[], start:Date.now()};
+save();
+render();
+el('yes').addEventListener('click', decide);
+el('no').addEventListener('click', decide);
+el('export').addEventListener('click', exportResults);
+window.addEventListener('keydown', event => { if (event.repeat && ['Enter',' '].includes(event.key)) event.preventDefault(); });
+window.addEventListener('storage', event => {
+  if (event.key === key && event.newValue) {state = JSON.parse(event.newValue); render();}
+});
+</script>
+</html>

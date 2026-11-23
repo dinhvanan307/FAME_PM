@@ -1,0 +1,129 @@
+{
+  "doi": "10.5281/zenodo.17175084",
+  "csv_manifest": {
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg.csv": {
+      "md5": "md5:fb61411b6b6af42d4bde72cb5fa89eef",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_e_adj.csv": {
+      "md5": "md5:9cd2aebe9627400fd4fe1f0ecf60435d",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_s.csv": {
+      "md5": "md5:3d10a0c7412c514c8897c8cee17ebf44",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_g_adj.csv": {
+      "md5": "md5:f73106b73715d3e72fdc8ed3d4de5a0b",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_adj.csv": {
+      "md5": "md5:f29981239ce4757bbeeda7f034385d49",
+      "rows": 604,
+      "columns": 100
+    },
+    "core_tkr_spx100_2015-12-31_2025-09-05_3b5ddba49906958d_close_full.csv": {
+      "md5": "md5:1021fb0b0af1267464e68e3650e14bfe",
+      "rows": 1443,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_e.csv": {
+      "md5": "md5:86d388ff5289f904ab09f34cfb3966ba",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_g.csv": {
+      "md5": "md5:e1121c624ca59a4dd24380cfb8fb0b95",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_s_adj.csv": {
+      "md5": "md5:78dc8a025e2534fe914ea198d05af295",
+      "rows": 604,
+      "columns": 100
+    },
+    "esgdata_2022-12-31_2025-06-01_45391872bed3f263_esg_sector_daily.csv": {
+      "md5": "md5:bae645b0ae41341a3c240008550ff840",
+      "rows": 604,
+      "columns": 8
+    },
+    "marketsense_2022-12-31_2025-06-01_f2fc372c98cd70e8_ms_daily.csv": {
+      "md5": "md5:aa155da7820c19b58325aeb8ddba598e",
+      "rows": 604,
+      "columns": 96
+    },
+    "marketsense_2022-12-31_2025-06-01_f2fc372c98cd70e8_ms_rank.csv": {
+      "md5": "md5:35b061793b1479facb9333a9b77249f6",
+      "rows": 604,
+      "columns": 96
+    }
+  },
+  "published_files": 14,
+  "tolerance": 1e-08,
+  "calibration_row": 1,
+  "test_rows": [
+    2,
+    604
+  ],
+  "unique_series_matched": 91,
+  "unmatched_tickers": [
+    "CHTR.US",
+    "CMCSA.US",
+    "DIS.US",
+    "GOOGL.US",
+    "META.US",
+    "NFLX.US",
+    "T.US",
+    "TMUS.US",
+    "VZ.US"
+  ],
+  "held_out": {
+    "e": {
+      "cells": 54873,
+      "matched": 54873,
+      "unchanged_matches": 0,
+      "max_abs_error": 2.842170943040401e-14
+    },
+    "s": {
+      "cells": 54873,
+      "matched": 54873,
+      "unchanged_matches": 0,
+      "max_abs_error": 2.842170943040401e-14
+    },
+    "g": {
+      "cells": 54873,
+      "matched": 54873,
+      "unchanged_matches": 0,
+      "max_abs_error": 2.842170943040401e-14
+    }
+  },
+  "ranking_sensitivity": {
+    "row": 604,
+    "top5_equal": [
+      "ACN.US",
+      "DUK.US",
+      "SO.US",
+      "NEE.US",
+      "EXC.US"
+    ],
+    "top5_environment": [
+      "ACN.US",
+      "DUK.US",
+      "SO.US",
+      "EXC.US",
+      "NEE.US"
+    ],
+    "common_top5": 5,
+    "largest_absolute_rank_change": {
+      "ticker": "CVX.US",
+      "equal_rank": 87,
+      "environment_rank": 65,
+      "equal_score": 60.9667,
+      "environment_score": 61.736
+    }
+  }
+}
