@@ -1,0 +1,370 @@
+{
+  "grant": "101092639",
+  "schedule": {
+    "deliverables": [
+      {
+        "deliverable": "D1.2",
+        "task_uid": "6",
+        "due": "2023-06-30",
+        "delivered": "2023-06-29",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2023/05/FAME-D1.2-Data-Management-Plan-v3.0.pdf#page=1",
+        "variance_days": -1
+      },
+      {
+        "deliverable": "D2.1",
+        "task_uid": "7",
+        "due": "2023-06-30",
+        "delivered": "2023-07-31",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2023/05/FAME-D2.1-_-Requirements-Analysis-Specifications-and-Co_Creation.pdf#page=1",
+        "variance_days": 31
+      },
+      {
+        "deliverable": "D4.2",
+        "task_uid": "8",
+        "due": "2024-03-31",
+        "delivered": "2024-05-23",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D4.2-Pricing-Trading-and-Monetization-Techniques-I.pdf#page=1",
+        "variance_days": 53
+      },
+      {
+        "deliverable": "D6.4",
+        "task_uid": "17",
+        "due": "2024-09-30",
+        "delivered": "2025-02-20",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=1",
+        "variance_days": 143
+      },
+      {
+        "deliverable": "D6.3",
+        "task_uid": "23",
+        "due": "2025-12-31",
+        "delivered": "2025-12-23",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=1",
+        "variance_days": -8
+      }
+    ],
+    "late": 3,
+    "on_time": 2,
+    "median_signed_days": 31,
+    "d64_before_review_days": 126,
+    "d64_after_review_days": 17,
+    "rp2": [
+      "2024-07-01",
+      "2025-12-31"
+    ]
+  },
+  "funding": [
+    {
+      "name": "FAME",
+      "cost_eur": "16621394.20",
+      "eu_eur": "12889656.25",
+      "other_eur": "3731737.95",
+      "eu_share_pct": 77.55
+    },
+    {
+      "name": "GFT Italia",
+      "cost_eur": "1047669.03",
+      "eu_eur": "733368.32",
+      "other_eur": "314300.71",
+      "eu_share_pct": 70.0
+    },
+    {
+      "name": "JRC Capital Management",
+      "cost_eur": "826250.00",
+      "eu_eur": "578375.00",
+      "other_eur": "247875.00",
+      "eu_share_pct": 70.0
+    },
+    {
+      "name": "KM Cube",
+      "cost_eur": "343750.00",
+      "eu_eur": "240625.00",
+      "other_eur": "103125.00",
+      "eu_share_pct": 70.0
+    },
+    {
+      "name": "UPRC",
+      "cost_eur": "645250.00",
+      "eu_eur": "645250.00",
+      "other_eur": "0.00",
+      "eu_share_pct": 100.0
+    }
+  ],
+  "kpis": [
+    {
+      "id": "K01",
+      "label": "Thời gian tạo báo cáo",
+      "direction": "<=",
+      "threshold": 60,
+      "unit": "phút",
+      "observation_type": "<",
+      "observed": 45,
+      "observed_unit": "phút",
+      "project_description": "Trước > 2 giờ. Sau < 45 phút. Ngưỡng gốc ≤ 1 giờ.",
+      "scope": "Cùng quy trình nhập dữ liệu đến tạo báo cáo.",
+      "comparable": true,
+      "decision": "Đạt",
+      "reference": "Đạt",
+      "baseline": "Đạt",
+      "owner_a": null,
+      "proposed_owner_b": null,
+      "requested_evidence": null,
+      "target_source": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=71",
+      "observation_source": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=54"
+    },
+    {
+      "id": "K02",
+      "label": "Hài lòng với công cụ",
+      "direction": ">=",
+      "threshold": 4,
+      "unit": "điểm/5",
+      "observation_type": "Giá trị",
+      "observed": 4.2,
+      "observed_unit": "điểm/5",
+      "project_description": "Điểm trung bình khảo sát công cụ là 4,2 trên thang 5.",
+      "scope": "Trùng chỉ tiêu hài lòng với công cụ.",
+      "comparable": true,
+      "decision": "Đạt",
+      "reference": "Đạt",
+      "baseline": "Đạt",
+      "owner_a": null,
+      "proposed_owner_b": null,
+      "requested_evidence": null,
+      "target_source": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=70",
+      "observation_source": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=53"
+    },
+    {
+      "id": "K03",
+      "label": "Người dùng tích cực",
+      "direction": ">=",
+      "threshold": 30,
+      "unit": "người",
+      "observation_type": "Giá trị",
+      "observed": 35,
+      "observed_unit": "người",
+      "project_description": "Ghi nhận 35 bên liên quan tích cực dùng nền tảng/công cụ.",
+      "scope": "Đếm số người, độc lập với tỷ lệ chấp nhận.",
+      "comparable": true,
+      "decision": "Đạt",
+      "reference": "Đạt",
+      "baseline": "Đạt",
+      "owner_a": null,
+      "proposed_owner_b": null,
+      "requested_evidence": null,
+      "target_source": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=69",
+      "observation_source": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=52"
+    },
+    {
+      "id": "K04",
+      "label": "Tỷ lệ sử dụng",
+      "direction": ">=",
+      "threshold": 0.7,
+      "unit": "tỷ lệ",
+      "observation_type": null,
+      "observed": null,
+      "observed_unit": null,
+      "project_description": "Phản hồi định tính tích cực. Thiếu tỷ lệ quan sát.",
+      "scope": "Thiếu nhóm đủ điều kiện và tỷ lệ hoặc tử/mẫu.",
+      "comparable": false,
+      "decision": "Thiếu bằng chứng",
+      "reference": "Thiếu bằng chứng",
+      "baseline": "Thiếu bằng chứng",
+      "owner_a": null,
+      "proposed_owner_b": "Đầu mối vận hành Pilot 5",
+      "requested_evidence": "Chốt danh sách đủ điều kiện, cửa sổ quan sát và số đã sử dụng.",
+      "target_source": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=70",
+      "observation_source": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=52"
+    },
+    {
+      "id": "K05",
+      "label": "Tương quan tín hiệu",
+      "direction": ">=",
+      "threshold": 0.5,
+      "unit": "hệ số",
+      "observation_type": null,
+      "observed": null,
+      "observed_unit": null,
+      "project_description": "Tín hiệu bước đầu tích cực. Chưa công bố hệ số.",
+      "scope": "Cần chuỗi tín hiệu – hiệu suất cùng kỳ và hệ số.",
+      "comparable": false,
+      "decision": "Thiếu bằng chứng",
+      "reference": "Thiếu bằng chứng",
+      "baseline": "Thiếu bằng chứng",
+      "owner_a": null,
+      "proposed_owner_b": "Đầu mối đánh giá mô hình",
+      "requested_evidence": "Cung cấp tín hiệu có ngày, hiệu suất đối ứng và hệ số tính lại.",
+      "target_source": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=71",
+      "observation_source": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=54"
+    },
+    {
+      "id": "K06",
+      "label": "Hiệu quả tối ưu danh mục",
+      "direction": ">=",
+      "threshold": 0.03,
+      "unit": "tỷ lệ/năm",
+      "observation_type": null,
+      "observed": null,
+      "observed_unit": null,
+      "project_description": "Đã trình diễn trong môi trường thử. Chưa có lợi suất so sánh.",
+      "scope": "Chưa xác lập kỳ năm, đối chứng và rủi ro tương đương.",
+      "comparable": false,
+      "decision": "Thiếu bằng chứng",
+      "reference": "Thiếu bằng chứng",
+      "baseline": "Thiếu bằng chứng",
+      "owner_a": null,
+      "proposed_owner_b": "Đầu mối quản lý danh mục",
+      "requested_evidence": "Cung cấp danh mục chuẩn, kỳ năm, chi phí và rủi ro cùng kỳ.",
+      "target_source": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=70",
+      "observation_source": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=53"
+    }
+  ],
+  "retrospective": {
+    "A": {
+      "matches": 6,
+      "open": 3,
+      "with_owner": 0
+    },
+    "B": {
+      "matches": 6,
+      "open": 3,
+      "with_owner": 3
+    }
+  },
+  "independent_review": {
+    "A": {
+      "n": 6,
+      "approvals": 6,
+      "matches": 3,
+      "accuracy_pct": 50.0,
+      "false_approvals": 3,
+      "missing_evidence_cases": 3,
+      "total_seconds": 9.475,
+      "mean_seconds": 1.579167,
+      "median_seconds": 0.7565
+    },
+    "B": {
+      "n": 6,
+      "approvals": 6,
+      "matches": 3,
+      "accuracy_pct": 50.0,
+      "false_approvals": 3,
+      "missing_evidence_cases": 3,
+      "total_seconds": 7.152,
+      "mean_seconds": 1.192,
+      "median_seconds": 1.301
+    },
+    "delta_mean_seconds": -0.387,
+    "delta_median_seconds": 0.5445
+  },
+  "esg": {
+    "doi": "10.5281/zenodo.17175084",
+    "tickers": 91,
+    "test_rows": 603,
+    "matched": 164619,
+    "cells": 164619,
+    "unchanged_matches": 0,
+    "unmatched": [
+      "CHTR.US",
+      "CMCSA.US",
+      "DIS.US",
+      "GOOGL.US",
+      "META.US",
+      "NFLX.US",
+      "T.US",
+      "TMUS.US",
+      "VZ.US"
+    ],
+    "quality": {
+      "esg": {
+        "rows": 604,
+        "columns": 100,
+        "unique_us_tickers": 100,
+        "non_ticker_headers": [],
+        "blank_cells": 0
+      },
+      "signals": {
+        "rows": 604,
+        "columns": 96,
+        "unique_us_tickers": 96,
+        "non_ticker_headers": [],
+        "blank_cells": 706
+      },
+      "common_us_tickers": 96
+    },
+    "ranking_sensitivity": {
+      "row": 604,
+      "top5_equal": [
+        "ACN.US",
+        "DUK.US",
+        "SO.US",
+        "NEE.US",
+        "EXC.US"
+      ],
+      "top5_environment": [
+        "ACN.US",
+        "DUK.US",
+        "SO.US",
+        "EXC.US",
+        "NEE.US"
+      ],
+      "common_top5": 5,
+      "largest_absolute_rank_change": {
+        "ticker": "CVX.US",
+        "equal_rank": 87,
+        "environment_rank": 65,
+        "equal_score": 60.9667,
+        "environment_score": 61.736
+      }
+    },
+    "all_rows_sensitivity": {
+      "rows": 604,
+      "tickers": 100,
+      "top_k": 5,
+      "scores": "original E/S/G",
+      "weights": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1
+        ]
+      ],
+      "tie_rule": "ticker ascending",
+      "overlap_histogram": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 39,
+        "4": 0,
+        "5": 565
+      },
+      "identical_members": 565,
+      "different_members": 39,
+      "identical_order": 0,
+      "distinct_top5_pairs": 3,
+      "reordered_same_members": 565,
+      "cutoff_tie_rows": 0,
+      "no_cutoff_tie_rows": 604,
+      "identical_members_without_cutoff_tie": 565,
+      "mean_shared": 4.870860927152318,
+      "last_row_equal": [
+        "ACN.US",
+        "DUK.US",
+        "SO.US",
+        "NEE.US",
+        "EXC.US"
+      ],
+      "last_row_environment": [
+        "ACN.US",
+        "DUK.US",
+        "SO.US",
+        "EXC.US",
+        "NEE.US"
+      ]
+    }
+  }
+}

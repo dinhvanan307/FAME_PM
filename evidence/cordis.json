@@ -1,0 +1,37 @@
+{
+  "grant": "101092639",
+  "source": "https://cordis.europa.eu/project/id/101092639",
+  "reporting_source": "https://cordis.europa.eu/project/id/101092639/reporting",
+  "currency": "EUR",
+  "rp2": [
+    "2024-07-01",
+    "2025-12-31"
+  ],
+  "funding": [
+    [
+      "FAME",
+      "16621394.20",
+      "12889656.25"
+    ],
+    [
+      "GFT Italia",
+      "1047669.03",
+      "733368.32"
+    ],
+    [
+      "JRC Capital Management",
+      "826250.00",
+      "578375.00"
+    ],
+    [
+      "KM Cube",
+      "343750.00",
+      "240625.00"
+    ],
+    [
+      "UPRC",
+      "645250.00",
+      "645250.00"
+    ]
+  ]
+}

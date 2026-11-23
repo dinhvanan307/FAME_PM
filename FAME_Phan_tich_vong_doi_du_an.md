@@ -1,5 +1,7 @@
 # Phân tích FAME từ quyết định tài trợ đến khai thác sau dự án
 
+Các quyết định dưới đây có thể đối chiếu với [bảng số liệu được sinh từ mã](results/ket-qua.md). Phần [phân tích theo mười miền tri thức](docs/phan-tich-quan-ly.md) giải thích điều kiện để một PM có thể chấp nhận, giữ mở hoặc xét lại từng hạng mục.
+
 *Federated decentralized trusted dAta Marketplace for Embedded finance* (FAME) là dự án châu Âu xây dựng một thị trường dữ liệu cho tài chính nhúng. Các tổ chức có thể công bố, tìm, trao đổi và sử dụng dữ liệu, mô hình AI hoặc dịch vụ phân tích qua một đầu mối chung. Trong thí điểm số 5, hai công ty quản lý tài sản dùng dữ liệu thị trường và dữ liệu môi trường, xã hội, quản trị (ESG) để xếp hạng tài sản và tối ưu danh mục. Đó là tình huống có thể theo dõi từ nhu cầu kinh doanh đến kết quả sử dụng. [Hồ sơ FAME của Ủy ban châu Âu][fact] · [Hồ sơ Pilot 5][p5]
 
 **Đánh giá của người viết.** Có bằng chứng FAME đã bàn giao nền tảng và rút ngắn thời gian tạo báo cáo trong Pilot 5. Việc người dùng có tiếp tục sử dụng, tín hiệu AI có hỗ trợ quyết định đầu tư, và nền tảng có tự trang trải được chi phí sau tài trợ là ba câu hỏi riêng. Chúng cần ba loại dữ liệu khác nhau. [Kết quả Pilot 5, Bảng 5][eval48] · [Công bố chuyển sang khai thác][live]
@@ -94,6 +96,10 @@ Mục tiêu có trong Bảng 43 của D6.4. Kết quả dưới đây do nhóm F
 **Phép thử do người viết thiết kế.** Ở dòng 604, đổi từ trọng số bằng nhau sang 60% môi trường, 20% xã hội và 20% quản trị. Năm mã dẫn đầu vẫn có cùng thành phần, nhưng EXC và NEE đổi thứ hạng. CVX dịch chuyển nhiều nhất, từ hạng 87 lên 65. Ví dụ cho thấy chỉ đếm mã trong top 5 sẽ bỏ sót thay đổi trong thứ tự. Người nghiệm thu nên kiểm tra cả danh sách có thứ tự, quy tắc xử lý đồng điểm và hồ sơ trọng số. [Kết quả chạy và hướng dẫn](./esg-data-audit/README.md)
 
 **Nhận định quản lý của người viết.** Có thể ghi nhận bước tính điểm trên 91 mã và mở vấn đề riêng cho 9 mã chưa ghép. Với phần hiệu quả đầu tư, metadata nhắc tới tệp pickle có giao dịch, nhưng danh mục tải xuống của bản phát hành gồm 12 CSV và 2 PDF. Các bảng giá và tín hiệu thiếu khóa ngày. Chưa thể tái tạo dòng giao dịch, xác minh con số lợi suất 61,1% do tác giả dữ liệu công bố hoặc xác nhận KPI cải thiện ≥ 3% mỗi năm của D6.3. Muốn ra quyết định, cần lịch có phiên bản, thời điểm tín hiệu khả dụng, quy tắc giao dịch và danh mục tham chiếu trên cùng kỳ. [Dữ liệu gốc](https://zenodo.org/records/17175084) · [D6.3, Bảng 5][eval49]
+
+### Mở rộng phép thử trọng số trên toàn bộ bản xuất
+
+**Thực nghiệm bổ sung của người viết.** Giữ nguyên tập 100 mã và điểm E/S/G gốc trên từng dòng. Tính lại hai danh sách theo trọng số bằng nhau và 60/20/20. Trên 565/604 dòng, thành phần top 5 giống nhau nhưng thứ tự đổi. Ở 39 dòng còn lại, hai danh sách chỉ trùng ba mã. Không có dòng nào giữ nguyên thứ tự, và toàn bản xuất chỉ tạo ra ba cặp danh sách có thứ tự khác nhau. Điều này giải thích vì sao ví dụ dòng 604 chưa phản ánh đầy đủ độ nhạy của tính năng. Tiêu chí nghiệm thu do người viết đề xuất là đối chiếu danh sách có thứ tự với phiên bản dữ liệu, trọng số và quy tắc đồng điểm đã chốt. [Phương pháp](fame_pm/sensitivity.py) · [Phân bố kết quả](results/ranking_sensitivity.json)
 
 ### So sánh sáu quyết định nghiệm thu trước và sau checklist
 

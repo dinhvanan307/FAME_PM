@@ -1,0 +1,17 @@
+{
+  "esg": {
+    "rows": 604,
+    "columns": 100,
+    "unique_us_tickers": 100,
+    "non_ticker_headers": [],
+    "blank_cells": 0
+  },
+  "signals": {
+    "rows": 604,
+    "columns": 96,
+    "unique_us_tickers": 96,
+    "non_ticker_headers": [],
+    "blank_cells": 706
+  },
+  "common_us_tickers": 96
+}

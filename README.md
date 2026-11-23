@@ -1,5 +1,44 @@
 # FAME Project Management Case Study
 
+Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, chạy mã, kiểm tra toàn bộ phép tính quản lý và đối chiếu với ProjectLibre, Excel. Bản Word và PDF ở thư mục gốc dùng để đọc và nộp bài.
+
+| Muốn làm gì? | Mở từ đây |
+|---|---|
+| Hiểu dự án từ quyết định tài trợ tới lúc kết thúc | [Phân tích vòng đời](FAME_Phan_tich_vong_doi_du_an.md) |
+| Xem quyết định của PM, phép thử, phản chứng và điều kiện nghiệm thu theo mười miền | [Phân tích quản lý chuyên sâu](docs/phan-tich-quan-ly.md) |
+| Truy một con số về đúng tài liệu, trang và phạm vi | [Sổ nguồn](evidence/README.md) |
+| Xem các số được chương trình tính lại | [Bảng kết quả](results/ket-qua.md) · [Dữ liệu JSON](results/pm_results.json) · [Thử trọng số trên 604 dòng](results/ranking_sensitivity.json) |
+| Kiểm tra quy tắc và trường hợp biên | [Mã phân tích](fame_pm/) · [Bộ kiểm thử](tests/) |
+| Chạy trực tiếp trên GitHub | [Verify FAME analysis](https://github.com/dinhvanan307/FAME_PM/actions/workflows/verify.yml). Trong Run workflow, chọn kiểm tra CSV gốc nếu muốn tải lại dữ liệu Zenodo. |
+| Xuất lại tài liệu nộp | [Cách dựng Word và PDF](report/README.md) |
+
+## Từ bản clone đến kết quả
+
+Dùng Python 3.10 trở lên. Chạy các lệnh tại thư mục gốc của repo.
+
+```bash
+git clone https://github.com/dinhvanan307/FAME_PM.git
+cd FAME_PM
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python -m fame_pm --check
+```
+
+Trên Windows PowerShell, kích hoạt môi trường bằng `.venv\Scripts\Activate.ps1`. Lần kiểm tra trên đọc XML, hai sổ Excel, dữ liệu bìa và tài trợ, cùng bản kết quả ESG đã lưu. Để tự tái lập từ bản phát hành Zenodo, chạy thêm các lệnh sau.
+
+```bash
+python -m fame_pm --check --download --data-dir du_lieu
+python -m fame_pm --check --data-dir du_lieu
+```
+
+Lệnh đầu tải metadata và 12 CSV, kiểm tra MD5 rồi chạy lại cả kiểm tra cấu trúc, hiệu chỉnh ngành và hai hồ sơ trọng số. Lệnh sau làm lại từ bản tải trên máy. Nếu chủ động cập nhật đầu vào, dùng `python -m fame_pm --write --data-dir du_lieu`, xem thay đổi trong `results/` rồi chạy lại `--check`. Khi có hai CSV gốc do điều phối viên lưu, thêm `--reviews-dir /duong/dan/thu_muc_phieu` để tái tính thống kê nhóm và đối chiếu với Excel. Hai tệp chi tiết được đọc tại chỗ.
+
+**Kết quả đáng xem.** D6.4 giao trễ 143 ngày lịch. Ba trong sáu KPI có đủ bằng chứng. Trong hồ sơ hồi cứu, số hồ sơ mở có đầu mối đề xuất tăng từ 0/3 lên 3/3. Trong buổi chấm độc lập, cả hai cách đều khớp tham chiếu 3/6. Khi thử hai hồ sơ trọng số ESG trên 604 dòng, có 39 dòng đổi thành phần top 5. Các kết quả này trả lời những câu hỏi khác nhau về tiến độ, chất lượng hồ sơ, quyết định của con người và hành vi công cụ. [Số liệu và nguồn theo từng phép tính](results/ket-qua.md)
+
+## Bối cảnh
+
 FAME (*Federated decentralized trusted dAta Marketplace for Embedded finance*) là dự án Horizon Europe do GFT Italia điều phối, triển khai từ năm 2023 đến 2025. Dự án xây dựng một thị trường dữ liệu để các tổ chức tìm, trao đổi và sử dụng dữ liệu, mô hình AI và dịch vụ phân tích tài chính. Kho này là một bài nghiên cứu tình huống độc lập về cách dự án được lập kế hoạch, thực hiện và đánh giá. [Hồ sơ dự án của Ủy ban châu Âu](https://cordis.europa.eu/project/id/101092639)
 
 ## Nội dung
