@@ -6,13 +6,14 @@ Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, 
 |---|---|
 | Tra mục tiêu, kết quả, kỳ đo và quyết định cho đủ 65 KPI | [Excel có bộ lọc](FAME_Ma_tran_65_KPI.xlsx) · [Bảng dữ liệu và từng trang nguồn](evidence/kpi_matrix.csv) · [Quy tắc và lệnh kiểm tra](evidence/README.md#ma-trận-nghiệm-thu-65-kpi) · Phụ lục G trong PDF |
 | Rà lại 25 hồ sơ còn mở ở phiên bản trước | Trang **Ra soat 25 KPI** trong Excel và Phụ lục H. [Quyết định từng KPI](evidence/kpi_review.csv) · [Trang nguồn và dấu SHA-256](evidence/kpi_review_sources.csv) |
+| Chạy lại phần kiểm được của 23 KPI còn mở | Trang **Kiem thu 23 KPI** trong Excel và Phụ lục I. [Kết quả và lệnh chạy](docs/kiem-thu-23-kpi.md) · [Trường cần xin cho từng KPI](evidence/open23_requests.csv) |
 | Rà từng yêu cầu của mẫu, đối chiếu cả bảy pilot và chạy mã gốc Pilot 7 | [Bản rà trước khi nộp và lệnh tái lập](docs/ra-soat-truoc-khi-nop.md) · [Kết quả theo pilot](evidence/pilot-outcomes.csv) |
 | Hiểu dự án từ quyết định tài trợ tới lúc kết thúc | [Phân tích vòng đời](FAME_Phan_tich_vong_doi_du_an.md) |
 | Xem quyết định của PM, phép thử, phản chứng và điều kiện nghiệm thu theo mười miền | [Phân tích quản lý chuyên sâu](docs/phan-tich-quan-ly.md) |
 | Truy một con số về đúng tài liệu, trang và phạm vi | [Sổ nguồn](evidence/README.md) |
 | Xem các số được chương trình tính lại | [Bảng kết quả](results/ket-qua.md) · [Dữ liệu JSON](results/pm_results.json) · [Thử trọng số trên 604 dòng](results/ranking_sensitivity.json) |
 | Kiểm tra quy tắc và trường hợp biên | [Mã phân tích](fame_pm/) · [Bộ kiểm thử](tests/) |
-| Chạy trực tiếp trên GitHub | [Verify FAME analysis](https://github.com/dinhvanan307/FAME_PM/actions/workflows/verify.yml). Trong Run workflow, chọn `original_data` để tải CSV Zenodo hoặc `pilot_sources` để kiểm hồ sơ 7 pilot, 17 tệp của lần rà bổ sung và chạy thành phần gốc của Pilot 7. |
+| Chạy trực tiếp trên GitHub | [Verify FAME analysis](https://github.com/dinhvanan307/FAME_PM/actions/workflows/verify.yml). Trong Run workflow, chọn `original_data` để tải CSV Zenodo hoặc `pilot_sources` để kiểm hồ sơ 7 pilot, các nguồn bổ sung, bộ kiểm thử 23 KPI và thành phần gốc của Pilot 7. |
 | Xuất lại tài liệu nộp | [Cách dựng Word và PDF](report/README.md) |
 
 ## Từ bản clone đến kết quả

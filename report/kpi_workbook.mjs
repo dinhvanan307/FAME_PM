@@ -9,6 +9,7 @@ const book = Workbook.create();
 const summary = book.worksheets.add("Tong hop");
 const matrix = book.worksheets.add("Ma tran");
 const review = book.worksheets.add("Ra soat 25 KPI");
+const execution = book.worksheets.add("Kiem thu 23 KPI");
 const states = ["Đạt", "Không đạt", "Thiếu bằng chứng", "Không áp dụng theo FAME"];
 const ink = "#17344B", teal = "#14666B", pale = "#EDF5F4";
 const keys = ["id", "pilot", "kpi", "target", "actual", "assessment", "rationale", "period",
@@ -32,7 +33,7 @@ function mergedText(sheet, address, text) {
   range.getCell(0, 0).values = [[text]];
   return range;
 }
-for (const sheet of [summary, matrix, review]) sheet.showGridLines = false;
+for (const sheet of [summary, matrix, review, execution]) sheet.showGridLines = false;
 summary.tabColor = ink;
 matrix.tabColor = teal;
 matrix.getRange("A1:N1").values = [headers];
@@ -95,7 +96,8 @@ const notes=[
   "Không áp dụng theo FAME dùng cho phép thử dữ liệu ngoài ở Pilot 1. Nguồn chưa ghi nhận quyết định miễn trừ.",
   "Kỳ đánh giá là khoảng dự án công bố. Khi thiếu ngày vận hành hoặc ngày lấy mẫu riêng, ma trận ghi rõ giới hạn đó.",
   "P1-01 đến P7-04 là mã của bài. Cột cuối nối sáu KPI Pilot 5 với workbook nghiệm thu trước đây.",
-  "Ra soat 25 KPI ghi bằng chứng, điều kiện còn thiếu và nguồn cho từng hồ sơ mở ở lần trước, bắt đầu bằng Pilot 3 và 5."
+  "Ra soat 25 KPI ghi bằng chứng, điều kiện còn thiếu và nguồn cho từng hồ sơ mở ở lần trước, bắt đầu bằng Pilot 3 và 5.",
+  "Kiem thu 23 KPI ghi phép thử đã chạy, kết quả, bên giữ dữ liệu và trường thông tin cần bổ sung cho từng dòng."
 ];
 notes.forEach((value,i)=>{
   const r=15+i;const line=mergedText(summary,`A${r}:F${r}`,value);
@@ -127,9 +129,42 @@ for (const [i, row] of reviewed.entries()) {
   cell.format.font = {name:"Calibri",size:11,bold:true,color:ink};
 }
 review.freezePanes.freezeRows(1);
+const cases = rows.filter(r => r.execution).sort((a,b) => a.execution.order-b.execution.order);
+const caseEnd = cases.length + 1;
+execution.tabColor = "#325885";
+execution.getRange("A1:L1").values = [["Mã KPI","Chỉ tiêu","Mục tiêu gốc","Kỳ đánh giá","Phương pháp kiểm","Kết quả và giới hạn",
+  "Kết luận hiện hành","Bên giữ hồ sơ đề xuất","Bằng chứng tối thiểu cần bổ sung","Cách xét khi nhận dữ liệu","Nguồn kiểm","Đặc tả"]];
+execution.getRange(`A2:L${caseEnd}`).values = cases.map(r => {
+  const c = r.execution;
+  return [r.id,r.kpi,r.target,r.period,c.method,c.observation,r.assessment,c.owner,c.request,c.decision_rule,"Mở nguồn","Mở D6.4"];
+});
+const caseTable = execution.tables.add(`A1:L${caseEnd}`, true, "HoSoKiemThu");
+caseTable.style = "TableStyleMedium2";
+caseTable.showFilterButton = true;
+widths(execution, [86,220,290,235,175,390,155,205,375,330,105,105]);
+const caseBody = execution.getRange(`A2:L${caseEnd}`);
+caseBody.format.wrapText = true;
+caseBody.format.verticalAlignment = "center";
+caseBody.format.rowHeight = 98;
+caseBody.format.font = {name:"Calibri", size:11, color:ink};
+execution.getRange(`K2:L${caseEnd}`).format.font = {name:"Calibri",size:11,color:"#155B88",underline:"single"};
+heading(execution.getRange("A1:L1"),ink);
+execution.getRange("A1:L1").format.rowHeight = 32;
+execution.freezePanes.freezeRows(1);
+const weights = cases.find(row => row.id === "P5-13").execution.profiles;
+heading(mergedText(summary,"A25:F25","Top 5 thay đổi trên bao nhiêu dòng khi điều chỉnh từng trụ ESG?"),ink);
+summary.getRange("A25:F25").format.rowHeight=34;
+const guide=mergedText(summary,"A26:F26","Mỗi lượt thay một trụ, chia đều phần còn lại. So với trọng số bằng nhau trên cùng dòng. Đơn vị là số dòng trong 604 dòng.");
+guide.format.wrapText=true;guide.format.rowHeight=38;
+summary.getRange("A27:D27").values=[["Trọng số","Thay E","Thay S","Thay G"]];
+heading(summary.getRange("A27:D27"));
+summary.getRange("A28:D32").values=[0,25,50,75,100].map(percent => [percent/100,...["E","S","G"].map(pillar =>
+  weights.find(p => p.pillar === pillar && p.weight_percent === percent).rows_changing_top5_members_vs_equal)]);
+summary.getRange("A28:A32").setNumberFormat("0%");
+summary.getRange("A28:D32").format.rowHeight=24;
 book.recalculate();
 if(preview){
-  const png = await book.render({sheetName:"Tong hop",range:"A1:F22",scale:1,format:"png"});
+  const png = await book.render({sheetName:"Tong hop",range:"A1:F32",scale:1,format:"png"});
   await writeFile(preview,new Uint8Array(await png.arrayBuffer()));
 }
 await (await SpreadsheetFile.exportXlsx(book)).save(output);

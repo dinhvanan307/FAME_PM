@@ -45,6 +45,11 @@ jobs:
       - run: python -m fame_pm.portfolio --data-dir du_lieu/portfolio --download --check
       - run: python -m fame_pm.kpi_matrix --source-dir du_lieu/portfolio
       - run: python -m fame_pm.kpi_review --source-dir du_lieu/portfolio --download
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python esg-data-audit/reproduce_pilot5.py --data-dir du_lieu/zenodo --download > /dev/null
+      - run: python -m fame_pm.open_kpi_runs --source-dir du_lieu/portfolio --data-dir du_lieu/zenodo --check
       - uses: actions/checkout@v5
         with:
           repository: giorgosfatouros/IIoT-Data-Quality-Assessment

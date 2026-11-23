@@ -82,7 +82,7 @@ def append_register(doc):
         f"Đối chiếu toàn dự án. Trong {len(rows)} KPI của bảy pilot, người viết xếp "
         f"{counts[STATUSES[0]]} đạt, {counts[STATUSES[1]]} không đạt, "
         f"{counts[STATUSES[2]]} thiếu bằng chứng và {counts[STATUSES[3]]} không áp dụng theo FAME. "
-        "Phụ lục G ghi từng chỉ tiêu. Phụ lục H giải thích vì sao 2 trong 25 hồ sơ đã được đóng sau khi đối chiếu thêm nguồn."
+        "Phụ lục G ghi từng chỉ tiêu. Phụ lục H giải thích vì sao 2 trong 25 hồ sơ đã được đóng sau khi đối chiếu thêm nguồn. Phụ lục I trình bày phép thử trên 23 hồ sơ còn mở và dữ liệu cần bổ sung."
     )
     conclusion = next(
         p for p in doc.paragraphs if p.text.startswith("Kết quả so sánh quản lý.")
@@ -174,6 +174,7 @@ def append_register(doc):
                 td(decision, r["rationale"], second=True)
 
     append_review(doc, rows)
+    append_execution(doc, rows)
 
 
 def append_review(doc, rows):
@@ -255,3 +256,77 @@ def append_review(doc, rows):
                 td(finding, r["review"]["finding"])
                 td(decision, r["assessment"], bold=True)
                 td(decision, r["review"]["resolution"], second=True)
+
+
+def append_execution(doc, rows):
+    from fame_pm.open23_register import published
+
+    cases = sorted(
+        (r for r in rows if r.get("execution")), key=lambda r: r["execution"]["order"]
+    )
+    snapshot = published()
+    fifth = snapshot["pilot5"]
+    profiles = fifth["weights"]["profiles"]
+    heading(doc, "I  Kiểm thử bằng dữ liệu và mã công khai")
+    doc.add_paragraph(
+        "Đợt kiểm thử lấy 23 hồ sơ đang mở ở commit 2ee5042 làm mốc. Với từng hồ sơ, "
+        "người viết xác định có thể đo trực tiếp thao tác nào, dùng mã của ai và còn thiếu đầu vào gì. "
+        "Không hồ sơ nào thu được đủ các vế để đổi quyết định nghiệm thu. Các trang sau ghi kết quả "
+        "và yêu cầu dữ liệu cho từng mã. Tên bên giữ hồ sơ là đề xuất của người viết."
+    )
+    doc.add_paragraph(
+        "Pilot 3. Người viết chạy hàm searchAssets từ gói FDAC gốc với ba ví dụ do FAME cung cấp. "
+        "Cả ba giữ nguyên nội dung truy vấn và trả được phản hồi thử. Tầng truyền dữ liệu dùng mẫu "
+        "trong bộ nhớ. Phép thử xác nhận cách hoạt động của mã máy khách. Muốn xét ngưỡng vận hành "
+        "của Pilot 3, cần đếm các sự kiện thực tế theo loại và kỳ."
+    )
+    doc.add_paragraph(
+        "Pilot 5. Trên 604 dòng và 100 mã của bản Zenodo v1, người viết lần lượt thay trọng số của "
+        "một trụ và chia đều phần còn lại cho hai trụ kia. Mỗi tổ hợp được so với trọng số ba trụ "
+        "bằng nhau trên cùng dòng. Bảng ghi số dòng thay đổi ít nhất một mã trong top 5. "
+        "Điểm bằng nhau được xếp theo mã cổ phiếu tăng dần."
+    )
+    t = table(
+        doc, ["Trọng số của trụ", "Thay E", "Thay S", "Thay G"], [4.8, 3.45, 3.45, 3.45]
+    )
+    for pc in (0, 25, 50, 75, 100):
+        selected = [
+            p["rows_changing_top5_members_vs_equal"]
+            for p in profiles
+            if p["weight_percent"] == pc
+        ]
+        for cell, value in zip(t.add_row().cells, [f"{pc}%", *selected]):
+            td(cell, str(value))
+    doc.add_paragraph(
+        f"15 cấu hình × 604 dòng cho 9.060 bảng xếp hạng. Dữ liệu có {fifth['weights']['unique_input_panels']} "
+        "bộ điểm E/S/G phân biệt khi so toàn bộ 100 mã. Các dòng lặp được giữ đúng số lần trong bản xuất. "
+        "Phép thử này dùng mã của người viết để tính điểm trên dữ liệu FAME. Nghiệm thu giao diện và "
+        "bộ tối ưu vẫn cần thử cùng các cấu hình trên bản Pilot 5 đã bàn giao."
+    )
+    p = compact(doc.add_paragraph())
+    source_link(
+        p,
+        "Mã chạy và kết quả chi tiết trên GitHub",
+        "https://github.com/dinhvanan307/FAME_PM/blob/main/results/open23_runs.json",
+    )
+    for start in range(0, len(cases), 3):
+        subset = cases[start : start + 3]
+        heading(doc, "I · Hồ sơ kiểm thử " + ", ".join(r["id"] for r in subset))
+        t = table(
+            doc,
+            ["KPI và cách kiểm", "Phép đo và giới hạn", "Hồ sơ cần bổ sung"],
+            [3.6, 5.5, 6.15],
+        )
+        for r in subset:
+            c = r["execution"]
+            row = t.add_row()
+            row._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
+            key, observed, missing = row.cells
+            td(key, r["id"] + " · " + r["kpi"], bold=True)
+            td(key, c["method"], second=True)
+            source_link(compact(key.add_paragraph()), "Nguồn đối chiếu", c["url"])
+            source_link(compact(key.add_paragraph()), "Mục tiêu D6.4", r["target_url"])
+            td(observed, c["observation"])
+            td(missing, c["owner"], bold=True)
+            td(missing, c["request"], second=True)
+            td(missing, c["decision_rule"], second=True)

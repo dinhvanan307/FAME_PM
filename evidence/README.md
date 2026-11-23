@@ -24,7 +24,7 @@ Một phiên bản đặc tả mới có thể thay mục tiêu nhưng vẫn gi�
 
 ## Ma trận nghiệm thu 65 KPI
 
-[Ma trận Excel](../FAME_Ma_tran_65_KPI.xlsx) có ba trang tính. **Tong hop** đếm kết luận theo pilot bằng công thức, **Ma tran** cho lọc theo pilot và trạng thái. **Ra soat 25 KPI** ghi lần đối chiếu tiếp theo, xếp Pilot 3 và 5 trước. Bấm các ô nguồn để mở trang PDF, tính từ bìa. Khoảng trang được ghi khi dòng tiếp tục sang trang kế tiếp. [CSV nguồn](kpi_matrix.csv) là dữ liệu biên tập dùng để dựng cả Excel và Phụ lục G.
+[Ma trận Excel](../FAME_Ma_tran_65_KPI.xlsx) có bốn trang tính. **Tong hop** đếm kết luận theo pilot bằng công thức, **Ma tran** cho lọc theo pilot và trạng thái. **Ra soat 25 KPI** ghi lần đối chiếu tiếp theo, xếp Pilot 3 và 5 trước. **Kiem thu 23 KPI** ghi phép thử, kết quả, bên có thể cung cấp hồ sơ và cách chốt khi nhận dữ liệu. Bấm các ô nguồn để mở trang PDF, tính từ bìa. Khoảng trang được ghi khi dòng tiếp tục sang trang kế tiếp. [CSV nguồn](kpi_matrix.csv) là dữ liệu biên tập dùng để dựng cả Excel và Phụ lục G.
 
 Mục tiêu lấy từ D6.4 bản 1.0, bảng 11, 25, 31, 35, 43, 49 và 56. Kết quả lấy từ D6.3 bản 3.0, bảng 1–7. Cột kỳ đo ghi giai đoạn đánh giá được nêu trong hồ sơ. P2 có kỳ 6–12/2025, P4 có kỳ 7–11/2025 và P5 có kỳ 4–12/2025. Bốn pilot còn lại chỉ gắn với pha 2 khi trang phương pháp không nêu khoảng ngày riêng cho KPI. Các số đếm có đơn vị thời gian như phiên/tuần hay lợi ích/năm giữ đơn vị đó ở cột mục tiêu.
 

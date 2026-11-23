@@ -64,6 +64,15 @@ def attach(rows, authored, output):
                 src, 3, "IJ", ([s["url"] for s in r["sources"]] for r in reviewed)
             )
         )
+        cases = sorted(
+            (r for r in rows if r.get("execution")),
+            key=lambda r: r["execution"]["order"],
+        )
+        updated.update(
+            linked_sheet(
+                src, 4, "KL", ((r["execution"]["url"], r["target_url"]) for r in cases)
+            )
+        )
         for info in src.infolist():
             dest.writestr(
                 info,

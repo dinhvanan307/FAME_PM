@@ -9,6 +9,7 @@ import re
 import unicodedata
 
 from .kpi_review import read_review
+from .open23_register import attach_runs
 from .portfolio import ROOT, SOURCES, BASE, pages
 
 COUNTS = (5, 8, 10, 7, 23, 8, 4)
@@ -96,7 +97,7 @@ def read_matrix():
         r["review"] = review.get(r["id"])
         if r["review"] and r["review"]["after"] != r["assessment"]:
             raise ValueError(f"Review decision and matrix disagree: {r['id']}")
-    return rows
+    return attach_runs(rows)
 
 
 def normalized(text):
@@ -190,7 +191,49 @@ def verify_workbook(rows):
             link = detail.cell(i, j).hyperlink
             if not link or link.target != source["url"]:
                 raise ValueError(f"Wrong review hyperlink at {i}, {j}")
+    execution = book["Kiem thu 23 KPI"]
+    cases = sorted(
+        (r for r in rows if r.get("execution")), key=lambda r: r["execution"]["order"]
+    )
+    if (
+        execution.max_row != len(cases) + 1
+        or not execution.tables
+        or not execution.freeze_panes
+    ):
+        raise ValueError("Invalid 23-KPI worksheet")
+    for i, row in enumerate(cases, 2):
+        case = row["execution"]
+        expected = [
+            row["id"],
+            row["kpi"],
+            row["target"],
+            row["period"],
+            case["method"],
+            case["observation"],
+            row["assessment"],
+            case["owner"],
+            case["request"],
+            case["decision_rule"],
+        ]
+        if [execution.cell(i, j).value for j in range(1, 11)] != expected:
+            raise ValueError(f"Execution worksheet differs for {row['id']}")
+        for j, url in ((11, case["url"]), (12, row["target_url"])):
+            link = execution.cell(i, j).hyperlink
+            if not link or link.target != url:
+                raise ValueError(f"Execution link differs for {row['id']}")
     summary = load_workbook(BOOK, data_only=True)["Tong hop"]
+    profiles = next(r["execution"]["profiles"] for r in cases if r["id"] == "P5-13")
+    for i, percent in enumerate((0, 25, 50, 75, 100), 28):
+        expected = [
+            percent / 100,
+            *(
+                p["rows_changing_top5_members_vs_equal"]
+                for p in profiles
+                if p["weight_percent"] == percent
+            ),
+        ]
+        if [summary.cell(i, j).value for j in range(1, 5)] != expected:
+            raise ValueError("Incorrect five-level ESG grid in workbook")
     for i in range(1, 8):
         counts = Counter(r["assessment"] for r in rows if int(r["pilot"]) == i)
         expected = [i, COUNTS[i - 1], *(counts[k] for k in STATUSES)]
