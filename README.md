@@ -4,6 +4,7 @@ Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, 
 
 | Muốn làm gì? | Mở từ đây |
 |---|---|
+| Tra mục tiêu, kết quả, kỳ đo và quyết định cho đủ 65 KPI | [Excel có bộ lọc](FAME_Ma_tran_65_KPI.xlsx) · [Bảng dữ liệu và từng trang nguồn](evidence/kpi_matrix.csv) · [Quy tắc và lệnh kiểm tra](evidence/README.md#ma-trận-nghiệm-thu-65-kpi) · Phụ lục G trong PDF |
 | Rà từng yêu cầu của mẫu, đối chiếu cả bảy pilot và chạy mã gốc Pilot 7 | [Bản rà trước khi nộp và lệnh tái lập](docs/ra-soat-truoc-khi-nop.md) · [Kết quả theo pilot](evidence/pilot-outcomes.csv) |
 | Hiểu dự án từ quyết định tài trợ tới lúc kết thúc | [Phân tích vòng đời](FAME_Phan_tich_vong_doi_du_an.md) |
 | Xem quyết định của PM, phép thử, phản chứng và điều kiện nghiệm thu theo mười miền | [Phân tích quản lý chuyên sâu](docs/phan-tich-quan-ly.md) |

@@ -21,3 +21,22 @@ Với “hai người chấm đều duyệt”, bằng chứng công khai ở m�
 ### Khi bằng chứng thay đổi
 
 Một phiên bản đặc tả mới có thể thay mục tiêu nhưng vẫn giữ tên KPI cũ. Khi đó cần lấy cả kết quả của đúng kỳ, ghi lại phiên bản nguồn rồi chạy kiểm tra. Nếu ngưỡng thay đổi sau buổi chấm, giữ lại tham chiếu của buổi cũ để giải thích quyết định tại thời điểm đó. Bất đồng giữa lịch và bìa, checksum sai hoặc thay đổi nhãn trong sổ tổng hợp đều khiến lệnh kiểm tra dừng trước khi công bố kết quả mới.
+
+## Ma trận nghiệm thu 65 KPI
+
+[Ma trận Excel](../FAME_Ma_tran_65_KPI.xlsx) có hai trang tính. **Tong hop** đếm kết luận theo pilot bằng công thức, **Ma tran** cho lọc theo pilot và trạng thái. Bấm các ô nguồn để mở trang PDF, tính từ bìa. Khoảng trang được ghi khi dòng tiếp tục sang trang kế tiếp. [CSV nguồn](kpi_matrix.csv) là dữ liệu biên tập dùng để dựng cả Excel và Phụ lục G.
+
+Mục tiêu lấy từ D6.4 bản 1.0, bảng 11, 25, 31, 35, 43, 49 và 56. Kết quả lấy từ D6.3 bản 3.0, bảng 1–7. Cột kỳ đo ghi giai đoạn đánh giá được nêu trong hồ sơ. P2 có kỳ 6–12/2025, P4 có kỳ 7–11/2025 và P5 có kỳ 4–12/2025. Bốn pilot còn lại chỉ gắn với pha 2 khi trang phương pháp không nêu khoảng ngày riêng cho KPI. Các số đếm có đơn vị thời gian như phiên/tuần hay lợi ích/năm giữ đơn vị đó ở cột mục tiêu.
+
+Người viết gán bốn kết luận theo bằng chứng công bố. **Đạt** khi số đo hoặc sản phẩm được xác định đủ để đáp ứng tiêu chí. **Không đạt** khi số đo hụt đích hoặc dự án xác nhận dưới ngưỡng. **Thiếu bằng chứng** khi thiếu một vế của yêu cầu, thiếu mẫu số, hoặc đầu ra được đo bằng chỉ báo khác. **Không áp dụng theo FAME** chỉ xuất hiện khi phép thử chưa diễn ra vì điều kiện đầu vào vắng mặt và FAME ghi N/A. Giá trị NA ở kết quả giao dịch của Pilot 7 được giữ thiếu bằng chứng. Các kết luận là của người viết, phục vụ đánh giá hồ sơ công khai.
+
+Mã `P5-01` đến `P5-23` cho phép tìm một dòng trong toàn danh mục Pilot 5. Sáu dòng có thêm `legacy_id` nối đúng phiếu cũ. Ví dụ, P5-21 là K01 (thời gian lập báo cáo). Buổi hai người chấm chỉ bao phủ sáu KPI đó.
+
+```bash
+python -m pip install -r report/requirements.txt
+python -m fame_pm.kpi_matrix
+python -m fame_pm.portfolio --data-dir du_lieu/portfolio --download --check
+python -m fame_pm.kpi_matrix --source-dir du_lieu/portfolio
+```
+
+Lệnh đầu sau khi cài thư viện kiểm tra số dòng, sáu mã đối chiếu, giá trị giữa CSV và Excel, liên kết và tổng theo pilot. Chế độ có PDF xác thực dấu SHA-256 của ba tài liệu, định vị tên từng KPI trên trang bắt đầu và kiểm tra ngữ cảnh nguồn kỳ đo. Việc đọc, chuyển ngữ và đánh giá nội dung của từng dòng do người viết thực hiện.

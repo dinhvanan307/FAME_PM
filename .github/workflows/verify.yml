@@ -27,6 +27,7 @@ jobs:
       - run: python -m pip install -r report/requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python -m fame_pm --check
+      - run: python -m fame_pm.kpi_matrix
       - if: ${{ github.event_name == 'workflow_dispatch' && inputs.original_data }}
         run: python -m fame_pm --check --download --data-dir du_lieu
       - run: python report/build_report.py --out build
@@ -42,6 +43,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r report/requirements.txt
       - run: python -m fame_pm.portfolio --data-dir du_lieu/portfolio --download --check
+      - run: python -m fame_pm.kpi_matrix --source-dir du_lieu/portfolio
       - uses: actions/checkout@v5
         with:
           repository: giorgosfatouros/IIoT-Data-Quality-Assessment

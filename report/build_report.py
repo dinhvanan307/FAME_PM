@@ -18,6 +18,8 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 STEM = "FAME_Bao_cao_cuoi_ky"
+sys.path.insert(0, str(ROOT))
+from report.kpi_appendix import append_register
 
 
 def number(value, digits=0):
@@ -211,6 +213,7 @@ def main():
     doc = Document(ROOT / "report/mau_bien_tap.docx")
     fill(doc, report_fields(data))
     append_portfolio(doc)
+    append_register(doc)
     with tempfile.TemporaryDirectory(dir=args.out) as tmp:
         directory = Path(tmp)
         word = directory / (STEM + ".docx")

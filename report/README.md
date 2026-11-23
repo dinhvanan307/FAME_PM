@@ -16,3 +16,12 @@ Lệnh thứ ba tạo Word. Lệnh thứ tư tạo cả Word và PDF bằng Libr
 **Đối chiếu sau khi biên tập.** Chương 3 phải dùng ngày lịch trên bìa. Chương 4 ghi đúng phạm vi tài chính. Mục 6.5 và 6.6 có mẫu số và mục đích khác nhau. Phụ lục E đo độ nhạy thứ hạng trên bản xuất có vị trí dòng. Cần đọc kết quả này cùng giới hạn về khóa ngày và lợi suất. [Nguồn các phép tính](../results/ket-qua.md) · [Phân tích đầy đủ theo miền](../docs/phan-tich-quan-ly.md)
 
 Phụ lục F dùng chỉ mục của ba PDF trong [pilot_portfolio.json](../results/pilot_portfolio.json), [bản chép kết quả và diễn giải theo pilot](../evidence/pilot-outcomes.csv) và [kết quả chạy mã gốc Pilot 7](../results/pilot7_boundaries.json). Xem [bản rà theo mẫu và hướng dẫn tái lập](../docs/ra-soat-truoc-khi-nop.md) để tính lại hai tệp JSON.
+
+Phụ lục G dựng toàn bộ 65 dòng từ [CSV nghiệm thu](../evidence/kpi_matrix.csv). Lệnh `python -m fame_pm.kpi_matrix` kiểm tra bản Excel phát hành. Có thể dựng lại Word/PDF bằng Python từ CSV theo các lệnh đầu trang. Bộ dựng Excel dùng Node có `@oai/artifact-tool` (môi trường tạo tệp), rồi gắn liên kết PDF vào từng ô nguồn. Từ thư mục gốc, khi đã có thư mục `build`:
+
+```bash
+python -m fame_pm.kpi_matrix --json > build/kpi.json
+node report/kpi_workbook.mjs build/kpi.json build/kpi-layout.xlsx
+python report/attach_kpi_links.py build/kpi.json build/kpi-layout.xlsx FAME_Ma_tran_65_KPI.xlsx
+python -m fame_pm.kpi_matrix
+```
