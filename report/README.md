@@ -25,3 +25,5 @@ node report/kpi_workbook.mjs build/kpi.json build/kpi-layout.xlsx
 python report/attach_kpi_links.py build/kpi.json build/kpi-layout.xlsx FAME_Ma_tran_65_KPI.xlsx
 python -m fame_pm.kpi_matrix
 ```
+
+Phần 6.2 lấy chuỗi quyết định của Pilot 5 từ [sổ phản hồi](../evidence/pilot5_feedback.json) và kết quả chạy trọng số. Mục 7.1 và Phụ lục J liên hệ quyết định nghiệm thu với [35 điểm Pentagon](../evidence/innovation_pentagon.json). Trang **Innovation Pentagon** của Excel lấy cùng bộ điểm và dùng công thức tính lại Hình 16. [Phương pháp và lệnh đối chiếu](../docs/innovation-pentagon.md)

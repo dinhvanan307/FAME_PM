@@ -10,6 +10,7 @@ import unicodedata
 
 from .kpi_review import read_review
 from .open23_register import attach_runs
+from .pilot_evaluation import page_url, read_evaluation
 from .portfolio import ROOT, SOURCES, BASE, pages
 
 COUNTS = (5, 8, 10, 7, 23, 8, 4)
@@ -221,7 +222,26 @@ def verify_workbook(rows):
             link = execution.cell(i, j).hyperlink
             if not link or link.target != url:
                 raise ValueError(f"Execution link differs for {row['id']}")
-    summary = load_workbook(BOOK, data_only=True)["Tong hop"]
+    cached = load_workbook(BOOK, data_only=True)
+    pentagon = book["Innovation Pentagon"]
+    data, means = read_evaluation()
+    if [c.value for c in pentagon[1][1:6]] != data["dimensions"]:
+        raise ValueError("Innovation Pentagon dimension order differs")
+    for i, figure in enumerate([*data["pilots"], data["portfolio"]], 2):
+        expected_name = f"Pilot {figure['pilot']}" if "pilot" in figure else "FAME công bố"
+        expected_scores = list(map(float, figure["scores"]))
+        source = pentagon[f"G{i}"]
+        if ([c.value for c in pentagon[i][:6]] != [expected_name, *expected_scores]
+                or source.value != f"Hình {figure['figure']} · tr. PDF {figure['page']}"
+                or not source.hyperlink or source.hyperlink.target != page_url("d63", figure["page"])):
+            raise ValueError(f"Innovation Pentagon differs at figure {figure['figure']}")
+    for col, mean in zip("BCDEF", means):
+        if (pentagon[col+"10"].value != f"=ROUND(AVERAGE({col}2:{col}8),2)"
+                or pentagon[col+"11"].value != f"={col}10-{col}9"
+                or cached[pentagon.title][col+"10"].value != float(mean)
+                or cached[pentagon.title][col+"11"].value != 0):
+            raise ValueError(f"Wrong Innovation Pentagon reconciliation in {col}")
+    summary = cached["Tong hop"]
     profiles = next(r["execution"]["profiles"] for r in cases if r["id"] == "P5-13")
     for i, percent in enumerate((0, 25, 50, 75, 100), 28):
         expected = [

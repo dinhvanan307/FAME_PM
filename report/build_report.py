@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
 from report.kpi_appendix import append_register
+from report.pilot_evaluation import add_pilot_evaluation
 
 
 def number(value, digits=0):
@@ -214,6 +215,21 @@ def main():
     fill(doc, report_fields(data))
     append_portfolio(doc)
     append_register(doc)
+    add_pilot_evaluation(doc)
+    if not args.pdf:
+        # A Word-only export can reuse the released field cache without a renderer.
+        # New anchors are resolved by Word or by a subsequent --pdf build.
+        released = ROOT / (STEM + ".docx")
+        if released.is_file():
+            cached = {}
+            for para in Document(released).paragraphs:
+                anchor = para._p.xpath("./w:hyperlink/@w:anchor")
+                if anchor:
+                    cached[anchor[0]] = para._p.xpath("./w:r/w:t")[-1].text
+            for para in doc.paragraphs:
+                anchor = para._p.xpath("./w:hyperlink/@w:anchor")
+                if anchor and anchor[0] in cached:
+                    para._p.xpath("./w:r/w:t")[-1].text = cached[anchor[0]]
     with tempfile.TemporaryDirectory(dir=args.out) as tmp:
         directory = Path(tmp)
         word = directory / (STEM + ".docx")

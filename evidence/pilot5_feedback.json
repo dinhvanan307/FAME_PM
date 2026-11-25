@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Phản hồi của bên liên quan",
+    "attribution": "FAME",
+    "text": "JRC và KM Cube rà quy trình nội bộ tháng 1/2025 rồi tổ chức hội thảo Đức–Hy Lạp tháng 6. Tại buổi trình diễn ngày 13/11/2025, người dự quan tâm đến cách hình thành điểm ESG, khả năng giải thích kết quả và quyền chỉnh trọng số theo chiến lược của khách hàng. D6.3 tổng hợp ý kiến của nhiều vòng. Yêu cầu lựa chọn theo E, S, G đã có trong P5_BR4 và P5_BR9.",
+    "sources": [["d63", 54], ["d63", 55], ["d64", 94]]
+  },
+  {
+    "title": "Quyết định và giới hạn truy vết",
+    "attribution": "FAME và phân tích của người viết",
+    "text": "Trong M31–M33, nhóm phân tích phản hồi và chỉnh thuật toán, giao diện. FAME ghi rõ các vòng góp ý dẫn tới chỉnh cách gán trọng số, bộ lọc mặc định và phần hiển thị. Người viết xem đây là điều chỉnh trong phạm vi hiện có. Hồ sơ công khai chưa chỉ ra người phê duyệt và phiên bản của từng thay đổi. Buổi tháng 11 dùng bản đã cập nhật.",
+    "sources": [["d63", 55], ["d63", 74]]
+  },
+  {
+    "title": "Thay đổi quan sát được ở sản phẩm",
+    "attribution": "FAME",
+    "text": "Theo FAME, người dùng đã góp ý trực tiếp để nhóm diễn giải từng thành phần điểm rõ hơn và sửa mẫu báo cáo. D6.2 ghi chín kiểu nhà đầu tư và tùy chọn cấu hình riêng. Hình 40 cho thấy phiếu xác định sở thích, Hình 41 cho thấy bảng điểm ESG. Bảng 5 của D6.3 ghi giao diện cho phép hiển thị và điều chỉnh E/S/G. Năm mức ưu tiên ESG so với lợi suất thuộc P5-11. Hai yêu cầu về từng trụ E/S/G được theo dõi riêng ở P5-12 và P5-13.",
+    "sources": [["d62", 42], ["d62", 45], ["d62", 46], ["d63", 53], ["d63", 74]]
+  },
+  {
+    "title": "Kết quả FAME công bố",
+    "attribution": "FAME",
+    "text": "Điểm hài lòng chung với công cụ đạt 4,2/5 so với mục tiêu 4,0/5. Thời gian tạo báo cáo từ trên 2 giờ xuống dưới 45 phút, đạt ngưỡng tối đa 1 giờ. Đây là số của cả công cụ trong kỳ đánh giá. Tài liệu không tách mức đóng góp của thay đổi giao diện hay của riêng chức năng trọng số.",
+    "sources": [["d63", 53], ["d63", 54]]
+  }
+]

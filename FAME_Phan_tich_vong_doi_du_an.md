@@ -6,6 +6,9 @@ Các quyết định dưới đây có thể đối chiếu với [bảng số l
 
 **Đánh giá của người viết.** Có bằng chứng FAME đã bàn giao nền tảng và rút ngắn thời gian tạo báo cáo trong Pilot 5. Việc người dùng có tiếp tục sử dụng, tín hiệu AI có hỗ trợ quyết định đầu tư, và nền tảng có tự trang trải được chi phí sau tài trợ là ba câu hỏi riêng. Chúng cần ba loại dữ liệu khác nhau. [Kết quả Pilot 5, Bảng 5][eval48] · [Công bố chuyển sang khai thác][live]
 
+
+Để theo dõi cách các buổi làm việc dẫn tới điều chỉnh và đánh giá bản trình diễn ESG, xem [chuỗi phản hồi của Pilot 5 cùng bảng điểm Innovation Pentagon của bảy pilot](docs/innovation-pentagon.md).
+
 ## Mục tiêu 5W1H của nghiên cứu
 
 | Câu hỏi | Cách áp dụng trong bài |

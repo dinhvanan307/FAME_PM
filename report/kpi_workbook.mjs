@@ -10,6 +10,8 @@ const summary = book.worksheets.add("Tong hop");
 const matrix = book.worksheets.add("Ma tran");
 const review = book.worksheets.add("Ra soat 25 KPI");
 const execution = book.worksheets.add("Kiem thu 23 KPI");
+const pentagon = book.worksheets.add("Innovation Pentagon");
+const pentagonData = JSON.parse(await readFile("evidence/innovation_pentagon.json", "utf8"));
 const states = ["Đạt", "Không đạt", "Thiếu bằng chứng", "Không áp dụng theo FAME"];
 const ink = "#17344B", teal = "#14666B", pale = "#EDF5F4";
 const keys = ["id", "pilot", "kpi", "target", "actual", "assessment", "rationale", "period",
@@ -33,7 +35,7 @@ function mergedText(sheet, address, text) {
   range.getCell(0, 0).values = [[text]];
   return range;
 }
-for (const sheet of [summary, matrix, review, execution]) sheet.showGridLines = false;
+for (const sheet of [summary, matrix, review, execution, pentagon]) sheet.showGridLines = false;
 summary.tabColor = ink;
 matrix.tabColor = teal;
 matrix.getRange("A1:N1").values = [headers];
@@ -162,8 +164,33 @@ summary.getRange("A28:D32").values=[0,25,50,75,100].map(percent => [percent/100,
   weights.find(p => p.pillar === pillar && p.weight_percent === percent).rows_changing_top5_members_vs_equal)]);
 summary.getRange("A28:A32").setNumberFormat("0%");
 summary.getRange("A28:D32").format.rowHeight=24;
+widths(pentagon, [196,100,108,112,106,118,168]);
+pentagon.getRange("A1:G1").values = [["Pilot · thang điểm 1–5", ...pentagonData.dimensions, "Nguồn D6.3"]];
+pentagon.getRange("A2:G9").values = [...pentagonData.pilots, pentagonData.portfolio].map(row => [
+  row.pilot ? `Pilot ${row.pilot}` : "FAME công bố", ...row.scores, `Hình ${row.figure} · tr. PDF ${row.page}`
+]);
+pentagon.tables.add("A1:G8", true, "DiemPentagon").style = "TableStyleMedium2";
+heading(pentagon.getRange("A1:G1"));
+pentagon.getRange("A1:G1").format.rowHeight = 32;
+pentagon.getRange("A2:G11").format.rowHeight = 25;
+pentagon.getRange("B2:F11").setNumberFormat("0.00");
+pentagon.getRange("G2:G9").format.font = {name:"Calibri",size:11,color:"#155B88",underline:"single"};
+pentagon.getRange("A10:A11").values = [["Người viết tính lại"], ["Chênh lệch (điểm)"]];
+for (const col of ["B","C","D","E","F"]) {
+  pentagon.getRange(`${col}10`).formulas = [[`=ROUND(AVERAGE(${col}2:${col}8),2)`]];
+  pentagon.getRange(`${col}11`).formulas = [[`=${col}10-${col}9`]];
+}
+pentagon.getRange("A9:F9").format.fill = pale;
+pentagon.getRange("A10:F10").format.font = {name:"Calibri",size:11,color:ink,bold:true};
+const pentagonNote = mergedText(pentagon,"A13:G13",
+  "Điểm của từng pilot được chép từ nhãn số in trong hình. Dòng 10 cho mỗi pilot trọng số bằng nhau và làm tròn đến hai chữ số. Dòng 11 đối chiếu với Hình 16.");
+pentagonNote.format.wrapText = true;
+pentagonNote.format.rowHeight = 34;
+pentagon.freezePanes.freezeRows(1);
 book.recalculate();
 if(preview){
+  const fig = await book.render({sheetName:"Innovation Pentagon",range:"A1:G13",scale:1,format:"png"});
+  await writeFile(preview + ".pentagon.png",new Uint8Array(await fig.arrayBuffer()));
   const png = await book.render({sheetName:"Tong hop",range:"A1:F32",scale:1,format:"png"});
   await writeFile(preview,new Uint8Array(await png.arrayBuffer()));
 }

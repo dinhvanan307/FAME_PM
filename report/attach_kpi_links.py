@@ -3,31 +3,36 @@
 import argparse
 import json
 from pathlib import Path
+import sys
 from zipfile import ZipFile
 
 from lxml import etree as ET
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from fame_pm.pilot_evaluation import page_url, read_evaluation
 
 S = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 PKG = "{http://schemas.openxmlformats.org/package/2006/relationships}"
 
 
-def linked_sheet(src, number, columns, records):
+def linked_sheet(src, number, columns, records, *, freeze_identifiers=True):
     sheet_name = f"xl/worksheets/sheet{number}.xml"
     rel_name = f"xl/worksheets/_rels/sheet{number}.xml.rels"
     sheet = ET.fromstring(src.read(sheet_name))
     relationships = ET.fromstring(src.read(rel_name))
     links = ET.Element(S + "hyperlinks")
     sheet.find(S + "tableParts").addprevious(links)
-    pane = sheet.find(".//" + S + "pane")
-    pane.set("xSplit", "2")
-    pane.set("topLeftCell", "C2")
-    pane.set("activePane", "bottomRight")
-    selection = sheet.find(".//" + S + "selection")
-    if selection is not None:
-        selection.set("pane", "bottomRight")
-        selection.set("activeCell", "C2")
-        selection.set("sqref", "C2")
+    if freeze_identifiers:
+        pane = sheet.find(".//" + S + "pane")
+        pane.set("xSplit", "2")
+        pane.set("topLeftCell", "C2")
+        pane.set("activePane", "bottomRight")
+        selection = sheet.find(".//" + S + "selection")
+        if selection is not None:
+            selection.set("pane", "bottomRight")
+            selection.set("activeCell", "C2")
+            selection.set("sqref", "C2")
     for i, urls in enumerate(records, 2):
         for col, url in zip(columns, urls):
             if url:
@@ -73,6 +78,10 @@ def attach(rows, authored, output):
                 src, 4, "KL", ((r["execution"]["url"], r["target_url"]) for r in cases)
             )
         )
+        data, _ = read_evaluation()
+        figures = [*data["pilots"], data["portfolio"]]
+        updated.update(linked_sheet(src, 5, "G", ((page_url("d63", r["page"]),) for r in figures),
+                                    freeze_identifiers=False))
         for info in src.infolist():
             dest.writestr(
                 info,

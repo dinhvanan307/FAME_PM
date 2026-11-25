@@ -4,6 +4,7 @@ Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, 
 
 | Muốn làm gì? | Mở từ đây |
 |---|---|
+| Đối chiếu Innovation Pentagon và theo dõi phản hồi của Pilot 5 | [Bảng 35 điểm, nguồn từng hình và quyết định quản lý](docs/innovation-pentagon.md) · Trang **Innovation Pentagon** trong Excel · Mục 6.2, 7.1 và Phụ lục J trong báo cáo |
 | Tra mục tiêu, kết quả, kỳ đo và quyết định cho đủ 65 KPI | [Excel có bộ lọc](FAME_Ma_tran_65_KPI.xlsx) · [Bảng dữ liệu và từng trang nguồn](evidence/kpi_matrix.csv) · [Quy tắc và lệnh kiểm tra](evidence/README.md#ma-trận-nghiệm-thu-65-kpi) · Phụ lục G trong PDF |
 | Rà lại 25 hồ sơ còn mở ở phiên bản trước | Trang **Ra soat 25 KPI** trong Excel và Phụ lục H. [Quyết định từng KPI](evidence/kpi_review.csv) · [Trang nguồn và dấu SHA-256](evidence/kpi_review_sources.csv) |
 | Chạy lại phần kiểm được của 23 KPI còn mở | Trang **Kiem thu 23 KPI** trong Excel và Phụ lục I. [Kết quả và lệnh chạy](docs/kiem-thu-23-kpi.md) · [Trường cần xin cho từng KPI](evidence/open23_requests.csv) |
