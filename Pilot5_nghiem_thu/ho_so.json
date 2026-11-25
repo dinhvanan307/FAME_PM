@@ -1,0 +1,12 @@
+{
+  "P1": [["A", ["R1", "R2", "R4"]], ["B", ["R5", "R6", "R3"]]],
+  "P2": [["B", ["R4", "R1", "R2"]], ["A", ["R3", "R5", "R6"]]],
+  "cases": {
+    "R1": ["Tính toàn vẹn tệp", "Đủ 12 CSV v1 cùng dung lượng và MD5 với bản kê Zenodo.", "S1 và S2 · danh sách files"],
+    "R2": ["Tham chiếu cố định", "Giữ tham chiếu ở dòng 1. Tất cả 9 × 603 × 3 ô trụ phải khớp trong 10⁻⁸ điểm.", "S2 · exceptions, frozen_reference_matched"],
+    "R3": ["Điểm trụ toàn bộ mã", "Phương án theo dòng phải khớp toàn bộ 100 × 603 × 3 ô công bố, sai số từng ô ≤ 10⁻⁸.", "S2 · matched, denominator, max_abs_pillar_error"],
+    "R4": ["Hiển thị vector trên giao diện", "P5-12 yêu cầu vector E/S/G tùy chỉnh ở ít nhất năm mức trên giao diện FAME.", "S3 và S4 · Independent E+S+G Scores presentation"],
+    "R5": ["Hồ sơ từng ngoại lệ", "Từng mã phải có 1.809 ô trụ và 603 giá trị điều chỉnh tổng hợp khớp ở dung sai 10⁻⁸.", "S2 · exceptions, adjusted_pillars_matched, adjusted_total_matched"],
+    "R6": ["Khuyến nghị từ bộ tối ưu", "P5-13 yêu cầu ít nhất năm mức trọng số E/S/G để tạo khuyến nghị bằng bộ tối ưu FAME.", "S3 và S4 · Independent E+S+G Scores Weightings"]
+  }
+}

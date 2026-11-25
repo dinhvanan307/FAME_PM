@@ -21,6 +21,7 @@ STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
 from report.kpi_appendix import append_register
 from report.pilot_evaluation import add_pilot_evaluation
+from report.pilot5_acceptance import append_acceptance
 
 
 def number(value, digits=0):
@@ -216,6 +217,7 @@ def main():
     append_portfolio(doc)
     append_register(doc)
     add_pilot_evaluation(doc)
+    append_acceptance(doc)
     if not args.pdf:
         # A Word-only export can reuse the released field cache without a renderer.
         # New anchors are resolved by Word or by a subsequent --pdf build.

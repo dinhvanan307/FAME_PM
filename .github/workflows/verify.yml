@@ -27,10 +27,13 @@ jobs:
       - run: python -m pip install -r report/requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python -m fame_pm --check
+      - run: python Pilot5_nghiem_thu/tong_hop.py Pilot5_nghiem_thu/P1.xlsx Pilot5_nghiem_thu/P2.xlsx
       - run: python -m fame_pm.kpi_matrix
       - run: python -m fame_pm.pilot_evaluation
       - if: ${{ github.event_name == 'workflow_dispatch' && inputs.original_data }}
-        run: python -m fame_pm --check --download --data-dir du_lieu
+        run: |
+          python -m fame_pm --check --download --data-dir du_lieu
+          python Pilot5_nghiem_thu/verify.py --data-dir du_lieu --check
       - run: python report/build_report.py --out build
 
   pilot-sources:
