@@ -45,3 +45,24 @@ python3 esg-data-audit/reproduce_pilot5.py --data-dir /tmp/fame-pilot5-inputs
 Cả 91 mã ghép duy nhất cho kết quả khớp ở 54.873 ô mỗi trụ cột trong dung sai tuyệt đối 10⁻⁸ điểm. Đối chứng giữ nguyên điểm gốc khớp 0 ô trên cùng tập. Chín mã chưa ghép được vẫn liệt kê trong JSON. Trên hàng cuối, thử hai hồ sơ tự chọn có trọng số (1/3, 1/3, 1/3) và (0,6, 0,2, 0,2) cho E, S, G. Điểm gốc có hai chữ số thập phân. Mã tính bằng số nguyên phần trăm, xếp điểm giảm dần và dùng thứ tự mã khi đồng điểm.
 
 Bản xuất thiếu khóa ngày công khai cho chuỗi điểm và giá. Phép thử xác nhận sự nhất quán số học theo hàng, chưa tái tạo được lệnh giao dịch hay lợi suất của chiến lược MS020. [Bộ dữ liệu](https://zenodo.org/records/17175084) · [Đặc tả Pilot 5, bảng 39](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=62)
+
+### Mở rộng phép đối chiếu ra đủ 100 mã
+
+**Câu hỏi quản lý chất lượng.** Quy tắc ghép từng mã với một cột ngành đã bao phủ 91/100 mã. Liệu chín ngoại lệ có dùng một tham chiếu chung mà người nhận bàn giao có thể tính lại từ các đầu vào công khai? Nguồn đối chiếu là các bảng E/S/G sau điều chỉnh do tác giả phát hành cùng các bảng đầu vào. [Bản Zenodo v1](https://zenodo.org/records/17175084)
+
+**Cách thử của người viết.** Ở dòng đầu, ESG tổng hợp trừ mức điều chỉnh công bố của mỗi mã ngoại lệ đều xấp xỉ 65,91, đúng bằng trung bình cộng của tám cột ngành. Giữ quy tắc cũ cho 91 mã. Với chín mã còn lại, tính lại trung bình tám cột ở từng dòng. Ước tính từng điểm trụ bằng điểm trụ gốc cộng điểm ESG tổng hợp rồi trừ giá trị tham chiếu. Ở các dòng 2–604, bảng điều chỉnh của tác giả chỉ dùng để chấm kết quả. Đây là phép kiểm hồi cứu trên bản công khai đã được khảo sát. Đơn vị là ô dữ liệu theo vị trí dòng.
+
+| Phương án | Mã có tham chiếu | Ô E/S/G có thể đối chiếu | Ô khớp trên tổng 180.900 ô |
+|---|---:|---:|---:|
+| Ghép với một cột ngành có tên | 91/100 | 164.619 | 164.619 (91%) |
+| Thêm tham chiếu trung bình cho chín mã | 100/100 | 180.900 | 180.900 (100%) |
+
+**Đối chứng.** Trên riêng chín mã, giữ tham chiếu cố định ở 65,91 chỉ khớp 1.026/16.281 ô. Cập nhật trung bình theo dòng khớp 16.281/16.281 ô với dung sai tuyệt đối 10⁻⁸. Tham chiếu chỉ có bốn giá trị phân biệt trên 603 dòng kiểm. Điều được xác nhận là tính tương đương số học trên bản xuất v1. Để xác nhận quy tắc nghiệp vụ và chuyển nó sang bản dữ liệu mới, cần bảng ánh xạ mã–ngành, quy tắc thay thế tham chiếu có phiên bản và một bản xuất mới để kiểm tra độc lập. Kết quả này chưa đo lợi suất, mức rủi ro hay số giờ tiết kiệm của dự án.
+
+Từ gốc repo, sau khi đã tải dữ liệu bằng lệnh ở trên, chạy lại:
+
+```bash
+python3 esg-data-audit/compare_references.py --data-dir /tmp/fame-pilot5-inputs --check
+```
+
+Bỏ `--check` để in toàn bộ kết quả, gồm danh sách chín mã và số ô khớp khi thay đổi tham chiếu. [Mã so sánh](compare_references.py) · [Kết quả chạy](reference_comparison.json)

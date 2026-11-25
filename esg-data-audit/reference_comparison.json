@@ -1,0 +1,70 @@
+{
+  "source_doi": "10.5281/zenodo.17175084",
+  "absolute_tolerance": 1e-08,
+  "calibration_row": 1,
+  "evaluation_rows": [
+    2,
+    604
+  ],
+  "sector_columns": [
+    "Basic Materials",
+    "Consumer Goods",
+    "Energy",
+    "Financial Services",
+    "Healthcare",
+    "Real Estate",
+    "Technology",
+    "Utilities"
+  ],
+  "denominator_pillar_cells": 180900,
+  "named_sector_only": {
+    "covered_tickers": 91,
+    "tested": 164619,
+    "matched": 164619
+  },
+  "named_or_mean": {
+    "covered_tickers": 100,
+    "tested": 180900,
+    "matched": 180900,
+    "max_absolute_error": 1.4210854715202004e-14
+  },
+  "additional_tickers": [
+    "CHTR.US",
+    "CMCSA.US",
+    "DIS.US",
+    "GOOGL.US",
+    "META.US",
+    "NFLX.US",
+    "T.US",
+    "TMUS.US",
+    "VZ.US"
+  ],
+  "unresolved": [],
+  "additional_pillar_cells": {
+    "tested": 16281,
+    "matched": 16281,
+    "matched_with_frozen_first_reference": 1026
+  },
+  "additional_total_adjustment_cells": {
+    "tested": 5427,
+    "matched": 5427
+  },
+  "evaluation_reference_values": [
+    {
+      "value": 65.91,
+      "rows": 38
+    },
+    {
+      "value": 66.16375,
+      "rows": 63
+    },
+    {
+      "value": 66.83500000000001,
+      "rows": 251
+    },
+    {
+      "value": 67.4975,
+      "rows": 251
+    }
+  ]
+}

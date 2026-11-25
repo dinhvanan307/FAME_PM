@@ -46,7 +46,7 @@ def verify(raw, entry):
         raise ValueError(f"Unexpected contents of {entry['key']}")
 
 
-def run(directory):
+def load_exports(directory):
     record = json.loads((directory / "metadata.json").read_text())
     if record["doi"] != DOI:
         raise ValueError("Wrong Zenodo record")
@@ -73,13 +73,21 @@ def run(directory):
         if name.startswith("esgdata_"):
             tables[name.split("_esg", 1)[1].removesuffix(".csv").lstrip("_") or "total"] = rows
 
-    total, adjustment, sectors = tables["total"], tables["adj"], tables["sector_daily"]
+    total = tables["total"]
     tickers = set(total[0])
     for key, rows in tables.items():
         if len(rows) != len(total):
             raise ValueError(f"Unaligned row count for {key}")
         if key != "sector_daily" and set(rows[0]) != tickers:
             raise ValueError(f"Unexpected ticker set for {key}")
+
+    return entries, manifest, tables
+
+
+def run(directory):
+    entries, manifest, tables = load_exports(directory)
+    total, adjustment, sectors = tables["total"], tables["adj"], tables["sector_daily"]
+    tickers = set(total[0])
 
     # Infer one numeric sector series per ticker from the first data row only.
     # The association does not establish an issuer's official industry classification.
