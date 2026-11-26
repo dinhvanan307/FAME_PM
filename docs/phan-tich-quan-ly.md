@@ -1,6 +1,6 @@
 # Phân tích quyết định quản lý dự án FAME
 
-Khi nghiệm thu Pilot 5, trưởng dự án đứng trước ba câu hỏi. Tệp dữ liệu có cho đúng kết quả số học mà đối tác đã xuất? Công cụ có đáp ứng yêu cầu người dùng? Bằng chứng có đủ để mở rộng đầu tư? Ba câu hỏi này dẫn tới ba quyết định khác nhau. Có thể công nhận phần tính điểm cho 91 mã, nghiệm thu ba KPI đã có số đo và đồng thời giữ mở quyết định nhân rộng. Báo cáo kết quả kỳ cuối của FAME và bộ dữ liệu công bố cung cấp bằng chứng ở những cấp khác nhau. [Hồ sơ vòng đời](../FAME_Phan_tich_vong_doi_du_an.md) · [Kết quả do mã tính](../results/ket-qua.md)
+Khi nghiệm thu Pilot 5, trưởng dự án đứng trước ba câu hỏi. Tệp dữ liệu có cho đúng kết quả số học mà đối tác đã xuất? Công cụ có đáp ứng yêu cầu người dùng? Bằng chứng có đủ để mở rộng đầu tư? Ba câu hỏi này dẫn tới ba quyết định khác nhau. Lần đầu người viết tái tạo điểm E/S/G cho 91 mã. Lượt xác nhận trên cùng bản dữ liệu kiểm đủ 100 mã. Ba KPI nghiệp vụ có số đo được nghiệm thu riêng. Quyết định nhân rộng vẫn cần bằng chứng vận hành. Báo cáo kết quả kỳ cuối của FAME và bộ dữ liệu công bố cung cấp bằng chứng ở những cấp khác nhau. [Hồ sơ vòng đời](../FAME_Phan_tich_vong_doi_du_an.md) · [Kết quả do mã tính](../results/ket-qua.md)
 
 ## 1. Xác định đối tượng quản lý và đơn vị quan sát
 
@@ -28,7 +28,7 @@ Chuỗi bằng chứng đi từ đặc tả nghiệp vụ đến công cụ, b�
 
 P5_BR1 liên quan đến xếp hạng tài sản, còn P5_BR10 liên quan đến tối ưu danh mục theo sở thích ESG. Công sức để nghiệm thu hai yêu cầu khác nhau. Đối với xếp hạng, có thể cung cấp tập tài sản, bộ điểm đầu vào, trọng số, quy tắc xử lý đồng điểm và danh sách đầu ra để bên thứ hai chạy lại. Đối với tối ưu danh mục, còn cần vị thế, giá giao dịch, kỳ tái cân bằng, mô hình phí, danh mục chuẩn và ràng buộc rủi ro. Người duyệt phải có khả năng kiểm tra cả điều kiện “cùng mức rủi ro” trong đặc tả. [D6.4, phụ lục A5](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=94)
 
-**Ảnh hưởng đến phạm vi bàn giao.** Có thể đóng gói bài toán tái tính điểm độc lập với gói kiểm chứng hiệu quả đầu tư. Chín mã chưa ghép duy nhất được ghi thành ngoại lệ có tên. PM có thể yêu cầu bên dữ liệu bổ sung ánh xạ rồi kiểm tra phạm vi mới. Nếu một hồ sơ ghi chung “ESG đã đạt”, người đọc khó xác định phần nào còn nằm ngoài kiểm thử. [Danh sách ngoại lệ](../esg-data-audit/reproduction.json)
+**Ảnh hưởng đến phạm vi bàn giao.** Có thể đóng gói bài toán tái tính điểm độc lập với gói kiểm chứng hiệu quả đầu tư. Lượt đầu ghi chín ngoại lệ do chưa ghép được với một ngành duy nhất. Lượt sau đóng cả chín về tái tạo điểm theo từng dòng. Bảng phân ngành nội bộ vẫn cần chủ dữ liệu xác nhận. Nếu một hồ sơ ghi chung “ESG đã đạt”, người đọc khó xác định phần nào còn nằm ngoài kiểm thử. [Danh sách ngoại lệ ban đầu](../esg-data-audit/reproduction.json) · [Kết quả xử lý từng mã](../Pilot5_nghiem_thu/phep_do.json)
 
 ## 3. Tiến độ và chi phí
 
@@ -50,7 +50,7 @@ Tổng chi phí và khoản EU tài trợ trả lời câu hỏi về cơ cấu 
 
 ### Kiểm tra đầu ra số học
 
-Bước đầu so mã MD5 và kích thước tệp với metadata của bản Zenodo. Mã cổ phiếu là khóa ghép theo cột. Dòng đầu chỉ dùng để tìm chuỗi trung bình ngành khớp duy nhất với chênh giữa ESG tổng hợp và cột điều chỉnh. Sau khi chốt ánh xạ, mã tính lại điểm từng trụ cột trên các dòng 2–604 rồi so với giá trị phía phát hành. Đối chứng giữ nguyên điểm gốc trên cùng tập ô giúp kiểm tra xem việc khớp có đơn thuần do hai tệp giống nhau hay không. Kết quả là 164.619 giá trị khớp trong sai số cho phép và đối chứng khớp 0. Đây là kiểm tra trên bản xuất đã biết. Ánh xạ suy từ dữ liệu cần đối tác xác nhận nếu dùng làm phân ngành chính thức. [Mã thực nghiệm](../esg-data-audit/reproduce_pilot5.py) · [Nguồn Zenodo](https://zenodo.org/records/17175084)
+Bước đầu so mã MD5 và kích thước tệp với metadata của bản Zenodo. Mã cổ phiếu là khóa ghép theo cột. Dòng đầu chỉ dùng để tìm chuỗi trung bình ngành khớp duy nhất với chênh giữa ESG tổng hợp và cột điều chỉnh. Sau khi chốt ánh xạ, mã tính lại điểm từng trụ cột trên các dòng 2–604 rồi so với giá trị phía phát hành. Đối chứng giữ nguyên điểm gốc trên cùng tập ô giúp kiểm tra xem việc khớp có đơn thuần do hai tệp giống nhau hay không. Lần đầu khớp 164.619 ô trên 91 mã và đối chứng khớp 0. Ngày 25/11/2026, áp dụng trung bình tám ngành theo từng dòng cho chín mã ngoại lệ giúp kiểm đủ 100 mã, với 180.900/180.900 ô E/S/G khớp trên cùng 603 dòng. Ánh xạ suy từ dữ liệu cần đối tác xác nhận nếu dùng làm phân ngành chính thức. [Mã thực nghiệm](../esg-data-audit/reproduce_pilot5.py) · [Nguồn Zenodo](https://zenodo.org/records/17175084)
 
 ### Khi thay trọng số, người dùng có nhìn thấy cùng danh sách?
 
@@ -99,7 +99,7 @@ Hồ sơ tài trợ nêu đối tác và cơ cấu vốn; bản phát hành dữ
 | Hạng mục | Quyết định đề xuất của người viết | Điều kiện để thay đổi quyết định |
 |---|---|---|
 | Năm mốc giao | Ghi nhận chênh lệch theo từng bìa, ưu tiên điều tra phần trước phản biện của D6.4 | Lịch cơ sở có phụ thuộc và hồ sơ thay đổi giải thích tác động |
-| Gói tính điểm | Chấp nhận bằng chứng số học cho tập 91 mã đã ghép duy nhất | Bên dữ liệu cung cấp ánh xạ ngành có phiên bản cho các mã ngoại lệ |
+| Gói tính điểm | Chấp nhận bằng chứng số học trên v1 cho 100 mã sau hai lượt (91 mã ở lượt đầu) | Khi cần xác nhận phân ngành chính thức, bên dữ liệu cung cấp bảng ánh xạ có phiên bản |
 | Danh sách xếp hạng | Đưa so sánh có thứ tự theo từng hồ sơ trọng số vào tiêu chí kiểm thử | Nghiệp vụ xác nhận công thức, quy tắc đồng điểm và mục đích sử dụng |
 | Nghiệm thu sáu KPI | Công nhận ba chỉ tiêu có bằng chứng; yêu cầu bổ sung K04–K06 | Có đủ số đo, đơn vị, kỳ đo và nguồn để kiểm tra lại |
 | Quyết định nhân rộng | Tách kết quả sử dụng, hiệu quả đầu tư và chi phí vận hành thành ba câu hỏi | Có số người dùng theo kỳ, danh mục đối chứng, dữ liệu giao dịch và chi phí riêng |

@@ -10,6 +10,8 @@ from openpyxl import load_workbook
 HERE = Path(__file__).resolve().parent
 SPEC = json.loads((HERE / "ho_so.json").read_text(encoding="utf-8"))
 DECISIONS = {"Duyệt", "Không duyệt"}
+PUBLIC_RESULT = Path("results/pilot5_review.json")
+PRIVATE_BALLOTS = HERE.parent / "du_lieu/phieu_pilot5"
 
 
 def read_ballot(path, person):
@@ -85,6 +87,24 @@ def summarize(p1, p2):
     conflicts = [k for k in targets if votes["P1"][k][1] != votes["P2"][k][1]]
     return dict(state, status="Đủ hai phiếu, chờ PM xét căn cứ và ký",
                 comparison=metrics, agreements=6-len(conflicts), disagreement_ids=conflicts)
+
+
+def report_review(directory=None):
+    """Prefer submitted ballots. A public checkout reproduces the released aggregate."""
+    released = json.loads((HERE.parent / PUBLIC_RESULT).read_text(encoding="utf-8"))
+    folder = PRIVATE_BALLOTS if directory is None else directory
+    returns = [folder / f"{person}.xlsx" for person in ("P1", "P2")]
+    has_returns = any(path.exists() for path in returns)
+    if directory is not None and not has_returns:
+        raise ValueError(f"Không tìm thấy P1.xlsx hoặc P2.xlsx trong {directory}")
+    paths = [path if path.exists() else HERE / path.name for path in returns]
+    current = summarize(*paths)
+    if not has_returns and not current["valid_decisions"]:
+        return released
+    for person, missing in current["missing"].items():
+        if set(missing) - set(released["missing"][person]):
+            raise ValueError(f"Thiếu quyết định {person} đã công bố. Kiểm tra lại các phiếu đầu vào.")
+    return current
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ Bốn mốc đầu được dựng lại từ thời điểm khóa tiêu chí, c
 3. PM lưu nguyên bản trả riêng ở ngoài repo hoặc trong thư mục bỏ qua bởi Git. Chạy lệnh dưới đây. Chương trình kiểm danh tính, thứ tự hồ sơ, ngày giờ, quyết định, căn cứ và checklist. PM đọc lý do và xác nhận độ phù hợp của nguồn.
 4. Khi đủ hai phiếu, đối chiếu ca quyết định đúng, duyệt nhầm, từ chối nhầm (ghi cả mẫu số), thời gian trung bình/trung vị cho A và B cùng số cặp đồng thuận trên sáu hồ sơ. Nếu bất đồng hoặc lý do sai nguồn, ghi mã hồ sơ, quyết định P1 và P2, nguồn/trang xử lý, lý do, quyết định cuối, người xác nhận và ngày ký. Giữ nguyên hai bản ban đầu.
 
-Tại ngày lập biên bản, số phiếu hoàn tất là **0/2**, số quyết định hợp lệ là **0/12**. Chỉ số hiệu quả checklist và quyết định ký cuối đang chờ. Mỗi người chấm cùng sáu hồ sơ một lần và thứ tự A/B được đảo giữa hai người. Mỗi điều kiện có sáu quan sát khi hoàn tất. Quy mô hai người và khác biệt về người chấm, hồ sơ, thứ tự làm việc giới hạn kết luận ở mức mô tả.
+Tại ngày lập biên bản kỹ thuật 25/11/2026, số phiếu hoàn tất là **0/2**, số quyết định hợp lệ là **0/12**. Chỉ số hiệu quả checklist và quyết định ký cuối đang chờ. Mỗi người chấm cùng sáu hồ sơ một lần và thứ tự A/B được đảo giữa hai người. Mỗi điều kiện có sáu quan sát khi hoàn tất. Quy mô hai người và khác biệt về người chấm, hồ sơ, thứ tự làm việc giới hạn kết luận ở mức mô tả.
 
 ## Lệnh chạy từ thư mục gốc FAME_PM
 
@@ -68,4 +68,6 @@ python Pilot5_nghiem_thu/verify.py --data-dir du_lieu/zenodo --check
 python Pilot5_nghiem_thu/tong_hop.py Pilot5_nghiem_thu/P1.xlsx Pilot5_nghiem_thu/P2.xlsx
 ```
 
-Sau khi nhận phiếu, thay hai đối số cuối bằng đường dẫn đến hai bản trả riêng. Thông tin tổng hợp in ra màn hình. PM chỉ công bố thống kê của đợt và quyết định đã xác nhận. [Mã tạo mẫu Excel](make_ballots.mjs) đọc [bố trí hồ sơ](ho_so.json) và tệp số đo, dùng Node với `@oai/artifact-tool`. Hai tệp đã dựng có thể mở trực tiếp trong Excel.
+Để cập nhật Phụ lục K, đặt bản trả tên `P1.xlsx` và `P2.xlsx` vào `du_lieu/phieu_pilot5/` (Git bỏ qua) rồi chạy `python report/build_report.py --pdf`. Có thể dựng lại khi mới nhận một phiếu. [Trạng thái công bố](../results/pilot5_review.json) đi kèm Word/PDF. [Hướng dẫn dùng thư mục khác và dựng lại trên GitHub](../report/README.md#cập-nhật-phụ-lục-k).
+
+Để xem số tổng trước khi dựng, thay hai đối số cuối của lệnh tổng hợp bằng đường dẫn đến hai bản trả riêng. Thông tin tổng hợp in ra màn hình. PM chỉ công bố thống kê của đợt và quyết định đã xác nhận. [Mã tạo mẫu Excel](make_ballots.mjs) đọc [bố trí hồ sơ](ho_so.json) và tệp số đo, dùng Node với `@oai/artifact-tool`. Hai tệp đã dựng có thể mở trực tiếp trong Excel.

@@ -19,6 +19,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
+from Pilot5_nghiem_thu.tong_hop import PUBLIC_RESULT, report_review
 from report.kpi_appendix import append_register
 from report.pilot_evaluation import add_pilot_evaluation
 from report.pilot5_acceptance import append_acceptance
@@ -202,10 +203,16 @@ def update_index_cache(doc, pdf):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--out", type=Path, default=ROOT, help="Output directory")
+    p.add_argument("--pilot5-ballots", type=Path,
+                   help="Directory containing returned P1.xlsx and/or P2.xlsx (default: du_lieu/phieu_pilot5)")
     p.add_argument(
         "--pdf", action="store_true", help="Also export with LibreOffice and refresh index pages"
     )
     args = p.parse_args()
+    try:
+        review = report_review(args.pilot5_ballots)
+    except (KeyError, ValueError) as exc:
+        p.error(str(exc))
     subprocess.run([sys.executable, "-m", "fame_pm", "--check"], cwd=ROOT, check=True)
     binary = shutil.which("soffice") or os.getenv("SOFFICE")
     if args.pdf and not binary:
@@ -217,7 +224,7 @@ def main():
     append_portfolio(doc)
     append_register(doc)
     add_pilot_evaluation(doc)
-    append_acceptance(doc)
+    append_acceptance(doc, review)
     if not args.pdf:
         # A Word-only export can reuse the released field cache without a renderer.
         # New anchors are resolved by Word or by a subsequent --pdf build.
@@ -235,6 +242,10 @@ def main():
     with tempfile.TemporaryDirectory(dir=args.out) as tmp:
         directory = Path(tmp)
         word = directory / (STEM + ".docx")
+        snapshot = directory / PUBLIC_RESULT.name
+        snapshot.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        published = args.out / PUBLIC_RESULT
+        published.parent.mkdir(parents=True, exist_ok=True)
         doc.save(word)
         if args.pdf:
             pdf = export_pdf(binary, word, directory)
@@ -246,6 +257,7 @@ def main():
                     raise ValueError("Index pagination did not stabilize")
             os.replace(pdf, args.out / pdf.name)
         os.replace(word, args.out / word.name)
+        os.replace(snapshot, published)
     print("Wrote report to", args.out.resolve())
 
 

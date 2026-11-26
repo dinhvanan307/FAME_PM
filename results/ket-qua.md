@@ -48,7 +48,9 @@ Hạn đến bản phản biện D6.4: 126 ngày. Từ đó đến bàn giao: 17
 
 ## Phép tái lập dữ liệu ESG
 
-Trên 91 mã ghép được và 603 dòng giữ lại, 164619/164619 giá trị khớp. Đối chứng giữ điểm ban đầu khớp 0 ô. Còn 9 mã ngoài phạm vi xác minh.
+**Lần đầu (21/11/2026).** Ghép duy nhất với một chuỗi ngành cho 91 mã. Trên 603 dòng đối chiếu, 164.619/164.619 ô E/S/G của tập này khớp. Đối chứng giữ điểm gốc khớp 0 ô. [Phép đo ban đầu](../esg-data-audit/reproduction.json)
+
+**Lượt xác nhận (25/11/2026).** Dùng trung bình tám ngành theo từng dòng cho 9 mã ngoại lệ. Trên cùng bản Zenodo v1, phạm vi đã kiểm tăng từ 91 lên đủ 100 mã. Cả 180.900/180.900 ô E/S/G khớp. Bảng phân ngành nội bộ vẫn cần tác giả xác nhận. [Phép đo xác nhận](../Pilot5_nghiem_thu/phep_do.json)
 
 Hai hồ sơ trọng số giữ cùng thành phần top 5 ở 565/604 dòng. Có 39 dòng thay thành phần và 0 dòng giữ nguyên thứ tự. Có 3 cặp danh sách có thứ tự khác nhau trong toàn bộ bản xuất. Số dòng có đồng điểm ở ranh hạng 5 và 6 trong ít nhất một hồ sơ: 0.
 

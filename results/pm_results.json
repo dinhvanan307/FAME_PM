@@ -274,6 +274,11 @@
       "TMUS.US",
       "VZ.US"
     ],
+    "confirmation": {
+      "tickers": 100,
+      "matched": 180900,
+      "denominator": 180900
+    },
     "quality": {
       "esg": {
         "rows": 604,

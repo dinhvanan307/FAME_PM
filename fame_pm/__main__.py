@@ -20,6 +20,10 @@ def esg_script(name, *args):
     return json.loads(output)
 
 
+def grouped_int(value):
+    return f"{value:,}".replace(",", ".")
+
+
 def summary_markdown(p):
     s, review = p["schedule"], p["independent_review"]
     lines = [
@@ -78,14 +82,23 @@ def summary_markdown(p):
             "| {name} | {cost_eur} | {eu_eur} | {other_eur} | {eu_share_pct} |".format(**row)
         )
     e = p["esg"]
+    confirmation = e["confirmation"]
     panel = e["all_rows_sensitivity"]
     lines += [
         "",
         "## Phép tái lập dữ liệu ESG",
         "",
-        f"Trên {e['tickers']} mã ghép được và {e['test_rows']} dòng giữ lại, {e['matched']}/{e['cells']} "
-        f"giá trị khớp. Đối chứng giữ điểm ban đầu khớp {e['unchanged_matches']} ô. "
-        f"Còn {len(e['unmatched'])} mã ngoài phạm vi xác minh.",
+        f"**Lần đầu (21/11/2026).** Ghép duy nhất với một chuỗi ngành cho {e['tickers']} mã. "
+        f"Trên {e['test_rows']} dòng đối chiếu, {grouped_int(e['matched'])}/{grouped_int(e['cells'])} ô E/S/G của tập này khớp. "
+        f"Đối chứng giữ điểm gốc khớp {e['unchanged_matches']} ô. "
+        "[Phép đo ban đầu](../esg-data-audit/reproduction.json)",
+        "",
+        f"**Lượt xác nhận (25/11/2026).** Dùng trung bình tám ngành theo từng dòng cho "
+        f"{len(e['unmatched'])} mã ngoại lệ. Trên cùng bản Zenodo v1, phạm vi đã kiểm tăng "
+        f"từ {e['tickers']} lên đủ {confirmation['tickers']} mã. "
+        f"Cả {grouped_int(confirmation['matched'])}/{grouped_int(confirmation['denominator'])} ô E/S/G khớp. "
+        "Bảng phân ngành nội bộ vẫn cần tác giả xác nhận. "
+        "[Phép đo xác nhận](../Pilot5_nghiem_thu/phep_do.json)",
         "",
         f"Hai hồ sơ trọng số giữ cùng thành phần top 5 ở {panel['identical_members']}/{panel['rows']} dòng. "
         f"Có {panel['different_members']} dòng thay thành phần và {panel['identical_order']} dòng giữ nguyên thứ tự. "
@@ -155,6 +168,11 @@ def main():
     else:
         panel = json.loads(panel_path.read_text(encoding="utf-8"))
     pillars = published["held_out"].values()
+    confirmed = json.loads((ROOT / "Pilot5_nghiem_thu/phep_do.json").read_text(encoding="utf-8"))
+    require(confirmed["doi"] == published["doi"] and
+            confirmed["baseline_matched"] == sum(v["matched"] for v in pillars) and
+            [r["ticker"] for r in confirmed["exceptions"]] == published["unmatched_tickers"],
+            "Pilot 5 confirmation does not match the original run")
     p["esg"] = dict(
         doi=published["doi"],
         tickers=published["unique_series_matched"],
@@ -163,6 +181,7 @@ def main():
         cells=sum(v["cells"] for v in pillars),
         unchanged_matches=sum(v["unchanged_matches"] for v in pillars),
         unmatched=published["unmatched_tickers"],
+        confirmation={key: confirmed[key] for key in ("tickers", "matched", "denominator")},
         quality=audit,
         ranking_sensitivity=published["ranking_sensitivity"],
         all_rows_sensitivity=panel,
