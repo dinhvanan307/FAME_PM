@@ -33,6 +33,12 @@ Các mã đã xử lý là CHTR.US, CMCSA.US, DIS.US, GOOGL.US, META.US, NFLX.US
 
 Nguồn chỉ tiêu và kết quả dự án nằm ở [D6.4, bảng 43, trang PDF 70](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=70) và [D6.3, bảng 5, trang PDF 53](https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=53).
 
+## Lượt tự chấm của Codex ngày 26/11/2026
+
+Codex mở biểu mẫu theo trình tự dành cho P1 và chấm đủ sáu hồ sơ. R1, R3 và R5 đủ căn cứ để duyệt. R2 bị từ chối do đối chứng cố định chỉ khớp 1.026/16.281 ô. R4 và R6 còn thiếu bằng chứng giao diện và đầu ra bộ tối ưu ở ít nhất năm mức. [Phiếu tự chấm có thời gian và căn cứ từng hồ sơ](Tu_cham_Codex.xlsx)
+
+Phụ lục K đọc trực tiếp sáu quyết định từ phiếu tự chấm. Đồng hồ đã tính cả thời gian đọc nguồn và chạy công cụ. Codex đã biết kết quả kỹ thuật của vòng trước. Hai phiếu độc lập của người chấm được tổng hợp riêng.
+
 ## Lịch thực hiện và bàn giao
 
 Mở [lịch ProjectLibre](Lich_nghiem_thu.pod) bằng File → Open. [Bản XML tương thích MS Project](Lich_nghiem_thu.xml) chứa cùng mã việc, lịch cơ sở, hạn, người phụ trách và liên kết kết thúc–bắt đầu. Đã lưu rồi mở lại tệp POD bằng bộ đọc gốc ProjectLibre 1.9.8, kiểm đủ tám công việc, lịch cơ sở, người phụ trách và hai tiền nhiệm của việc 7.

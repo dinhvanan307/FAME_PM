@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 
+from openpyxl import load_workbook
+from Pilot5_nghiem_thu.tong_hop import DECISIONS, SPEC
 from report.kpi_appendix import heading, source_link, table, td
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,14 +47,51 @@ def append_acceptance(doc, review):
     p.add_run(f"Khi dựng báo cáo có {review['received_complete_ballots']}/2 phiếu hoàn tất "
               f"và {review['valid_decisions']}/{review['expected_decisions']} quyết định hợp lệ. ")
     p.add_run("Chờ đủ hai phiếu để so sánh A/B." if review["comparison"] is None
-              else "Kết quả đối chiếu ở trang tiếp theo. Quyết định cuối chờ PM xét căn cứ và ký.")
+              else "Xem bảng kết quả hai phiếu độc lập trong phụ lục này. Quyết định cuối chờ PM xét căn cứ và ký.")
     p = doc.add_paragraph(style="Minicap")
     source_link(p, "Bản xuất Zenodo v1", "https://zenodo.org/records/17175084")
     p.add_run("  ·  ")
     source_link(p, "Hồ sơ nghiệm thu và lịch", LINK)
     p.add_run("  ·  D6.4, bảng 43, tr. PDF 70. D6.3, bảng 5, tr. PDF 53.")
+    append_codex_review(doc)
     if review["comparison"] is not None:
         append_review_comparison(doc, review)
+
+
+def append_codex_review(doc):
+    filename = "Tu_cham_Codex.xlsx"
+    book = load_workbook(ROOT / "Pilot5_nghiem_thu" / filename, data_only=True, read_only=True)
+    records = {}
+    try:
+        if book["Huong dan"]["A1"].value != "Pilot 5    |    Phiếu tự chấm Codex":
+            raise ValueError("Phiếu tự chấm sai tên người đánh giá")
+        for i, (_, ids) in enumerate(SPEC["P1"], 1):
+            sheet = book[f"Luot {i}"]
+            for key, row in zip(ids, sheet.iter_rows(min_row=6, max_row=8, values_only=True)):
+                case, title, _, _, start, end, seconds, decision, reason = row[:9]
+                if (case != key or decision not in DECISIONS or not reason
+                        or seconds != (end - start).total_seconds() or seconds < 1):
+                    raise ValueError(f"Phiếu tự chấm có dòng không hợp lệ: {key}")
+                records[case] = (title, decision, seconds, reason)
+    finally:
+        book.close()
+    if records.keys() != SPEC["cases"].keys():
+        raise ValueError("Phiếu tự chấm thiếu hồ sơ")
+    accepted = sum(values[1] == "Duyệt" for values in records.values())
+    heading(doc, "K  Phiếu tự chấm của Codex")
+    doc.add_paragraph(f"Ngày 26/11/2026, Codex duyệt {accepted}/{len(records)} hồ sơ sau khi chạy lại "
+                      "phép kiểm trên 12 CSV và đối chiếu đặc tả với báo cáo đánh giá của FAME. "
+                      "Codex đã biết kết quả kỹ thuật của lượt trước. Thời gian dưới đây tính từ lúc "
+                      "mở hồ sơ đến lúc chốt trên biểu mẫu, gồm cả thời gian chạy công cụ.")
+    t = table(doc, ["Hồ sơ", "Quyết định", "Giây", "Căn cứ đối chiếu"], [3.0, 2.0, 1.2, 9.2])
+    for case in sorted(records):
+        title, decision, seconds, reason = records[case]
+        for cell, text in zip(t.add_row().cells, (case + " · " + title, decision, str(seconds), reason)):
+            td(cell, text)
+    doc.add_paragraph("Đây là một lượt tự kiểm. PM chỉ tính mức đồng thuận và so sánh hiệu quả checklist "
+                      "khi nhận đủ hai phiếu chấm độc lập P1 và P2.")
+    p = doc.add_paragraph(style="Minicap")
+    source_link(p, "Phiếu Excel có giờ và căn cứ từng hồ sơ", LINK.replace("/tree/", "/blob/") + "/" + filename)
 
 
 def append_review_comparison(doc, review):
