@@ -54,6 +54,7 @@ def append_acceptance(doc, review):
     source_link(p, "Hồ sơ nghiệm thu và lịch", LINK)
     p.add_run("  ·  D6.4, bảng 43, tr. PDF 70. D6.3, bảng 5, tr. PDF 53.")
     append_codex_review(doc)
+    append_weight_evidence(doc)
     if review["comparison"] is not None:
         append_review_comparison(doc, review)
 
@@ -92,6 +93,63 @@ def append_codex_review(doc):
                       "khi nhận đủ hai phiếu chấm độc lập P1 và P2.")
     p = doc.add_paragraph(style="Minicap")
     source_link(p, "Phiếu Excel có giờ và căn cứ từng hồ sơ", LINK.replace("/tree/", "/blob/") + "/" + filename)
+
+
+def append_weight_evidence(doc):
+    sources = json.loads((ROOT / "results/pilot_portfolio.json").read_text(encoding="utf-8"))["sources"]
+    heading(doc, "K  Kiểm chứng năm mức trọng số E/S/G")
+    doc.add_paragraph(
+        "Ngày 26/11/2026, người viết rà lại R4 và R6. D6.4 yêu cầu ít nhất năm mức phần trăm "
+        "cho mỗi chỉ tiêu. D6.3 ghi chức năng hiển thị và điều chỉnh đã có. Kết quả năm mức "
+        "ở dòng ngay phía trên thuộc chỉ tiêu tỷ trọng ESG so với lợi nhuận tài chính."
+    )
+    p = doc.add_paragraph(style="Minicap")
+    source_link(p, "D6.4 · bảng 43 · tr. 70", sources["d64"]["url"] + "#page=70")
+    p.add_run("   ·   ")
+    source_link(p, "D6.3 · bảng 5 · tr. 53", sources["d63"]["url"] + "#page=53")
+    t = table(doc, ["Hồ sơ", "Bằng chứng của FAME", "Quyết định của PM học phần"], [2.4, 6.6, 6.4])
+    rows = [
+        ("R4\nP5-12",
+         "Giao diện hiển thị E 55%, S 33%, G 12%. Biểu đồ tròn lặp lại đúng ba tỷ lệ. "
+         "Thanh 70% phía trên đo mức ưu tiên ESG so với tài chính.",
+         "Giữ mở. Xác nhận được một vector tùy chỉnh cụ thể. Năm lựa chọn định tính trong "
+         "bảng hỏi chưa chứng minh năm vector phần trăm đã hiển thị.",
+         [("D6.4 · tr. 66", "d64", 66), ("D6.2 · hình 40", "d62", 45)]),
+        ("R6\nP5-13",
+         "Hình 43 cho chọn trọng số ESG tùy chỉnh, ô đang để trống. Hình 44 ghi danh mục "
+         "MS023 ngày 18/09/2025, gồm ABBV.US 15,54% và CVS.US 14,90%.",
+         "Giữ mở. Xác nhận bộ tối ưu trả phân bổ theo mã. Còn thiếu chuỗi đầu vào E/S/G và "
+         "khuyến nghị ghép được theo từng lượt ở ít nhất năm cấu hình.",
+         [("D6.2 · hình 43", "d62", 48), ("Hình 44", "d62", 49)]),
+    ]
+    for case, observed, decision, references in rows:
+        cells = t.add_row().cells
+        td(cells[0], case, bold=True)
+        p = td(cells[1], observed)
+        p.add_run("\n")
+        for index, (label, document, page) in enumerate(references):
+            if index:
+                p.add_run(" · ")
+            source_link(p, label, sources[document]["url"] + f"#page={page}")
+        td(cells[2], decision)
+    doc.add_paragraph(
+        "Người viết cũng rà bốn gói mã công khai của marketplace và các khung hình demo. "
+        "Các nguồn này chưa cung cấp bộ kiểm thử năm mức. D1.4 xác định KM/JRC vận hành "
+        "dịch vụ theo thuê bao. Phép thử 15 cấu hình trên CSV trong bài chỉ đo thay đổi thứ hạng."
+    )
+    doc.add_paragraph(
+        "Bằng chứng cần bổ sung. Với cùng phiên bản, ngày dữ liệu, tập mã và tham số tài chính, "
+        "lưu ba trọng số đã chọn, ảnh sau khi áp dụng và danh mục trả về cho từng lượt. "
+        "PM có thể đóng R4 ngay khi đủ năm vector hiển thị. R6 cần khuyến nghị gắn được với "
+        "từng cấu hình, kể cả khi hai danh mục trùng nhau."
+    )
+    p = doc.add_paragraph(style="Minicap")
+    source_link(p, "D1.4 · bảng 36 · tr. 58",
+                "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=58")
+    p.add_run("   ·   ")
+    source_link(p, "Demo từ phút 31:10", "https://www.youtube.com/watch?v=cmfj7OEz2Ow&t=1870s")
+    p.add_run("   ·   ")
+    source_link(p, "Dấu vết từng nguồn và gói mã", LINK.replace("/tree/", "/blob/") + "/ra_soat_R4_R6.md")
 
 
 def append_review_comparison(doc, review):

@@ -27,11 +27,11 @@ Các mã đã xử lý là CHTR.US, CMCSA.US, DIS.US, GOOGL.US, META.US, NFLX.US
 
 | Hồ sơ còn mở | Căn cứ hiện có | Bằng chứng cần chủ hệ thống bổ sung |
 |---|---|---|
-| P5-12, giao diện hiển thị vector E/S/G | D6.3 ghi có chức năng. D6.4 đặt ngưỡng ít nhất năm mức. | Bản dựng, thời gian, năm cấu hình phân biệt, kết quả mong đợi và ảnh hoặc log hiển thị tương ứng từng mức. |
-| P5-13, thay trọng số khi đưa khuyến nghị | D6.3 ghi có chức năng. Bản xuất ESG có thể dùng kiểm tra số học. | Cùng tập đầu vào và phiên bản bộ tối ưu, ít nhất năm cấu hình trọng số và đầu ra khuyến nghị thực tế gắn với từng cấu hình. |
+| P5-12, giao diện hiển thị vector E/S/G | Trang PDF 66 của D6.4 cho thấy E 55%, S 33%, G 12% trên cả thanh chỉnh lẫn biểu đồ. | Ảnh hoặc log giao diện thể hiện đủ ba tỷ lệ ở ít nhất năm cấu hình phân biệt. |
+| P5-13, thay trọng số khi đưa khuyến nghị | Hình 43 và 44 của D6.2 cho thấy tùy chọn trọng số và một danh mục MS023 có phân bổ theo mã. | Cùng tập đầu vào và phiên bản bộ tối ưu, ít nhất năm cấu hình trọng số và đầu ra khuyến nghị thực tế gắn với từng cấu hình. |
 | Lợi suất MS020 | Tác giả ghi kết quả trên Zenodo. Các bảng CSV dùng ở đây không đủ khóa ngày. | Dữ liệu có ngày, quy tắc và cấu hình chính xác, nhật ký lệnh/khớp, chi phí và chuỗi giá trị danh mục trên cùng kỳ. |
 
-Nguồn chỉ tiêu và kết quả dự án nằm ở [D6.4, bảng 43, trang PDF 70](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=70) và [D6.3, bảng 5, trang PDF 53](https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=53).
+Đợt rà ngày 26/11/2026 giữ mở cả R4 và R6. Có thể kiểm lại từng quan sát từ [hồ sơ đối chiếu ảnh gốc, webinar và bốn gói mã của FAME](ra_soat_R4_R6.md). Nguồn chỉ tiêu và kết quả do dự án công bố nằm ở [D6.4, bảng 43, trang PDF 70](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=70) và [D6.3, bảng 5, trang PDF 53](https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=53).
 
 ## Lượt tự chấm của Codex ngày 26/11/2026
 
