@@ -1,4 +1,5 @@
 """Use temporary, synthetic ballots to exercise the release and reconciliation rules."""
+import base64
 import json
 import tempfile
 import unittest
@@ -40,6 +41,22 @@ class ReviewRoundTests(unittest.TestCase):
         result = summarize(HERE / "P1.xlsx", HERE / "P2.xlsx")
         self.assertEqual((result["received_complete_ballots"], result["valid_decisions"]), (0, 0))
         self.assertIsNone(result["comparison"])
+
+    def test_click_forms_embed_the_matching_workbook_and_cases(self):
+        for person in ("P1", "P2"):
+            html = (HERE / f"Duyet_{person}.html").read_text(encoding="utf-8")
+            raw = html.split('<script type="application/json" id="payload">', 1)[1].split("</script>", 1)[0]
+            payload = json.loads(raw)
+            self.assertEqual(payload["person"], person)
+            self.assertEqual(base64.b64decode(payload["workbook"]), (HERE / f"{person}.xlsx").read_bytes())
+            expected = [(key, mode, turn, row) for turn, (mode, ids) in enumerate(SPEC[person])
+                        for row, key in enumerate(ids)]
+            self.assertEqual([(r["id"], r["mode"], r["pass"], r["row"]) for r in payload["items"]], expected)
+            for r in payload["items"]:
+                self.assertEqual([r["title"], r["criterion"], r["where"]], SPEC["cases"][r["id"]])
+            run = json.loads((HERE / "phep_do.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["exceptions"], run["exceptions"])
+            self.assertEqual(payload["files"], run["files"])
 
     def test_reject_swapped_ballots(self):
         with self.assertRaisesRegex(ValueError, "danh tính"):

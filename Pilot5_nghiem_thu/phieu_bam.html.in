@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAME · Phiếu nghiệm thu {{PERSON}}</title>
+<style>
+:root{color-scheme:light;--ink:#172f35;--muted:#48636a;--line:#c7d6d7;--accent:#075d56;--paper:#fff}*{box-sizing:border-box}
+body{margin:0;background:#f0f4f2;color:var(--ink);font:16px/1.55 "Segoe UI",Arial,sans-serif}main{width:min(760px,100%);margin:auto;padding:26px 18px 40px}
+header{display:flex;align-items:center;justify-content:space-between;padding:0 0 14px;border-bottom:2px solid var(--accent)}header b{letter-spacing:.08em}header span,.sub{color:var(--muted)}
+article{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-top:18px;padding:clamp(18px,4vw,36px)}
+h1,h2{line-height:1.2;margin:8px 0 14px}h1{font-size:clamp(27px,4.2vw,35px)}h2{font-size:1.08rem}p{margin:8px 0 16px}
+button{font:inherit;font-weight:650;border:1px solid var(--accent);border-radius:7px;padding:10px 18px;min-height:44px;cursor:pointer;color:#fff;background:var(--accent)}
+button:hover{filter:brightness(.93)}button:disabled{opacity:.55;cursor:default}.reject{background:#fff;color:#812b2f;border-color:#b66e70}
+:focus-visible{outline:3px solid #c87510;outline-offset:3px}.actions,.links{display:flex;flex-wrap:wrap;gap:10px}.links a,a{color:#075d56}
+.meta{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.92rem;color:var(--muted)}.timer{font-variant-numeric:tabular-nums;white-space:nowrap}
+details,fieldset{margin:18px 0;padding:12px 14px;border-radius:7px;border:1px solid var(--line)}summary{cursor:pointer;font-weight:650}summary+div{margin-top:10px}fieldset legend,.label{font-weight:650}.checks{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:5px 0}.checks label{padding:4px;white-space:nowrap}
+textarea{display:block;width:100%;resize:vertical;min-height:83px;padding:10px;border:1px solid #789699;border-radius:6px;font:inherit;color:var(--ink)}.hint{font-size:.9rem;color:var(--muted);margin:4px 0 9px}
+.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:.9rem;margin-top:10px}td,th{text-align:left;vertical-align:top;padding:6px 8px;border-bottom:1px solid var(--line)}.files td:first-child,.files td:last-child{overflow-wrap:anywhere;min-width:128px}
+ol{padding-left:24px}li{margin:8px 0}.error{color:#832a2d;font-weight:600;margin:8px 0}.error:empty{margin:0}.warning{color:#793f00}#progress{font-weight:600}progress{accent-color:var(--accent);width:100%;height:7px;display:block;margin:10px 0 0}
+h1[tabindex="-1"]:focus{outline:none}[hidden]{display:none!important}@media(max-width:440px){main{padding:14px 10px}.meta{font-size:.83rem}.checks{gap:4px}.actions button{flex:1}}
+</style></head>
+<body><main>
+<header><b>FAME · PILOT 5</b><span>Phiếu độc lập <strong>{{PERSON}}</strong></span></header>
+<p class="meta"><span id="progress">Đã chốt 0/6 hồ sơ</span><span>P5-V1</span></p><progress id="bar" max="6" value="0" aria-label="Tiến độ chấm"></progress>
+<p id="storage" class="warning" role="status"></p>
+<article id="ready"><h1 id="ready-title" tabindex="-1">Nghiệm thu điểm ESG</h1>
+<div id="intro"><p>Bạn chấm sáu hồ sơ, chia làm hai lượt. Mỗi hồ sơ chỉ chấm một lần.</p>
+<ol><li>Bấm <b>Mở hồ sơ</b> để bắt đầu tính giờ. Tra nguồn được dẫn trong hồ sơ.</li><li>Ghi căn cứ rồi bấm <b>Duyệt</b> khi đủ bằng chứng, hoặc <b>Không duyệt</b> khi thiếu căn cứ hay chưa đạt ngưỡng. Lượt có checklist yêu cầu thêm ba lựa chọn.</li><li>Sau hồ sơ thứ sáu, tải Excel và gửi riêng cho PM. Tệp ghi cả giờ tra nguồn. Nếu bị gián đoạn, ghi vào căn cứ.</li></ol></div>
+<p id="next-info" class="sub"></p><button id="start" type="button">Mở hồ sơ</button></article>
+<article id="case" hidden><div class="meta"><span id="position"></span><span id="timer" class="timer" aria-label="Thời gian đã trôi qua"></span></div>
+<h1 id="case-title" tabindex="-1"></h1><p id="criterion"></p>
+<details id="sources"><summary>Tra bằng chứng</summary><div><p id="locator" class="hint"></p><div id="links" class="links"></div><div id="measurement"></div></div></details>
+<fieldset id="checklist" hidden><legend>Checklist trước khi chốt</legend><div id="checks"></div></fieldset>
+<label class="label" for="note">Căn cứ quyết định</label><p class="hint">Ghi trang hoặc tên trường, số liệu đã đối chiếu và lý do quyết định.</p>
+<textarea id="note" maxlength="3000" rows="3" required></textarea><p id="error" class="error" role="alert"></p>
+<div class="actions"><button type="button" id="approve">Duyệt</button><button type="button" class="reject" id="reject">Không duyệt</button></div></article>
+<article id="done" hidden><h1 tabindex="-1" id="done-title">Đã chấm đủ sáu hồ sơ</h1><p>Tải <b>{{PERSON}}.xlsx</b> rồi gửi riêng cho PM. Có thể tải lại từ phiếu này.</p><button type="button" id="export">Tải kết quả Excel</button>
+<p id="export-msg" role="status"></p><details><summary>Xem lại quyết định của bạn</summary><div id="receipt"></div></details></article>
+<noscript>Cần bật JavaScript để bấm giờ và lưu phiếu.</noscript></main>
+<script type="application/json" id="payload">{{DATA}}</script>
+<script type="text/plain" id="zip-license">{{LICENSE}}</script><script>{{ZIP}}</script>
+<script>
+"use strict";
+const data = JSON.parse(document.getElementById("payload").textContent);
+const person = "{{PERSON}}";
+const key = "fame-p5-v1-click-" + person + "-" + data.version;
+const $ = id => document.getElementById(id);
+const items = data.items;
+const questions = ["Đúng nguồn?", "Đủ mẫu số?", "Đúng phạm vi?"];
+const labels = ["S1 · Zenodo v1", "S2 · Bản kê và số đo", "S3 · D6.4, trang 70", "S4 · D6.3, trang 53"];
+let state = {rows: [], draft: null}, writable = true, lastSaved = null;
+function warnStorage(){writable=false; $("storage").textContent="Trình duyệt chưa lưu được bản nháp. Giữ tab này mở đến khi tải xong kết quả.";}
+try { lastSaved = localStorage.getItem(key); } catch { warnStorage(); }
+if (lastSaved) state = JSON.parse(lastSaved);
+function save(){
+  if (!writable) return true;
+  try {
+    if(localStorage.getItem(key)!==lastSaved){location.reload();return false;}
+    const snapshot=JSON.stringify(state);localStorage.setItem(key,snapshot);lastSaved=snapshot;
+  } catch {warnStorage();}
+  return true;
+}
+window.addEventListener("storage", event=>{if(event.key===key && event.newValue!==lastSaved) location.reload();});
+function element(tag,text){const node=document.createElement(tag);node.textContent=text;return node;}
+function table(columns,rows,style=""){
+  const wrap=document.createElement("div");wrap.className="scroll";
+  const t=document.createElement("table");t.className=style;wrap.append(t);
+  const header=t.createTHead().insertRow();columns.forEach(c=>header.append(element("th",c)));
+  const body=t.createTBody();rows.forEach(values=>{const tr=body.insertRow();values.forEach(v=>tr.insertCell().textContent=v);});return wrap;
+}
+function evidence(item){
+  $("locator").textContent=item.where;$("links").replaceChildren();$("measurement").replaceChildren();
+  const refs=item.id==="R1"?[0,1]:["R4","R6"].includes(item.id)?[2,3]:[1];
+  for(const n of refs){const a=element("a",labels[n]);a.href=data.urls[n];a.target="_blank";a.rel="noopener noreferrer";$("links").append(a);}
+  const panel=$("measurement");
+  if(item.id==="R1"){
+    panel.append(table(["Tệp CSV","Byte","MD5"],data.files.map(f=>[f.file,f.bytes,f.md5.replace("md5:","")]),"files"));
+  }else if(item.id==="R2"||item.id==="R5"){
+    panel.append(table(["Mã","Giữ cố định / 1.809","Trụ theo dòng / 1.809","Tổng điều chỉnh / 603"],data.exceptions.map(r=>[r.ticker,r.frozen_reference_matched,r.adjusted_pillars_matched,r.adjusted_total_matched])));
+  }else if(item.id==="R3"){
+    panel.append(table(["Trường trong S2","Giá trị"],[["matched",data.matched],["denominator",data.total],["max_abs_pillar_error",data.error]]));
+  }else{
+    const title=item.id==="R4"?"Independent E+S+G Scores presentation":"Independent E+S+G Scores Weightings";
+    panel.append(element("p","Tra dòng “"+title+"” ở bảng 43 (S3) và bảng 5 (S4)."));
+  }
+}
+function timer(){
+  if(!state.draft)return;
+  const sec=Math.max(0,Math.floor((Date.now()-state.draft.start)/1000));
+  $("timer").textContent="Đang tính giờ · "+Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");
+}
+function show(){
+  const n=state.rows.length, item=items[n], draft=state.draft;
+  $("progress").textContent="Đã chốt "+n+"/6 hồ sơ";$("bar").value=n;
+  $("ready").hidden=!!draft||!item;$("case").hidden=!draft||!item;$("done").hidden=!!item;
+  if(!item){$("receipt").replaceChildren(table(["Hồ sơ","Quyết định","Giây"],state.rows.map((r,i)=>[items[i].id,r.choice,(r.end-r.start)/1000])));$("done-title").focus();return;}
+  const place="Lượt "+(item.pass+1)+" · "+(item.mode==="A"?"Thông thường":"Có checklist")+" · Hồ sơ "+(item.row+1)+"/3";
+  if(!draft){
+    $("ready-title").textContent=n?"Đã ghi quyết định cho "+items[n-1].id:"Nghiệm thu điểm ESG";
+    $("intro").hidden=n>0;$("next-info").textContent=place+" · Đồng hồ bắt đầu khi bạn mở hồ sơ.";
+    $("start").textContent=n?"Mở hồ sơ tiếp theo":"Mở hồ sơ";if(n)$("start").focus();return;
+  }
+  $("position").textContent=place;$("case-title").textContent=item.id+" · "+item.title;$("criterion").textContent=item.criterion;
+  $("sources").open=false;evidence(item);$("error").textContent="";$("note").value=draft.note;
+  $("checklist").hidden=item.mode!=="B";$("checks").replaceChildren();
+  if(item.mode==="B") questions.forEach((q,i)=>{
+    const part=document.createElement("div");part.className="checks";part.setAttribute("role","group");part.setAttribute("aria-label",q);part.append(element("span",q));
+    for(const v of ["Có","Không"]){const label=document.createElement("label"), radio=document.createElement("input");
+      radio.type="radio";radio.name="check"+i;radio.value=v;radio.checked=draft.checks[i]===v;
+      radio.addEventListener("change",()=>{draft.checks[i]=v;save();});
+      label.append(radio,document.createTextNode(" "+v));part.append(label);}
+    $("checks").append(part);
+  });timer();$("case-title").focus();
+}
+$("start").onclick=()=>{
+  if(state.draft || state.rows.length===items.length)return;
+  const start=Math.floor(Date.now()/1000)*1000;
+  if(state.rows.length && start<state.rows[state.rows.length-1].end){$("next-info").textContent="Đồng hồ đang sớm hơn giờ chốt hồ sơ trước. Kiểm tra giờ thiết bị rồi mở lại hồ sơ.";return;}
+  state.draft={start,note:"",checks:[null,null,null]};
+  if(save())show();
+};
+$("note").oninput=()=>{state.draft.note=$("note").value;save();};
+function decide(choice){
+  const draft=state.draft;if(!draft)return;
+  const note=$("note").value.trim(), item=items[state.rows.length], end=Math.floor(Date.now()/1000)*1000;
+  if(!note || /[\x00-\x08\x0b\x0c\x0e-\x1f\ufffe\uffff]/u.test(note)){
+    $("error").textContent="Ghi căn cứ bằng văn bản trước khi chốt.";$("note").focus();return;}
+  if(item.mode==="B"&&draft.checks.some(v=>v===null)){
+    $("error").textContent="Trả lời đủ ba câu checklist trước khi chốt.";
+    document.querySelector('input[name="check'+draft.checks.indexOf(null)+'"]').focus();return;}
+  if(end<=draft.start){$("error").textContent="Giờ kết thúc phải sau giờ bắt đầu ít nhất một giây. Kiểm tra đồng hồ thiết bị.";return;}
+  state.rows.push({id:item.id,start:draft.start,end,choice,note,checks:item.mode==="B"?draft.checks:[]});
+  state.draft=null;if(save())show();
+}
+$("approve").onclick=()=>decide("Duyệt");$("reject").onclick=()=>decide("Không duyệt");
+async function workbook(){
+  const zip=await JSZip.loadAsync(data.workbook,{base64:true});
+  const ns="http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+  const excelTime=ms=>25569+(ms+7*3600000)/86400000;
+  for(const pass of [0,1]){
+    const name="xl/worksheets/sheet"+(pass+2)+".xml";
+    const xml=new DOMParser().parseFromString(await zip.file(name).async("string"),"application/xml");
+    if(xml.getElementsByTagName("parsererror").length)throw Error("Không đọc được mẫu Excel.");
+    const cells=new Map([...xml.getElementsByTagNameNS(ns,"c")].map(c=>[c.getAttribute("r"),c]));
+    function set(address,value,type){
+      const cell=cells.get(address);if(!cell)throw Error("Thiếu ô "+address);
+      cell.setAttribute("t",type);
+      for(const child of [...cell.children])if(child.localName!=="f")child.remove();
+      const v=xml.createElementNS(ns,"v");v.textContent=String(value);cell.append(v);
+    }
+    items.forEach((item,i)=>{
+      if(item.pass!==pass)return;
+      const r=state.rows[i],n=item.row+6;
+      set("E"+n,excelTime(r.start),"n");set("F"+n,excelTime(r.end),"n");set("G"+n,(r.end-r.start)/1000,"n");
+      set("H"+n,r.choice,"str");set("I"+n,r.note,"str");
+      r.checks.forEach((v,j)=>set("JKL"[j]+n,v,"str"));set((item.mode==="B"?"M":"J")+n,"Đủ trường","str");
+    });
+    zip.file(name,new XMLSerializer().serializeToString(xml));
+  }
+  return zip.generateAsync({type:"blob",compression:"DEFLATE",mimeType:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+$("export").onclick=async()=>{
+  if(state.rows.length!==items.length)return;
+  $("export").disabled=true;
+  try{
+    const url=URL.createObjectURL(await workbook()), a=document.createElement("a");a.href=url;a.download=person+".xlsx";
+    document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+    $("export-msg").textContent="Tệp kết quả đã sẵn sàng trong mục tải xuống.";
+  }catch(e){$("export-msg").textContent="Xuất chưa thành công. Hãy thử tải lại. "+e.message;}finally{$("export").disabled=false;}
+};
+setInterval(timer,500);show();
+</script></body></html>

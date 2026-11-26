@@ -52,6 +52,12 @@ Bốn mốc đầu được dựng lại từ thời điểm khóa tiêu chí, c
 
 ## Giao phiếu và đối soát
 
+**Phiếu bấm giờ tự động.** Gửi [Duyet_P1.html](Duyet_P1.html) cho P1 và [Duyet_P2.html](Duyet_P2.html) cho P2. Mỗi người tải tệp rồi mở bằng trình duyệt. Bấm **Mở hồ sơ** trước khi tra bằng chứng. Ghi căn cứ, trả lời ba câu nếu có checklist, rồi bấm **Duyệt** hoặc **Không duyệt** để chốt giờ kết thúc. Sau sáu hồ sơ, bấm **Tải kết quả Excel** và gửi riêng tệp cho PM. Có thể mở lại cùng tệp trong cùng trình duyệt để tiếp tục nếu trình duyệt cho lưu bản nháp. Khi quay lại hồ sơ đang mở, đồng hồ tính cả thời gian gián đoạn.
+
+PM nhận `P1.xlsx` và `P2.xlsx` cùng định dạng với phiếu Excel bên dưới. Lưu vào `du_lieu/phieu_pilot5/` rồi chạy `python report/build_report.py --pdf`. Giờ trong Excel theo UTC+7. Trang kết quả chỉ hiện các quyết định của người đang chấm. Bốn liên kết nguồn mở bằng Internet, còn việc chấm và xuất tệp chạy ngay trong trình duyệt.
+
+**Cách nhập trực tiếp bằng Excel**
+
 1. Gửi riêng [P1.xlsx](P1.xlsx) cho người thứ nhất và [P2.xlsx](P2.xlsx) cho người thứ hai. Mỗi người chỉ cần phiếu của mình. Mở **Huong dan**, làm **Luot 1**, lưu, rồi làm **Luot 2**. Chỉ mở bốn nguồn S1–S4 ở trang **Bang chung** trong buổi chấm.
 2. Trước khi đọc từng hồ sơ, ghi ngày giờ tĩnh đến giây ở E. Chọn **Duyệt** hoặc **Không duyệt** ở H. Ở I, ghi trang hoặc trường dữ liệu, số đối chiếu và lý do. Lượt có checklist cần trả lời thêm ba ô J–L. Ghi giờ kết thúc ở F, kiểm tra dòng hiện **Đủ trường**, lưu và gửi riêng file cho PM.
 3. PM lưu nguyên bản trả riêng ở ngoài repo hoặc trong thư mục bỏ qua bởi Git. Chạy lệnh dưới đây. Chương trình kiểm danh tính, thứ tự hồ sơ, ngày giờ, quyết định, căn cứ và checklist. PM đọc lý do và xác nhận độ phù hợp của nguồn.
@@ -71,3 +77,5 @@ python Pilot5_nghiem_thu/tong_hop.py Pilot5_nghiem_thu/P1.xlsx Pilot5_nghiem_thu
 Để cập nhật Phụ lục K, đặt bản trả tên `P1.xlsx` và `P2.xlsx` vào `du_lieu/phieu_pilot5/` (Git bỏ qua) rồi chạy `python report/build_report.py --pdf`. Có thể dựng lại khi mới nhận một phiếu. [Trạng thái công bố](../results/pilot5_review.json) đi kèm Word/PDF. [Hướng dẫn dùng thư mục khác và dựng lại trên GitHub](../report/README.md#cập-nhật-phụ-lục-k).
 
 Để xem số tổng trước khi dựng, thay hai đối số cuối của lệnh tổng hợp bằng đường dẫn đến hai bản trả riêng. Thông tin tổng hợp in ra màn hình. PM chỉ công bố thống kê của đợt và quyết định đã xác nhận. [Mã tạo mẫu Excel](make_ballots.mjs) đọc [bố trí hồ sơ](ho_so.json) và tệp số đo, dùng Node với `@oai/artifact-tool`. Hai tệp đã dựng có thể mở trực tiếp trong Excel.
+
+Hai tệp HTML được dựng từ đúng hai mẫu Excel, thứ tự hồ sơ trong `ho_so.json` và số đo trong `phep_do.json`. Để dựng lại bằng Node có `jszip@3.10.1` và phụ thuộc `pako`, chạy `node Pilot5_nghiem_thu/make_click_forms.cjs` từ gốc repo. Người chấm chỉ cần tệp HTML tương ứng.
