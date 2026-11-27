@@ -29,6 +29,7 @@ from report.pilot_evaluation import add_pilot_evaluation
 from report.pilot5_acceptance import append_acceptance
 from report.marketsense_sp100 import append_marketsense
 from report.schedule import append_schedule
+from report.risk_chapter import fill_risk_chapter
 
 
 def number(value, digits=0):
@@ -274,6 +275,7 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     data = json.loads((ROOT / "results/pm_results.json").read_text(encoding="utf-8"))
     doc = Document(ROOT / "report/mau_bien_tap.docx")
+    fill_risk_chapter(doc, data["kpis"])
     fill(doc, report_fields(data))
     append_portfolio(doc)
     append_register(doc)

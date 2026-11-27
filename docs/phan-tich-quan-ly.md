@@ -92,6 +92,19 @@ Nhà cung cấp dữ liệu, người vận hành pilot, chuyên viên tài chí
 
 Tương tự, quyền truy cập hoặc giấy phép có thể trì hoãn thí điểm dù công cụ đã phát triển xong. D6.4 ghi nhận lo ngại tuân thủ ở Pilot 6. Bài sử dụng tình huống này để minh họa cách đặt điều kiện phê duyệt trước khi chuyển dữ liệu. Không có căn cứ để quy sự việc đó thành nguyên nhân khiến Pilot 5 hay D6.4 bị trễ. [D6.4, tình huống Pilot 6](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=77)
 
+#### RR-04. Duyệt KPI thiếu bằng chứng
+
+Ở Bảng 5.1, RR-04 là nguy cơ người duyệt chấp nhận một KPI khi kết quả chỉ có mô tả định tính hoặc một bản demo. Bảng 5.2 ghi hai vấn đề cùng mã RR-04. **VD-04** là khoảng trống bằng chứng trong báo cáo Pilot 5 của FAME. **VD-05** là các quyết định nhầm trong buổi chấm của học phần. Bảng 5.3 xếp RR-04 ở ô P = 3, I = 3 vì tín hiệu lặp ở ba hồ sơ và có thể đảo kết luận nghiệm thu. Người viết gán mã và chấm mức ưu tiên. [Sổ rủi ro](../evidence/risk_register.csv) · [Nhật ký vấn đề](../evidence/risk_issues.csv)
+
+| Câu hỏi quản lý | Bằng chứng và quyết định |
+|---|---|
+| Gợi ý trên phiếu có ngăn được duyệt nhầm? | A hiển thị ngưỡng và kết quả. B thêm bốn câu nhắc, vẫn cho phép bấm Duyệt ngay. Hai người chấm chéo cùng sáu KPI. A và B đều duyệt 3/3 hồ sơ thiếu căn cứ, mỗi cách khớp tham chiếu 3/6. Giữ RR-04 ở mức cao. [Phiếu đã dùng](../Cham_doc_lap/Duyet_nhanh_P1.html) · [Kết quả A/B](../Cham_doc_lap/Ket_qua/Tong_hop_A_B.xlsx) |
+| Checklist giúp ở khâu nào? | Trong phép hồi cứu Excel riêng, số hồ sơ mở có đầu mối đề xuất tăng từ 0/3 lên 3/3. Quyết định khớp tham chiếu 6/6 ở cả hai cách. Các đầu mối còn chờ xác nhận nhận việc. [Workbook hồi cứu](../FAME_Nghiem_thu_6_KPI.xlsx) |
+| PM làm gì với ba KPI? | Giữ mở K04 cho đến khi đầu mối vận hành cung cấp tử số, mẫu số đủ điều kiện và kỳ quan sát. K05 chờ đầu mối mô hình cung cấp chuỗi tín hiệu có ngày, hiệu suất đối ứng và hệ số tương quan. K06 chờ đầu mối danh mục cung cấp đối chứng, kết quả lợi suất ở cùng kỳ năm, chi phí và rủi ro. [Ngưỡng, kết quả và đề nghị cho từng KPI](../results/pm_results.json) |
+| Khi nào xét lại mức rủi ro? | Người viết đề xuất bắt buộc nhập số đo hoặc cận, đơn vị, kỳ đo và nguồn. Hồ sơ thiếu chuyển sang “Chờ bằng chứng”. Đầu mối rà soát đối chiếu nội dung với nguồn trước khi ký. Thử phiếu mới và cách B trên cùng 12 hồ sơ mới có đáp án khóa trước, gồm 6 hồ sơ đủ bằng chứng đạt ngưỡng và 6 hồ sơ thiếu căn cứ. Mỗi hồ sơ có một quyết định ở mỗi điều kiện. Trưởng pilot chỉ xét hạ mức khi phiếu mới duyệt nhầm 0/6 hồ sơ thiếu, duyệt đúng 6/6 hồ sơ đủ và nguồn đã được đối chiếu. Đây là tiêu chí đề xuất, chưa có kết quả cho phiếu mới. |
+
+Các lượt trên dùng mã K01–K06 ở Chương 6. Vòng kỹ thuật R1–R6 và phiếu tự kiểm ở Phụ lục K có sổ theo dõi riêng. [Trạng thái vòng kỹ thuật](../results/pilot5_review.json)
+
 ### Mua sắm
 
 Hồ sơ tài trợ nêu đối tác và cơ cấu vốn; bản phát hành dữ liệu nêu điều kiện sử dụng. Để đánh giá một hợp đồng mua dịch vụ dữ liệu cần phạm vi cấp phép, đối tượng được phép dùng, chu kỳ cập nhật, chất lượng giao hàng, đơn giá và cách xử lý vi phạm. Với một dịch vụ điểm ESG, quyền đọc dữ liệu nội bộ và quyền công bố bảng xếp hạng dẫn xuất có thể khác nhau. Tình huống quản lý cần xem xét là một kết quả đã đúng về mặt số học nhưng chưa đủ quyền phân phối. PM phải yêu cầu bên phụ trách pháp lý hoặc hợp đồng xác nhận trước khi đưa đầu ra sang môi trường khai thác. Phần này là đề xuất điều kiện nghiệm thu mua sắm; hồ sơ đã xem chưa đủ để chấm hiệu quả nhà cung cấp. [Hồ sơ tài trợ](https://cordis.europa.eu/project/id/101092639) · [Bản phát hành dữ liệu kèm giấy phép](https://zenodo.org/records/17175084)

@@ -45,3 +45,5 @@ Bảng 3.1 tổng hợp cả bảy gói công việc. Trang mở đầu phụ l�
 Bản nộp tổ chức bảy chương thành bốn phần. Mục 2.5, 3.4 và 5.3 lần lượt phân tích nguồn lực, kịch bản tiến độ và ưu tiên rủi ro theo mẫu INTERLINK. Mục 6.6 hiển thị chênh lệch B trừ A. Quá trình dựng đối chiếu [CSV và lịch kịch bản](../results/d64_review_scenarios.csv) bằng `python -m fame_pm.review_scenario --check`.
 
 Mục 3.5 lấy ngày giao và số giờ vượt năng lực từ [mô hình QA](../results/qa/). Bản dựng kiểm cả XML và CSV bằng `python -m fame_pm.qa_capacity --check`. Phần mở Phụ lục K lấy kết quả chấm K01–K06 từ thống kê ở mục 6.6 và đếm phiếu R1–R6 bằng bộ tổng hợp riêng.
+
+Chương 5 lấy mã, dấu hiệu và đầu mối từ [sổ rủi ro](../evidence/risk_register.csv). [Nhật ký vấn đề](../evidence/risk_issues.csv) dùng lại mã RR cho từng sự việc. Bộ dựng tính vị trí trong ma trận bằng P và I của người viết. Bảng 5.4 và kết quả đã thử của RR-04 dùng cùng dữ liệu K01–K06 với Chương 6.
