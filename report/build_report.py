@@ -21,6 +21,7 @@ STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
 # ruff: noqa: E402 -- direct script execution needs the repository imports below.
 from Pilot5_nghiem_thu.tong_hop import PUBLIC_RESULT, report_review
+from fame_pm.review_scenario import scenarios
 from report.appendix_directory import add_appendix_directory
 from report.kpi_appendix import append_register
 from report.pilot_evaluation import add_pilot_evaluation
@@ -51,6 +52,23 @@ def report_fields(data):
     fields["sensitivity_median"] = number(sensitivity["median_signed_days"])
     fields["d64_before"] = str(schedule["d64_before_review_days"])
     fields["d64_delta"] = str(schedule["d64_before_review_days"] + schedule["d64_after_review_days"])
+
+    branches = scenarios()
+    for branch in branches:
+        prefix = branch["case"].lower() + "_"
+        fields[prefix + "wait"] = str(branch["wait_days"])
+        fields[prefix + "slip"] = str(branch["versus_cover_days"])
+        for key in ("feedback", "finish"):
+            fields[prefix + key] = date.fromisoformat(branch[key]).strftime("%d/%m/%Y")
+    fields["recovered_days"] = str(branches[1]["wait_days"] - branches[2]["wait_days"])
+    review = data["independent_review"]
+    for key, stat in (("mean", "delta_mean_seconds"), ("median", "delta_median_seconds")):
+        delta = review[stat]
+        fields[f"click_{key}_delta"] = ("+" if delta > 0 else "−" if delta < 0 else "") + number(abs(delta), 3)
+    fields["review_gain_pp"] = number(review["B"]["accuracy_pct"] - review["A"]["accuracy_pct"])
+    retro = data["retrospective"]
+    fields["owner_gain_pp"] = number(100 * (retro["B"]["with_owner"] / retro["B"]["open"]
+                                            - retro["A"]["with_owner"] / retro["A"]["open"]))
 
     confirmed = json.loads((ROOT / "Pilot5_nghiem_thu/phep_do.json").read_text(encoding="utf-8"))
     fields["confirmed_tickers"] = str(confirmed["tickers"])
@@ -238,6 +256,7 @@ def main():
     except (KeyError, ValueError) as exc:
         p.error(str(exc))
     subprocess.run([sys.executable, "-m", "fame_pm", "--check"], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, "-m", "fame_pm.review_scenario", "--check"], cwd=ROOT, check=True)
     binary = shutil.which("soffice") or os.getenv("SOFFICE")
     if args.pdf and not binary:
         p.error("--pdf requires soffice on PATH or SOFFICE pointing to its executable")

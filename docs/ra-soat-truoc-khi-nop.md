@@ -2,6 +2,27 @@
 
 Phạm vi toàn dự án gồm **7 pilot và 14 ca sử dụng**. Bài đã đối chiếu cả bảy pilot qua ba lần bàn giao: D6.4 xác định phạm vi và chỉ tiêu, D6.2 mô tả tích hợp, D6.3 đánh giá kết quả. Phần thực hành có hai đối tượng riêng: dữ liệu ESG do nhóm tác giả phát hành ở Pilot 5 và mã kiểm tra chất lượng cảm biến của đối tác Pilot 7. Lịch ProjectLibre theo dõi đủ 32 báo cáo trong danh mục công khai. Buổi chấm độc lập đo sáu KPI được chọn của Pilot 5. Các mẫu số này phục vụ những quyết định khác nhau. [Tổng quan FAME](https://www.fame-horizon.eu/the-project/) · [Chỉ mục được sinh từ ba PDF](../results/pilot_portfolio.json)
 
+## Ba bài tham khảo của học phần
+
+Mẫu gần nhất về nội dung là *Phân tích dự án INTERLINK* của Vũ Phúc Anh, báo cáo cuối kỳ 37 trang. Phần 1 trình bày dự án và đầu ra. Phần 2 rà WBS, Gantt, nguồn lực, rủi ro, chi phí và tổng hợp kết quả (trang PDF 2–34). Trang 34 giới thiệu hướng mô phỏng phần tiếp theo. Bản được cung cấp kết thúc bằng thuật ngữ và tài liệu tham khảo. Báo cáo EVM của Phạm Quang Vinh, trang PDF 14 và 50–53, hướng dẫn cách đọc riêng số liệu tham khảo và kịch bản tự tính. Bài phân tích Luo et al. của Vũ Phúc Anh, trang PDF 33–41, minh họa cách giữ cùng đối tượng quan sát và so sánh hai phương án. Đây là ba tài liệu tham khảo về cách làm bài. Số liệu FAME có nguồn riêng cho từng nhận định.
+
+| Nội dung tham khảo | Áp dụng trong báo cáo FAME | Kết quả và giới hạn |
+|---|---|---|
+| Bối cảnh, WBS, sản phẩm và bàn giao | Phần I và mục 2.1–2.4. Từ WP6 đến đặc tả D6.4, hệ thống tích hợp D6.2 và báo cáo đánh giá D6.3 | WBS do người viết tái dựng. Chủ trì, phản biện và QA có căn cứ trên bìa. |
+| Tiến độ và điều phối nguồn lực | Mục 2.5 và 3.1–3.4. Ba bìa ghi cùng đầu mối QA và cùng ngày giao. D6.4 có ba mốc của bản 0.6, 0.7 và 1.0 | Có căn cứ để điều phối lượt duyệt. Muốn khẳng định quá tải phải có lịch phân công và giờ thực tế. |
+| Rủi ro và ứng phó | Bảng 5.1–5.3 nối nhận diện, tín hiệu và người xử lý với mức ưu tiên | P, I và ngưỡng ưu tiên do người viết đặt. Lịch sử giao muộn và ngày trên bìa thuộc hồ sơ FAME. |
+| Chi phí và câu hỏi EVM | Mục 4.3 phân biệt cơ cấu tài trợ, số thực chi và giá trị công việc đã hoàn thành | Tính được phần ngoài tài trợ EU. Muốn tính CPI, EAC phải có dữ liệu phù hợp cùng phạm vi, kỳ và đường cơ sở. |
+| Kịch bản và phép so sánh | Mục 3.4 xét ba kịch bản chờ phản biện. Mục 6.5–6.6 xét sáu KPI trên Excel với cùng ngưỡng và tham chiếu | Dự phòng thu hồi 5 ngày **trong mô phỏng S2 so với S1**. Hồi cứu có thêm 3/3 hồ sơ mở được đề xuất đầu mối. Hai cách chấm độc lập cùng khớp 3/6. |
+
+**Chạy lại kịch bản D6.4** từ thư mục gốc. Lệnh đầu đối chiếu ngày từ lịch đã xác minh với tệp công bố. Lệnh sau dựng lại CSV và Microsoft Project XML từ lịch lịch sử nếu cần.
+
+```bash
+python -m fame_pm.review_scenario --check
+python -m fame_pm.review_scenario --write
+```
+
+Mở [lịch kịch bản](../results/D6_4_kich_ban_ProjectLibre.xml) bằng ProjectLibre. S0 dùng ngày 03/02, 12/02 và 20/02/2025. S1 thêm bảy ngày chờ; S2 vẫn có gián đoạn đó nhưng giả định người thay thế đủ năng lực có thể nhận sau hai ngày. Hai khoảng gốc 9 và 8 ngày giữ nguyên. Mỗi nhóm có ba mốc và hai liên kết kết thúc–bắt đầu. Độ trễ trên liên kết dùng lịch bảy ngày của bài. Mốc 10 giờ là quy ước hiển thị; bìa FAME chỉ công bố ngày. Kết quả xem ở [sổ kịch bản](../results/d64_review_scenarios.csv). Lịch có 32 báo cáo lịch sử vẫn ở [tệp ProjectLibre gốc của bài](../FAME_Lich_ProjectLibre.pod).
+
 ## 1. Mẫu cũ yêu cầu thể hiện điều gì?
 
 Tệp được lớp dẫn là một khóa luận về dự đoán khách hàng ngừng sử dụng dịch vụ. Phần có thể áp dụng trực tiếp là cách nối câu hỏi, công cụ, phương pháp đề xuất, dữ liệu, cách đánh giá, kịch bản thử và kết quả. Các mục 4.1–4.4 của mẫu tương ứng bốn câu hỏi: lấy gì về, đo bằng gì, so sánh trường hợp nào và thực tế thu được gì. Đề bài học phần yêu cầu áp dụng kiến thức và kỹ thuật quản lý cho một dự án hệ thống thông tin có thật. Bảng sau dùng hai căn cứ đó để rà bài. Giảng viên chưa cung cấp thang điểm trong tài liệu được dẫn. [Mẫu báo cáo của lớp](https://drive.google.com/file/d/1NUqA7wXU1grDJe4b3ya_6D0xHUZAbdyv/view)
