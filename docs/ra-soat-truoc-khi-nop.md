@@ -9,7 +9,7 @@ Mẫu gần nhất về nội dung là *Phân tích dự án INTERLINK* của V�
 | Nội dung tham khảo | Áp dụng trong báo cáo FAME | Kết quả và giới hạn |
 |---|---|---|
 | Bối cảnh, WBS, sản phẩm và bàn giao | Phần I và mục 2.1–2.4. Từ WP6 đến đặc tả D6.4, hệ thống tích hợp D6.2 và báo cáo đánh giá D6.3 | WBS do người viết tái dựng. Chủ trì, phản biện và QA có căn cứ trên bìa. |
-| Tiến độ và điều phối nguồn lực | Mục 2.5 và 3.1–3.4. Ba bìa ghi cùng đầu mối QA và cùng ngày giao. D6.4 có ba mốc của bản 0.6, 0.7 và 1.0 | Có căn cứ để điều phối lượt duyệt. Muốn khẳng định quá tải phải có lịch phân công và giờ thực tế. |
+| Tiến độ và điều phối nguồn lực | Mục 2.5 và 3.1–3.5. Ba bìa ghi cùng đầu mối QA và cùng ngày giao. D6.4 có ba mốc của bản 0.6, 0.7 và 1.0 | Trong [mô phỏng QA](../results/qa/) nhu cầu vượt năng lực giảm từ 16 còn 8 giờ ngày 31/07. Sau khi cân tải, lô ba hồ sơ hoàn tất sớm một ngày làm việc. Muốn xác định quá tải thực tế cần lịch phân công và giờ công của UPRC. |
 | Rủi ro và ứng phó | Bảng 5.1–5.3 nối nhận diện, tín hiệu và người xử lý với mức ưu tiên | P, I và ngưỡng ưu tiên do người viết đặt. Lịch sử giao muộn và ngày trên bìa thuộc hồ sơ FAME. |
 | Chi phí và câu hỏi EVM | Mục 4.3 phân biệt cơ cấu tài trợ, số thực chi và giá trị công việc đã hoàn thành | Tính được phần ngoài tài trợ EU. Muốn tính CPI, EAC phải có dữ liệu phù hợp cùng phạm vi, kỳ và đường cơ sở. |
 | Kịch bản và phép so sánh | Mục 3.4 xét ba kịch bản chờ phản biện. Mục 6.5–6.6 xét sáu KPI trên Excel với cùng ngưỡng và tham chiếu | Dự phòng thu hồi 5 ngày **trong mô phỏng S2 so với S1**. Hồi cứu có thêm 3/3 hồ sơ mở được đề xuất đầu mối. Hai cách chấm độc lập cùng khớp 3/6. |

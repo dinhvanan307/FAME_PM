@@ -15,8 +15,18 @@ def append_acceptance(doc, review):
     d = lambda n: f"{n:,}".replace(",", ".")
     rows = data["exceptions"]
     heading(doc, "K  Biên bản tái kiểm điểm ESG của Pilot 5")
-    doc.add_paragraph("Ngày 25/11/2026, PM học phần lập biên bản kỹ thuật cho bản xuất Zenodo v1 "
-                      "trước khi thu phiếu chấm. Căn cứ nghiệm thu là độ khớp với các giá trị do tác giả công bố.")
+    first = json.loads((ROOT / "results/pm_results.json").read_text(encoding="utf-8"))["independent_review"]
+    p = doc.add_paragraph()
+    p.add_run("Vòng K01–K06 (mục 6.6). ").bold = True
+    p.add_run(f"Hai người chấm độc lập sáu KPI nghiệp vụ, ghi {first['A']['n'] + first['B']['n']} quyết định. "
+              f"A khớp tham chiếu {first['A']['matches']}/{first['A']['n']}, "
+              f"B khớp {first['B']['matches']}/{first['B']['n']}.")
+    p = doc.add_paragraph()
+    p.add_run("Vòng R1–R6 (Phụ lục K). ").bold = True
+    p.add_run(f"Tái kiểm sáu hồ sơ kỹ thuật ESG bằng bộ phiếu P1/P2 riêng. Hiện có "
+              f"{review['received_complete_ballots']}/2 phiếu hoàn tất và "
+              f"{review['valid_decisions']}/{review['expected_decisions']} quyết định hợp lệ. "
+              "Phiếu tự chấm của Codex được thống kê riêng.")
     p = doc.add_paragraph()
     p.add_run("Dữ liệu và tiêu chí. ").bold = True
     p.add_run(f"Đã kiểm dung lượng và MD5 của {len(data['files'])} CSV. Dòng 1 dùng hiệu chuẩn. "
@@ -42,10 +52,8 @@ def append_acceptance(doc, review):
               "Lợi suất MS020 còn thiếu lịch giao dịch và cấu hình chạy tương ứng.")
     p = doc.add_paragraph()
     p.add_run("Kiểm soát tiến độ và chất lượng. ").bold = True
-    p.add_run("P1 làm lượt thường (A) trước, P2 làm lượt có checklist (B) trước. Lịch đề xuất chấm "
-              "26/11 và đối soát 27/11. ")
-    p.add_run(f"Khi dựng báo cáo có {review['received_complete_ballots']}/2 phiếu hoàn tất "
-              f"và {review['valid_decisions']}/{review['expected_decisions']} quyết định hợp lệ. ")
+    p.add_run("Biên bản kỹ thuật lập ngày 25/11/2026. Lịch đề xuất chấm 26/11, đối soát 27/11. "
+              "P1 làm A trước, P2 làm B trước. ")
     p.add_run("Chờ đủ hai phiếu để so sánh A/B." if review["comparison"] is None
               else "Xem bảng kết quả hai phiếu độc lập trong phụ lục này. Quyết định cuối chờ PM xét căn cứ và ký.")
     p = doc.add_paragraph(style="Minicap")

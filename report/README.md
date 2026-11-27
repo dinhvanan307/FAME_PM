@@ -43,3 +43,5 @@ Nếu lưu phiếu ở thư mục riêng khác, dùng `--pilot5-ballots "/đư�
 Bảng 3.1 tổng hợp cả bảy gói công việc. Trang mở đầu phụ lục liên kết A–L tới đúng tiêu đề trong Word và PDF. Kết luận lấy các số đếm của vòng xác nhận từ [phép đo 100 mã](../Pilot5_nghiem_thu/phep_do.json), cùng nguồn với Phụ lục K. Chương 3 và Phụ lục L lấy số liệu từ [32 cặp ngày đã đối chiếu](../evidence/deliverables.csv). [Cách kiểm lại bìa PDF, lịch XML và bản ProjectLibre](../evidence/README.md#đối-chiếu-32-bìa-báo-cáo).
 
 Bản nộp tổ chức bảy chương thành bốn phần. Mục 2.5, 3.4 và 5.3 lần lượt phân tích nguồn lực, kịch bản tiến độ và ưu tiên rủi ro theo mẫu INTERLINK. Mục 6.6 hiển thị chênh lệch B trừ A. Quá trình dựng đối chiếu [CSV và lịch kịch bản](../results/d64_review_scenarios.csv) bằng `python -m fame_pm.review_scenario --check`.
+
+Mục 3.5 lấy ngày giao và số giờ vượt năng lực từ [mô hình QA](../results/qa/). Bản dựng kiểm cả XML và CSV bằng `python -m fame_pm.qa_capacity --check`. Phần mở Phụ lục K lấy kết quả chấm K01–K06 từ thống kê ở mục 6.6 và đếm phiếu R1–R6 bằng bộ tổng hợp riêng.

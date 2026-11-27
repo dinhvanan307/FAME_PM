@@ -1,0 +1,11 @@
+view,plan,date,reviewer,work_h,capacity_h,excess_h
+nhu_cau,A,2025-07-31,QA chính,24,8,16
+nhu_cau,B,2025-07-31,QA chính,16,8,8
+nhu_cau,B,2025-07-31,QA hỗ trợ,8,8,0
+can_tai,A,2025-07-31,QA chính,8,8,0
+can_tai,A,2025-08-01,QA chính,8,8,0
+can_tai,A,2025-08-04,QA chính,8,8,0
+can_tai,B,2025-07-31,QA chính,8,8,0
+can_tai,B,2025-07-31,QA hỗ trợ,8,8,0
+can_tai,B,2025-08-01,QA chính,8,8,0
+can_tai,B,2025-08-01,QA hỗ trợ,0,8,0

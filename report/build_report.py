@@ -21,6 +21,7 @@ STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
 # ruff: noqa: E402 -- direct script execution needs the repository imports below.
 from Pilot5_nghiem_thu.tong_hop import PUBLIC_RESULT, report_review
+from fame_pm.qa_capacity import make_jobs, metrics
 from fame_pm.review_scenario import scenarios
 from report.appendix_directory import add_appendix_directory
 from report.kpi_appendix import append_register
@@ -61,6 +62,15 @@ def report_fields(data):
         for key in ("feedback", "finish"):
             fields[prefix + key] = date.fromisoformat(branch[key]).strftime("%d/%m/%Y")
     fields["recovered_days"] = str(branches[1]["wait_days"] - branches[2]["wait_days"])
+    jobs = make_jobs()
+    qa = metrics(jobs)
+    for job in jobs:
+        key = job.plan + "_" + job.code.replace(".", "_")
+        fields["qa_" + key] = job.finish.strftime("%d/%m/%Y")
+    for plan, values in qa.items():
+        for key in ("request_excess", "feasible_excess", "on_target"):
+            fields[f"qa_{plan}_{key}"] = str(values[key])
+    fields["qa_earlier"] = str((qa["A"]["last"] - qa["B"]["last"]).days)
     review = data["independent_review"]
     for key, stat in (("mean", "delta_mean_seconds"), ("median", "delta_median_seconds")):
         delta = review[stat]
@@ -257,6 +267,7 @@ def main():
         p.error(str(exc))
     subprocess.run([sys.executable, "-m", "fame_pm", "--check"], cwd=ROOT, check=True)
     subprocess.run([sys.executable, "-m", "fame_pm.review_scenario", "--check"], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, "-m", "fame_pm.qa_capacity", "--check"], cwd=ROOT, check=True)
     binary = shutil.which("soffice") or os.getenv("SOFFICE")
     if args.pdf and not binary:
         p.error("--pdf requires soffice on PATH or SOFFICE pointing to its executable")

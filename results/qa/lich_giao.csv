@@ -1,0 +1,7 @@
+plan,code,reviewer,assumed_work_h,cover_delivered,requested,feasible,calendar_days_after_target,cover_source
+A,D2.4,QA chính,8,2025-07-31,2025-07-31,2025-07-31,0,https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D2.4-Integrated-FAME-Data-Marketplace-II.pdf#page=1
+A,D3.5,QA chính,8,2025-07-31,2025-07-31,2025-08-01,1,https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.5-Federated-Data-Assets-Catalogue-II.pdf#page=1
+A,D3.6,QA chính,8,2025-07-31,2025-07-31,2025-08-04,4,https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.6-Mechanisms-and-Tools-for-Regulatory-Compliance-II.pdf#page=1
+B,D2.4,QA chính,8,2025-07-31,2025-07-31,2025-07-31,0,https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D2.4-Integrated-FAME-Data-Marketplace-II.pdf#page=1
+B,D3.5,QA hỗ trợ,8,2025-07-31,2025-07-31,2025-07-31,0,https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.5-Federated-Data-Assets-Catalogue-II.pdf#page=1
+B,D3.6,QA chính,8,2025-07-31,2025-07-31,2025-08-01,1,https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.6-Mechanisms-and-Tools-for-Regulatory-Compliance-II.pdf#page=1

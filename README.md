@@ -5,6 +5,7 @@ Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, 
 | Muốn làm gì? | Mở từ đây |
 |---|---|
 | Tra theo mẫu INTERLINK, khung EVM và phép so sánh A/B | [Các phần tương ứng và nguồn](docs/ra-soat-truoc-khi-nop.md#ba-bài-tham-khảo-của-học-phần) · [Lịch mô phỏng D6.4 mở bằng ProjectLibre](results/D6_4_kich_ban_ProjectLibre.xml) · [Ba kịch bản và mốc đối chiếu](results/d64_review_scenarios.csv) |
+| So tải QA trước và sau khi thêm người cho D2.4, D3.5, D3.6 | [Mô hình, giả định và lệnh chạy](results/qa/) · [Nhu cầu giao cùng ngày](results/qa/nhu_cau.pod) · [Ngày giao sau cân tải](results/qa/can_tai.pod) · Mục 3.5 |
 | Tra tiến độ của 32 báo cáo FAME | [Hạn, ngày giao, phiên bản và bìa nguồn](evidence/deliverables.csv) · [Lịch ProjectLibre](FAME_Lich_ProjectLibre.pod) · [Cách chạy và đọc ngoại lệ](evidence/README.md#đối-chiếu-32-bìa-báo-cáo) · Chương 3 và Phụ lục L |
 | Đối chiếu Innovation Pentagon và theo dõi phản hồi của Pilot 5 | [Bảng 35 điểm, nguồn từng hình và quyết định quản lý](docs/innovation-pentagon.md) · Trang **Innovation Pentagon** trong Excel · Mục 6.2, 7.1 và Phụ lục J trong báo cáo |
 | Tra mục tiêu, kết quả, kỳ đo và quyết định cho đủ 65 KPI | [Excel có bộ lọc](FAME_Ma_tran_65_KPI.xlsx) · [Bảng dữ liệu và từng trang nguồn](evidence/kpi_matrix.csv) · [Quy tắc và lệnh kiểm tra](evidence/README.md#ma-trận-nghiệm-thu-65-kpi) · Phụ lục G trong PDF |
