@@ -98,8 +98,15 @@ def read_schedule(root, cordis):
     without_notes = [row["variance_days"] for row in result if not row["note"]]
     return {
         "deliverables": result,
-        "by_work_package": {wp: {"reports": len(values), "late": sum(d > 0 for d in values)}
-                            for wp, values in by_wp.items()},
+        "by_work_package": {
+            wp: {
+                "reports": len(values),
+                "early": sum(d < 0 for d in values),
+                "on_deadline": values.count(0),
+                "late": sum(d > 0 for d in values),
+            }
+            for wp, values in by_wp.items()
+        },
         "excluding_annotated_covers": {
             "reports": len(without_notes),
             "late": sum(d > 0 for d in without_notes),

@@ -21,6 +21,7 @@ STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
 # ruff: noqa: E402 -- direct script execution needs the repository imports below.
 from Pilot5_nghiem_thu.tong_hop import PUBLIC_RESULT, report_review
+from report.appendix_directory import add_appendix_directory
 from report.kpi_appendix import append_register
 from report.pilot_evaluation import add_pilot_evaluation
 from report.pilot5_acceptance import append_acceptance
@@ -40,7 +41,23 @@ def report_fields(data):
     fields["schedule_total"] = str(len(schedule["deliverables"]))
     for key in ("late", "early", "on_deadline"):
         fields["schedule_" + key] = str(schedule[key])
-    for row in data["schedule"]["deliverables"]:
+    for wp, counts in schedule["by_work_package"].items():
+        prefix = wp.lower() + "_"
+        for key, source in (("total", "reports"), ("early", "early"), ("exact", "on_deadline"), ("late", "late")):
+            fields[prefix + key] = str(counts[source])
+    sensitivity = schedule["excluding_annotated_covers"]
+    fields["sensitivity_total"] = str(sensitivity["reports"])
+    fields["sensitivity_late"] = str(sensitivity["late"])
+    fields["sensitivity_median"] = number(sensitivity["median_signed_days"])
+    fields["d64_before"] = str(schedule["d64_before_review_days"])
+    fields["d64_delta"] = str(schedule["d64_before_review_days"] + schedule["d64_after_review_days"])
+
+    confirmed = json.loads((ROOT / "Pilot5_nghiem_thu/phep_do.json").read_text(encoding="utf-8"))
+    fields["confirmed_tickers"] = str(confirmed["tickers"])
+    for field, source in (("confirmed_matches", "matched"), ("confirmed_cells", "denominator")):
+        fields[field] = number(confirmed[source])
+        fields[field + "_en"] = format(confirmed[source], ",d")
+    for row in schedule["deliverables"]:
         k = row["deliverable"].replace(".", "_")
         fields[k + "_due"] = date.fromisoformat(row["due"]).strftime("%d/%m/%Y")
         fields[k + "_actual"] = date.fromisoformat(row["delivered"]).strftime("%d/%m/%Y")
@@ -234,6 +251,7 @@ def main():
     append_acceptance(doc, review)
     append_marketsense(doc)
     append_schedule(doc, data["schedule"])
+    add_appendix_directory(doc)
     if not args.pdf:
         # A Word-only export can reuse the released field cache without a renderer.
         # New anchors are resolved by Word or by a subsequent --pdf build.

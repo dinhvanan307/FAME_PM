@@ -45,7 +45,7 @@ python -m fame_pm --check --data-dir du_lieu
 
 Lệnh đầu tải metadata và 12 CSV, kiểm tra MD5 rồi chạy lại cả kiểm tra cấu trúc, hiệu chỉnh ngành và hai hồ sơ trọng số. Lệnh sau làm lại từ bản tải trên máy. Nếu chủ động cập nhật đầu vào, dùng `python -m fame_pm --write --data-dir du_lieu`, xem thay đổi trong `results/` rồi chạy lại `--check`. Khi có hai CSV gốc do điều phối viên lưu, thêm `--reviews-dir /duong/dan/thu_muc_phieu` để tái tính thống kê nhóm và đối chiếu với Excel. Hai tệp chi tiết được đọc tại chỗ.
 
-**Kết quả đáng xem.** D6.4 giao trễ 143 ngày lịch. Ba trong sáu KPI có đủ bằng chứng. Trong hồ sơ hồi cứu, số hồ sơ mở có đầu mối đề xuất tăng từ 0/3 lên 3/3. Trong buổi chấm độc lập, cả hai cách đều khớp tham chiếu 3/6. Khi thử hai hồ sơ trọng số ESG trên 604 dòng, có 39 dòng đổi thành phần top 5. Các kết quả này trả lời những câu hỏi khác nhau về tiến độ, chất lượng hồ sơ, quyết định của con người và hành vi công cụ. [Số liệu và nguồn theo từng phép tính](results/ket-qua.md)
+**Kết quả chính.** Có 22/32 bản bàn giao sau hạn trên bìa, trung vị +22 ngày lịch. Chương 3 trình bày theo bảy gói công việc, sau đó dùng D6.4 để giải thích 143 ngày trễ. Trong bài tập checklist, số hồ sơ mở có đầu mối tăng từ 0/3 lên 3/3 ở đối chiếu hồi cứu. Hai người chấm độc lập vẫn khớp tham chiếu 3/6 KPI ở mỗi điều kiện. Lượt đầu kiểm được điểm ESG của 91 mã, lượt xác nhận khớp 180.900 giá trị trên đủ 100 mã. Dữ liệu và cấu hình để kiểm lợi suất MS020 còn thiếu. [Phép tính quản lý](results/ket-qua.md) · [Lượt xác nhận ESG](Pilot5_nghiem_thu/phep_do.json)
 
 ## Bối cảnh
 

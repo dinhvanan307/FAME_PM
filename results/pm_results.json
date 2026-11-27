@@ -390,30 +390,44 @@
     "by_work_package": {
       "WP1": {
         "reports": 2,
+        "early": 2,
+        "on_deadline": 0,
         "late": 0
       },
       "WP2": {
         "reports": 6,
+        "early": 2,
+        "on_deadline": 0,
         "late": 4
       },
       "WP3": {
         "reports": 6,
+        "early": 0,
+        "on_deadline": 0,
         "late": 6
       },
       "WP4": {
         "reports": 6,
+        "early": 0,
+        "on_deadline": 0,
         "late": 6
       },
       "WP5": {
         "reports": 4,
+        "early": 3,
+        "on_deadline": 0,
         "late": 1
       },
       "WP6": {
         "reports": 4,
+        "early": 1,
+        "on_deadline": 0,
         "late": 3
       },
       "WP7": {
         "reports": 4,
+        "early": 1,
+        "on_deadline": 1,
         "late": 2
       }
     },

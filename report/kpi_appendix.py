@@ -87,7 +87,8 @@ def append_register(doc):
     conclusion = next(
         p for p in doc.paragraphs if p.text.startswith("Kết quả so sánh quản lý.")
     )
-    conclusion.add_run(" " + summary)
+    paragraph = doc.add_paragraph(summary)
+    conclusion._p.addnext(paragraph._p)
     heading(doc, "G  Ma trận nghiệm thu theo 65 KPI")
     doc.add_paragraph(
         "Người viết đối chiếu từng dòng trong bảy bảng chỉ tiêu của D6.4 với các bảng 1–7 "

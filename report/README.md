@@ -40,4 +40,4 @@ Mỗi lần dựng, chương trình kiểm tra phiếu, đếm số phiếu hoà
 
 Nếu lưu phiếu ở thư mục riêng khác, dùng `--pilot5-ballots "/đường/dẫn/tới/thư mục"`. Dùng `--out build` để xuất thử. Bộ dựng đặt [bản tổng hợp ẩn danh](../results/pilot5_review.json) dưới `results/` trong thư mục đầu ra. Khi phát hành, đưa bản tổng hợp lên GitHub cùng Word/PDF. Một bản clone sạch sẽ dựng lại Phụ lục K từ số liệu đã công bố. Hai tệp Excel có lý do và giờ chấm chi tiết được giữ ở thư mục riêng.
 
-Chương 3 và Phụ lục L lấy số liệu từ [32 cặp ngày đã đối chiếu](../evidence/deliverables.csv). [Cách kiểm lại bìa PDF, lịch XML và bản ProjectLibre](../evidence/README.md#đối-chiếu-32-bìa-báo-cáo).
+Bảng 3.1 tổng hợp cả bảy gói công việc. Trang mở đầu phụ lục liên kết A–L tới đúng tiêu đề trong Word và PDF. Kết luận lấy các số đếm của vòng xác nhận từ [phép đo 100 mã](../Pilot5_nghiem_thu/phep_do.json), cùng nguồn với Phụ lục K. Chương 3 và Phụ lục L lấy số liệu từ [32 cặp ngày đã đối chiếu](../evidence/deliverables.csv). [Cách kiểm lại bìa PDF, lịch XML và bản ProjectLibre](../evidence/README.md#đối-chiếu-32-bìa-báo-cáo).
