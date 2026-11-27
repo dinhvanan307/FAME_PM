@@ -28,3 +28,36 @@
 Người viết giữ nguyên mã gốc, kể cả hậu tố `.US`, và chỉ ghép khi ngày quan sát của bảng trùng ngày tín hiệu, ba cột số được xác định là E/S/G của cùng cổ phiếu, nguồn truy được đến trang hoặc giây. Phân biệt ngày dự báo, ngày dữ liệu, năm ví dụ, ngày sự kiện và kỳ danh mục. Không điền giá trị gần nhất hoặc suy lịch cho 604 dòng không có cột ngày trong bản ESG trên Zenodo. Một khóa đã xuất hiện ở D6.4 chỉ tính một lần.
 
 [Các dòng ứng viên đã chép](../../evidence/pilot5_esg_candidates.csv) gồm đủ ba dòng NVIDIA và một dòng đại diện cho cấu trúc hình 41. Các nguồn định tính không được tự chuyển thành dòng quan sát. Để đóng 1.478 khóa còn mở, ưu tiên xin bảng thành phần theo mã của 15 kỳ từ 31/12/2022 đến 29/02/2024 hoặc chỉ mục ngày được tác giả xác nhận cho ba tệp ESG. Bản xuất cần nêu ý nghĩa ngày, thang điểm, phiên bản và trường hợp thiếu giá trị. [CSV tác giả](https://zenodo.org/records/12744005) · [Bản ESG của Pilot 5](https://zenodo.org/records/17175084)
+
+## JSON xếp hạng và chỉ mục ngày
+
+**Đợt truy tìm tiếp ngày 27/11/2026.** Hai đường dẫn dữ liệu được kiểm tra độc lập. D1.4 cho biết điều kiện để lấy bản xếp hạng. Zenodo cho kiểm tra được đến nội dung từng CSV đã phát hành. Trong các nguồn công khai đã rà, chưa thu được tệp nào bổ sung được điểm E/S/G có ngày. Chạy lại phép ghép cho kết quả **0 dòng mới, 22 đã xác minh, 1.478 còn mở**. [Bảng từng mã–ngày đã nghiệm thu](../../results/marketsense_esg_matches.csv)
+
+### 1. Bản xếp hạng ở bảng 27
+
+Bảng 27 kéo dài qua **hai trang PDF**. Trang 47 mô tả *Ranking Aggressive ESG-Selective Portfolio* là bản chụp JSON khoảng 11 KB, tạo lại hằng tháng từ hệ thống quản lý danh mục nội bộ. Trang 48 ghi KM và JRC nắm quyền, lưu nội bộ, chia sẻ qua FAME Marketplace bằng token hoặc thuê bao, với giấy phép thương mại. Bảng mô tả thứ hạng của danh mục *Aggressive ESG-Selective*. Văn bản không cam kết có điểm riêng của cả ba trụ cho đủ 100 cổ phiếu. Nếu nhận được JSON, cần kiểm tra trường dữ liệu, ngày hiệu lực và phạm vi mã trước khi tính số dòng có thể ghép. [Trang 47](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=47) · [Quyền truy cập, trang 48](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=48)
+
+Trong phiên khách của FDAC, truy vấn `ESG` trả 0 kết quả. Nhập nguyên tên tài sản trả **7 thẻ**, không có tên khớp hoàn toàn. Kết quả gần tên nhất là *Portfolio Optimization algorithm (AIGO)*, được xếp loại **Algorithm**. Đây là ghi nhận từ màn hình tìm kiếm công khai tại thời điểm rà. Danh mục của người có quyền có thể khác. [Tra theo tên bảng 27](https://marketplace.fame-horizon.eu/fdac?query=Ranking%20Aggressive%20ESG-Selective%20Portfolio) · [Tra ESG](https://marketplace.fame-horizon.eu/fdac?query=ESG)
+
+### 2. Chỉ mục ngày của ba bảng E/S/G
+
+Zenodo liệt kê **1 phiên bản, 14 tệp phát hành** cho DOI này, gồm 12 CSV và 2 PDF. Mô tả của tác giả nhắc đến *Complete Pickle File* và 605 ngày giao dịch. Danh mục tệp tải không liệt kê pickle, JSON, tệp nén hoặc tệp chỉ mục ngày. Hai mục media mang tên hai PDF với hậu tố `.ptif`. Các PDF này cũng không có tệp đính kèm nhúng. [Bản ghi tác giả](https://zenodo.org/records/17175084) · [Các phiên bản](https://zenodo.org/api/records/17175084/versions) · [Tệp tải](https://zenodo.org/api/records/17175084/files) · [Media](https://zenodo.org/api/records/17175084/media-files)
+
+| Kiểm trên dữ liệu tải về | Kết quả có ý nghĩa cho phép ghép |
+|---|---|
+| Ba CSV điểm E/S/G gốc | Mỗi tệp có 604 dòng dữ liệu × 100 cột mã. Không có cột ngày hoặc mã dòng ngày. Tên tệp có khoảng thời gian và mã bản xuất `45391872bed3f263`. |
+| Kiểm tra CSV đồng hành | 11/12 CSV có toàn bộ tiêu đề là mã cổ phiếu. Tệp còn lại có 8 tiêu đề ngành. Hai tệp tín hiệu và thứ hạng cùng có 604 dòng nhưng cũng thiếu ngày. Tệp giá đóng cửa có 1.443 dòng. Cả 12 tệp đã được kiểm kích thước và MD5 với danh mục Zenodo. |
+| Căn cứ thời gian | Khoảng thời gian trong tên tệp, con số 605 trong phần mô tả và thứ tự 604 dòng trong dữ liệu không cho biết ngày nào ứng với từng dòng. Gán ngày cuối tháng hoặc lùi về phiên trước có thể ghép nhầm. |
+
+[Kiểm kê từng tệp, checksum, kích thước và tiêu đề cột](../../results/pilot5_zenodo_inventory.json) · [Mã kiểm tra trực tiếp](../verify_esg_publication.py)
+
+### 3. Kiểm tra khả năng phát hành ở kênh khác
+
+| Kênh | Kết quả quan sát |
+|---|---|
+| OpenAIRE theo mã tài trợ 101092639 | Có bốn mục dữ liệu. Mục ESG trỏ về DOI chung 17175083 và bản Zenodo 17175084 vừa kiểm. Ba mục kia là dữ liệu khí hậu châu Âu, tin tức ngoại hối và khảo sát hoàn thuế. [Truy vấn dữ liệu theo dự án FAME](https://api.openaire.eu/search/datasets?projectID=101092639&format=json&size=100) |
+| Zenodo của dự án và tác giả | Đã sàng lọc tên bản ghi và tên tệp của 56 mục công khai trong cộng đồng FAME. Tìm toàn Zenodo theo tác giả Metaxas cùng ESG, portfolio hoặc MarketSenseAI trả ba mục gồm bản tín hiệu, bản ESG và slide. Tìm theo chuỗi tên danh mục hoặc mã bản xuất không cho thêm kết quả. [Cộng đồng FAME](https://zenodo.org/communities/fame-project/records) · [Truy vấn tác giả](https://zenodo.org/api/records?q=creators.name%3A%22Metaxas%22%20AND%20%28ESG%20OR%20portfolio%20OR%20MarketSenseAI%29&size=25) |
+| Gói JSON có tên gần mục tiêu | Gói *FAME marketplace smart-contract evaluation data* có tệp như `results-T4-PAYU.json`. Bên trong là số đo gas cho giao dịch blockchain. Thiếu mã cổ phiếu, ngày quan sát và điểm ESG. [Gói TESTDATA và README của nhóm](https://zenodo.org/records/23057178) |
+| Công bố và phần mềm | Slide 13 của Metaxas tại buổi đào tạo Hürth minh họa tín hiệu và điểm mô hình cho Oracle. Phần nghiên cứu trên website MarketSenseAI dẫn đến hai bài báo. Danh mục repo GitHub công khai của đồng tác giả và tên tệp trong ba gói dashboard, tích hợp, FDAC của FAME không đưa ra bản xếp hạng hay chỉ mục được yêu cầu. [Slide tác giả](https://zenodo.org/records/17937541/files/presentationKostasMetaxas.pdf#page=13) · [Nghiên cứu](https://marketsense-ai.com/research) · [Kho tác giả](https://github.com/giorgosfatouros?tab=repositories) · [Các mô-đun của FAME](https://www.fame-horizon.eu/index.html@p=3257.html) |
+
+**Bằng chứng đủ để mở lại phép ghép.** Với bản CSV hiện tại, cần tác giả xác nhận ánh xạ giữa 604 vị trí dòng và ngày tương ứng, thứ tự dùng chung cho cả ba tệp, cùng quy ước nếu ngày tín hiệu rơi vào ngày nghỉ. Với đường JSON, cần các bản theo tháng có mã, ngày của bảng, ba điểm tách riêng và định nghĩa điểm. Chỉ các khóa có bằng chứng mới được thêm. Chưa xác định được quyền tải miễn phí của sinh viên đối với tài sản bảng 27. [D1.4, bảng 27](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=48)

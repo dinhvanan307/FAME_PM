@@ -15,6 +15,22 @@ def read_csv(path):
 
 
 class MarketSenseRelease(unittest.TestCase):
+    def test_date_index_inventory_agrees_with_the_verified_csv_release(self):
+        audit = json.loads((ROOT / "results/pilot5_zenodo_inventory.json").read_text())
+        reference = json.loads((ROOT / "esg-data-audit/reproduction.json").read_text())["csv_manifest"]
+        files = {item["file"]: item for item in audit["files"] if item["file"].endswith(".csv")}
+        self.assertEqual(files.keys(), reference.keys())
+        for name, item in files.items():
+            self.assertEqual((item["checksum"], item["rows"], item["columns"]),
+                             (reference[name]["md5"], reference[name]["rows"], reference[name]["columns"]))
+            self.assertEqual(item["ticker_columns"] + len(item["other_columns"]), item["columns"])
+        sector_table, = [item for item in files.values() if item["other_columns"]]
+        self.assertTrue(sector_table["file"].endswith("_esg_sector_daily.csv"))
+        self.assertEqual(sector_table["ticker_columns"], 0)
+        self.assertEqual(set(sector_table["other_columns"]), {
+            "Basic Materials", "Consumer Goods", "Energy", "Financial Services",
+            "Healthcare", "Real Estate", "Technology", "Utilities"})
+
     def test_public_source_review_preserves_exact_keys_and_exclusions(self):
         summary = json.loads((ROOT / "results/marketsense_sp100.json").read_text())
         review = summary["source_review"]

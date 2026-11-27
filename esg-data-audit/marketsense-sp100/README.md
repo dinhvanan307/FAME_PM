@@ -54,3 +54,5 @@ Từ thư mục gốc FAME_PM, nếu máy chưa có bản ESG, chạy lệnh đ�
 python esg-data-audit/reproduce_pilot5.py --data-dir du_lieu/zenodo --download
 python esg-data-audit/marketsense_sp100.py --check
 ```
+
+Để đối chiếu xem Zenodo có thêm phiên bản hoặc tệp chứa chỉ mục ngày, chạy `python esg-data-audit/verify_esg_publication.py --check` với kết nối mạng. Lệnh so danh mục hiện tại với [bản kiểm kê](../../results/pilot5_zenodo_inventory.json) và kiểm checksum các CSV địa phương. [Kết quả tìm JSON bảng 27 và chỉ mục ngày](ra-soat-nguon.md#json-xếp-hạng-và-chỉ-mục-ngày)

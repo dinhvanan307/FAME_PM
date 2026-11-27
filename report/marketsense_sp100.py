@@ -155,3 +155,49 @@ def append_marketsense(doc):
         if i:
             p.add_run("   ·   ")
         source_link(p, label, url)
+
+    publication = json.loads((ROOT / "results/pilot5_zenodo_inventory.json").read_text(encoding="utf-8"))
+    files = publication["files"]
+    csv_files = [item for item in files if "rows" in item]
+    all_ticker = sum(item["ticker_columns"] == item["columns"] for item in csv_files)
+    heading(doc, "K  Truy tìm bản xếp hạng tháng và ngày của 604 dòng ESG")
+    doc.add_paragraph(
+        "Ngày 27/11/2026, người viết kiểm tra hai nguồn có thể bổ sung bằng chứng cho "
+        f"{integer(remaining)} tín hiệu. Bảng 27 của D1.4 trải qua hai trang PDF. Trang 47 "
+        "mô tả JSON khoảng 11 KB, được tạo lại hằng tháng cho danh mục Aggressive ESG-Selective. "
+        "Trang 48 ghi KM và JRC nắm quyền và phân phối qua FAME Marketplace bằng token hoặc "
+        "thuê bao. Khi tìm theo đúng tên bảng trong phiên khách, cả bảy kết quả đều mang tên khác."
+    )
+    t = table(doc, ["Kiểm tra nguồn tác giả", "Kết quả đối chiếu của người viết"], [5.2, 10.2])
+    for item in [
+        ("Tệp tải trên Zenodo",
+         f"Có {len(publication['version_ids'])} phiên bản và {len(files)} tệp phát hành, gồm "
+         f"{len(csv_files)} CSV và {len(files) - len(csv_files)} PDF. Mô tả nhắc đến pickle, "
+         "danh sách tệp tải chưa có pickle hoặc tệp ngày."),
+        ("Kiểm các cột và checksum",
+         f"{all_ticker}/{len(csv_files)} CSV chỉ có cột mã chứng khoán. Tệp còn lại có tám cột ngành. "
+         "Ba bảng E/S/G đều có 604 dòng × 100 mã. Không có cột ngày để ghép."),
+        ("Bản công bố liên quan",
+         "Trong bốn bộ dữ liệu OpenAIRE gắn với dự án, mục ESG dẫn về cùng bản Zenodo. "
+         "Gói JSON thử nghiệm hợp đồng thông minh của FAME đo chi phí gas."),
+    ]:
+        for cell, value in zip(t.add_row().cells, item):
+            td(cell, value)
+    doc.add_paragraph(
+        f"Quyết định nghiệm thu. Chạy lại phép ghép đủ {integer(n)} tín hiệu cho "
+        f"{review['added']} dòng mới. Tổng số xác minh được là {verified}. Để mở lại "
+        "các dòng còn thiếu, cần KM/JRC cung cấp bản tháng có mã, ngày và điểm E/S/G riêng, "
+        "hoặc tác giả cung cấp 604 cặp số thứ tự dòng và ngày dùng chung cho ba tệp. "
+        "Với tín hiệu cuối tháng rơi vào ngày nghỉ, cần xác nhận ngày dữ liệu được dùng."
+    )
+    p = doc.add_paragraph(style="Minicap")
+    for i, (label, url) in enumerate([
+        ("D1.4, tr. 48", next(r["url"] for r in reports if r["report"] == "D1.4") + "#page=48"),
+        ("FDAC", "https://marketplace.fame-horizon.eu/fdac?query=Ranking%20Aggressive%20ESG-Selective%20Portfolio"),
+        ("Zenodo", publication["files_api"]),
+        ("OpenAIRE", "https://api.openaire.eu/search/datasets?projectID=101092639&format=json&size=100"),
+        ("Kiểm kê từng tệp", "https://github.com/dinhvanan307/FAME_PM/blob/main/results/pilot5_zenodo_inventory.json"),
+    ]):
+        if i:
+            p.add_run("   ·   ")
+        source_link(p, label, url)
