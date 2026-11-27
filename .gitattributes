@@ -1,0 +1,2 @@
+# Preserve the authors' CSV byte-for-byte, including original whitespace.
+esg-data-audit/marketsense-sp100/MarketSenseAI_data_SP100.csv -text whitespace=-trailing-space

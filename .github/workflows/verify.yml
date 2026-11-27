@@ -54,6 +54,7 @@ jobs:
         with:
           node-version: '24'
       - run: python esg-data-audit/reproduce_pilot5.py --data-dir du_lieu/zenodo --download > /dev/null
+      - run: python esg-data-audit/marketsense_sp100.py --check
       - run: python -m fame_pm.open_kpi_runs --source-dir du_lieu/portfolio --data-dir du_lieu/zenodo --check
       - uses: actions/checkout@v5
         with:

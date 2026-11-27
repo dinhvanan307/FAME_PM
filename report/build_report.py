@@ -23,6 +23,7 @@ from Pilot5_nghiem_thu.tong_hop import PUBLIC_RESULT, report_review
 from report.kpi_appendix import append_register
 from report.pilot_evaluation import add_pilot_evaluation
 from report.pilot5_acceptance import append_acceptance
+from report.marketsense_sp100 import append_marketsense
 
 
 def number(value, digits=0):
@@ -225,6 +226,7 @@ def main():
     append_register(doc)
     add_pilot_evaluation(doc)
     append_acceptance(doc, review)
+    append_marketsense(doc)
     if not args.pdf:
         # A Word-only export can reuse the released field cache without a renderer.
         # New anchors are resolved by Word or by a subsequent --pdf build.

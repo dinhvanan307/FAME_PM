@@ -1,0 +1,156 @@
+{
+  "signals_doi": "10.5281/zenodo.12744005",
+  "signals_sha256": "5b8b9bf3ac7a073939a67299d00dfbb766c9f396e8c7fae1b8d735dfbde2f6d0",
+  "pilot5_esg_doi": "10.5281/zenodo.17175084",
+  "observations": 1500,
+  "unique_tickers": 100,
+  "date_range": [
+    "2022-12-31",
+    "2024-02-29"
+  ],
+  "by_decision": {
+    "buy": 338,
+    "hold": 1150,
+    "sell": 12
+  },
+  "by_date": {
+    "2022-12-31": {
+      "buy": 23,
+      "hold": 77,
+      "sell": 0
+    },
+    "2023-01-31": {
+      "buy": 17,
+      "hold": 82,
+      "sell": 1
+    },
+    "2023-02-28": {
+      "buy": 12,
+      "hold": 88,
+      "sell": 0
+    },
+    "2023-03-31": {
+      "buy": 18,
+      "hold": 81,
+      "sell": 1
+    },
+    "2023-04-30": {
+      "buy": 17,
+      "hold": 83,
+      "sell": 0
+    },
+    "2023-05-31": {
+      "buy": 17,
+      "hold": 83,
+      "sell": 0
+    },
+    "2023-06-30": {
+      "buy": 12,
+      "hold": 87,
+      "sell": 1
+    },
+    "2023-07-31": {
+      "buy": 21,
+      "hold": 79,
+      "sell": 0
+    },
+    "2023-08-31": {
+      "buy": 27,
+      "hold": 73,
+      "sell": 0
+    },
+    "2023-09-30": {
+      "buy": 18,
+      "hold": 80,
+      "sell": 2
+    },
+    "2023-10-31": {
+      "buy": 17,
+      "hold": 82,
+      "sell": 1
+    },
+    "2023-11-30": {
+      "buy": 21,
+      "hold": 77,
+      "sell": 2
+    },
+    "2023-12-31": {
+      "buy": 25,
+      "hold": 74,
+      "sell": 1
+    },
+    "2024-01-31": {
+      "buy": 50,
+      "hold": 48,
+      "sell": 2
+    },
+    "2024-02-29": {
+      "buy": 43,
+      "hold": 56,
+      "sell": 1
+    }
+  },
+  "explanations_present": 1500,
+  "distinct_normalized_texts": 1500,
+  "median_words_by_decision": {
+    "buy": 275.0,
+    "hold": 297.0,
+    "sell": 297.0
+  },
+  "marker_patterns": {
+    "news": "\\b(?:news|headline[s]?)\\b",
+    "price_risk": "\\b(?:price dynamics|momentum|volatility|sharpe|drawdown[s]?)\\b",
+    "macro": "\\b(?:macro(?:economic[s]?|economy)?|inflation|interest rates?|federal reserve)\\b",
+    "fundamentals": "\\b(?:fundamentals?|balance sheet[s]?|cash flow[s]?|earnings|revenues?)\\b",
+    "explicit_esg": "\\bESG\\b|\\benvironmental,?\\s+social,?\\s+(?:and\\s+)?governance\\b"
+  },
+  "marker_counts_by_decision": {
+    "buy": {
+      "news": 280,
+      "price_risk": 331,
+      "macro": 280,
+      "fundamentals": 338,
+      "explicit_esg": 8
+    },
+    "hold": {
+      "news": 841,
+      "price_risk": 1108,
+      "macro": 1029,
+      "fundamentals": 1144,
+      "explicit_esg": 26
+    },
+    "sell": {
+      "news": 11,
+      "price_risk": 11,
+      "macro": 11,
+      "fundamentals": 12,
+      "explicit_esg": 0
+    }
+  },
+  "zenodo_esg": {
+    "raw_pillar_rows": {
+      "e": 604,
+      "s": 604,
+      "g": 604
+    },
+    "shared_tickers": 100,
+    "only_esg": [],
+    "only_signals": [],
+    "ticker_only_signal_rows": 1500,
+    "date_column": null,
+    "verifiable_ticker_date_pairs": 0
+  },
+  "d64_pdf_page_64": {
+    "source_dates": [
+      "2024-02-29"
+    ],
+    "visible_rows": 22,
+    "signal_counts_in_image": {
+      "buy": 22
+    },
+    "matched_ticker_date": 22,
+    "same_signal": 22,
+    "unmatched_source_keys": [],
+    "signal_rows_without_snapshot": 1478
+  }
+}
