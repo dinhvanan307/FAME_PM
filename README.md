@@ -4,6 +4,7 @@ Repo này là nơi thực hiện bài phân tích. Có thể lấy dữ liệu, 
 
 | Muốn làm gì? | Mở từ đây |
 |---|---|
+| Tra tiến độ của 32 báo cáo FAME | [Hạn, ngày giao, phiên bản và bìa nguồn](evidence/deliverables.csv) · [Lịch ProjectLibre](FAME_Lich_ProjectLibre.pod) · [Cách chạy và đọc ngoại lệ](evidence/README.md#đối-chiếu-32-bìa-báo-cáo) · Chương 3 và Phụ lục L |
 | Đối chiếu Innovation Pentagon và theo dõi phản hồi của Pilot 5 | [Bảng 35 điểm, nguồn từng hình và quyết định quản lý](docs/innovation-pentagon.md) · Trang **Innovation Pentagon** trong Excel · Mục 6.2, 7.1 và Phụ lục J trong báo cáo |
 | Tra mục tiêu, kết quả, kỳ đo và quyết định cho đủ 65 KPI | [Excel có bộ lọc](FAME_Ma_tran_65_KPI.xlsx) · [Bảng dữ liệu và từng trang nguồn](evidence/kpi_matrix.csv) · [Quy tắc và lệnh kiểm tra](evidence/README.md#ma-trận-nghiệm-thu-65-kpi) · Phụ lục G trong PDF |
 | Nghiệm thu riêng Pilot 5 và xử lý chín mã ngoại lệ | [Hồ sơ và lệnh chạy](Pilot5_nghiem_thu/) · [Lịch ProjectLibre](Pilot5_nghiem_thu/Lich_nghiem_thu.pod) · [Phiếu bấm P1](Pilot5_nghiem_thu/Duyet_P1.html) · [Phiếu bấm P2](Pilot5_nghiem_thu/Duyet_P2.html) · Phụ lục K |

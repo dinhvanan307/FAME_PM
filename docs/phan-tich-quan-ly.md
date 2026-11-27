@@ -8,13 +8,13 @@ FAME là dự án xây dựng thị trường dữ liệu cho tài chính nhúng
 
 | Đơn vị quan sát | Câu hỏi | Mẫu và đối chứng | Kết luận có thể bảo vệ |
 |---|---|---|---|
-| Sản phẩm bàn giao | Sản phẩm giao sớm hay trễ? | 5 bìa có cùng hai trường ngày; đối chiếu với lịch tái dựng | Sai lệch ngày lịch của từng sản phẩm |
+| Sản phẩm bàn giao | Sản phẩm giao sớm hay trễ? | 32 bìa có cùng hai trường ngày; đối chiếu với lịch tái dựng | Sai lệch ngày lịch của từng sản phẩm |
 | Giá trị điểm E/S/G | Công thức có tái tạo được số đã xuất? | Dòng đầu hiệu chuẩn, 603 dòng giữ lại; đối chứng giữ nguyên điểm gốc | Độ nhất quán số học trên tập ghép được |
 | Danh sách 5 mã dẫn đầu | Quyết định chọn tài sản có nhạy với trọng số? | Cùng một dòng, cùng 100 mã và quy tắc đồng điểm, thay duy nhất trọng số | Thay đổi thành phần hoặc thứ tự của danh sách |
 | Hồ sơ nghiệm thu | Khi dùng checklist, hồ sơ còn thiếu có rõ đầu mối hơn? | Cùng 6 KPI, nhận xét lưu trước đó và hồ sơ sau rà soát | Mức đầy đủ của hồ sơ tại thời điểm ghi nhận |
 | Quyết định của người chấm | Hiển thị gợi ý có thay đổi cách duyệt? | 2 người, 6 KPI, 12 lần bấm; mỗi KPI xuất hiện ở cả A và B | Mức khớp tham chiếu và thời gian thao tác trong buổi thử |
 
-Cách chọn mẫu ảnh hưởng trực tiếp đến kết luận. Năm sản phẩm có ngày công khai thuận tiện cho đối chiếu, nhưng không đại diện ngẫu nhiên cho mọi gói công việc. Sáu KPI được chọn vì liên quan đến người dùng và quy trình ESG. Có KPI có số đo, có KPI chỉ có bằng chứng định tính. Tỷ lệ khớp trong bài tập mô tả khả năng ra quyết định trên tập này. Không dùng nó làm tỷ lệ thành công của tất cả các thí điểm.
+Cách chọn mẫu ảnh hưởng trực tiếp đến kết luận. Phần tiến độ bao phủ cả 32 báo cáo trong danh mục công khai đã rà. Mỗi quan sát là một sản phẩm có bìa, các công việc nội bộ cần nguồn lịch riêng. Sáu KPI được chọn vì liên quan đến người dùng và quy trình ESG. Có KPI có số đo, có KPI chỉ có bằng chứng định tính. Tỷ lệ khớp trong bài tập mô tả khả năng ra quyết định trên tập này. Không dùng nó làm tỷ lệ thành công của tất cả các thí điểm.
 
 ## 2. Tích hợp và phạm vi
 
@@ -34,7 +34,9 @@ P5_BR1 liên quan đến xếp hạng tài sản, còn P5_BR10 liên quan đến
 
 ### Tiến độ
 
-Năm độ lệch ngày lịch lần lượt là −1, +31, +53, +143 và −8. Ba sản phẩm giao muộn, hai sản phẩm giao trước hạn. Trung vị có dấu là +31 ngày. D6.4 là trường hợp đáng điều tra vì nằm xa các mốc còn lại, đồng thời có lịch sử phiên bản đủ rõ để tách khoảng thời gian. Độ lệch của D6.4 thuộc bản đặc tả chung cho các thí điểm. Dùng con số đó làm độ trễ riêng của Pilot 5 sẽ vượt phạm vi bằng chứng. [Ngày nguồn của từng sản phẩm](../evidence/deliverables.csv)
+Đối chiếu 32 cặp ngày cho thấy 22 bản giao trễ, chín bản giao sớm và một bản giao đúng ngày. Trung vị có dấu là +22 ngày. Cả sáu bản ở WP3 và sáu bản ở WP4 đều có ngày giao sau hạn trên bìa. Đây là tín hiệu để PM kiểm tra lịch cơ sở theo gói công việc. D6.4 (+143 ngày) được chọn để phân tích tiếp vì có lịch sử phiên bản, phạm vi của nó gồm các thí điểm. [Ngày nguồn và phiên bản của từng sản phẩm](../evidence/deliverables.csv)
+
+Khi quyết định có cần mở vấn đề tiến độ hay không, PM cần xác định đúng lần nộp và hạn được duyệt. D7.2 ghi +333 ngày cho bản nộp lại. D5.4 đổi từ trễ 182 ngày sang sớm một ngày nếu chọn cuối M33. D3.5 và D3.6 đều trễ theo cả hai cách đọc hạn (+122 hoặc +31). D6.1 có thông tin nộp ở M10 và nộp lại ở M20 trong D6.4. Nếu tạm tách cả năm hồ sơ cần làm rõ, 17/27 bản còn lại giao trễ và trung vị là +15 ngày. Phép kiểm tra độ nhạy này do người viết thực hiện. [D7.2, lịch sử phiên bản](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D7.2-Dissemination-Communication-and-Standardization-Activities-I-v1.1.pdf.pdf#page=2) · [D6.4, tr. PDF 88](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=88) · [Sổ hạn và ghi chú](../evidence/deliverables.csv)
 
 Từ hạn 30/09/2024 tới bản sẵn sàng phản biện ngày 03/02/2025 là 126 ngày. Từ lúc đó tới ngày giao 20/02/2025 thêm 17 ngày. Các cập nhật về tài sản, KPI và tham gia của đối tác nằm trong khoảng đầu. Những mốc này hướng câu hỏi của PM về thời điểm đầu vào sẵn sàng. Chúng chưa đo số ngày một người làm việc, thời gian chờ bắt buộc hoặc nguyên nhân gốc. Muốn kết luận về nguyên nhân cần phiếu thay đổi, ngày yêu cầu bổ sung, ngày phản hồi và kết luận xử lý. Muốn kết luận về ngày kết thúc toàn dự án cần lịch phụ thuộc cơ sở và độ dự trữ. [Lịch sử phiên bản D6.4](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=2)
 
@@ -98,7 +100,7 @@ Hồ sơ tài trợ nêu đối tác và cơ cấu vốn; bản phát hành dữ
 
 | Hạng mục | Quyết định đề xuất của người viết | Điều kiện để thay đổi quyết định |
 |---|---|---|
-| Năm mốc giao | Ghi nhận chênh lệch theo từng bìa, ưu tiên điều tra phần trước phản biện của D6.4 | Lịch cơ sở có phụ thuộc và hồ sơ thay đổi giải thích tác động |
+| 32 mốc giao | Ghi nhận chênh lệch theo từng bìa, ưu tiên điều tra phần trước phản biện của D6.4 | Lịch cơ sở có phụ thuộc và hồ sơ thay đổi giải thích tác động |
 | Gói tính điểm | Chấp nhận bằng chứng số học trên v1 cho 100 mã sau hai lượt (91 mã ở lượt đầu) | Khi cần xác nhận phân ngành chính thức, bên dữ liệu cung cấp bảng ánh xạ có phiên bản |
 | Danh sách xếp hạng | Đưa so sánh có thứ tự theo từng hồ sơ trọng số vào tiêu chí kiểm thử | Nghiệp vụ xác nhận công thức, quy tắc đồng điểm và mục đích sử dụng |
 | Nghiệm thu sáu KPI | Công nhận ba chỉ tiêu có bằng chứng; yêu cầu bổ sung K04–K06 | Có đủ số đo, đơn vị, kỳ đo và nguồn để kiểm tra lại |

@@ -57,8 +57,8 @@ def read_schedule(root, cordis):
     baseline_ids = {u for u, t in tasks.items() if t.find("p:Baseline", ns) is not None}
     require({r["task_uid"] for r in records} == baseline_ids, "Baseline set differs from covers")
     require(
-        len(records) == len({r["deliverable"] for r in records}) == 5,
-        "Expected five distinct covers",
+        len(records) == len({r["deliverable"] for r in records}) == len(baseline_ids) == 32,
+        "Expected 32 distinct covers and milestone IDs",
     )
     result = []
     for record in records:
@@ -73,7 +73,11 @@ def read_schedule(root, cordis):
             (due, delivered) == (day(uid, "p:Baseline/p:Finish"), day(uid, "p:ActualFinish")),
             f"Cover and Project calendar differ for {record['deliverable']}",
         )
-        result.append({**record, "variance_days": (delivered - due).days})
+        variance = (delivered - due).days
+        require(due == day(uid, "p:Deadline") and int(record["variance_days"]) == variance
+                and tasks[uid].findtext("p:HyperlinkAddress", namespaces=ns) == record["source_url"],
+                f"Cover deadline, source or variance mismatch for {record['deliverable']}")
+        result.append({**record, "variance_days": variance})
     case = next(row for row in result if row["deliverable"] == "D6.4")
     review = day("15", "p:ActualFinish")
     require(review.isoformat() == "2025-02-03", "D6.4 review differs from revision 0.6")
@@ -87,9 +91,23 @@ def read_schedule(root, cordis):
         "RP2 mismatch",
     )
     days = [row["variance_days"] for row in result]
+    by_wp = {}
+    for row in result:
+        wp = "WP" + row["deliverable"].split(".")[0][1:]
+        by_wp.setdefault(wp, []).append(row["variance_days"])
+    without_notes = [row["variance_days"] for row in result if not row["note"]]
     return {
         "deliverables": result,
+        "by_work_package": {wp: {"reports": len(values), "late": sum(d > 0 for d in values)}
+                            for wp, values in by_wp.items()},
+        "excluding_annotated_covers": {
+            "reports": len(without_notes),
+            "late": sum(d > 0 for d in without_notes),
+            "median_signed_days": median(without_notes),
+        },
         "late": sum(d > 0 for d in days),
+        "early": sum(d < 0 for d in days),
+        "on_deadline": days.count(0),
         "on_time": sum(d <= 0 for d in days),
         "median_signed_days": median(days),
         "d64_before_review_days": before,

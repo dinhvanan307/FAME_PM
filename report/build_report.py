@@ -19,11 +19,13 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 STEM = "FAME_Bao_cao_cuoi_ky"
 sys.path.insert(0, str(ROOT))
+# ruff: noqa: E402 -- direct script execution needs the repository imports below.
 from Pilot5_nghiem_thu.tong_hop import PUBLIC_RESULT, report_review
 from report.kpi_appendix import append_register
 from report.pilot_evaluation import add_pilot_evaluation
 from report.pilot5_acceptance import append_acceptance
 from report.marketsense_sp100 import append_marketsense
+from report.schedule import append_schedule
 
 
 def number(value, digits=0):
@@ -33,7 +35,11 @@ def number(value, digits=0):
 
 def report_fields(data):
     fields = {}
-    fields["median_schedule"] = str(data["schedule"]["median_signed_days"])
+    schedule = data["schedule"]
+    fields["median_schedule"] = number(schedule["median_signed_days"])
+    fields["schedule_total"] = str(len(schedule["deliverables"]))
+    for key in ("late", "early", "on_deadline"):
+        fields["schedule_" + key] = str(schedule[key])
     for row in data["schedule"]["deliverables"]:
         k = row["deliverable"].replace(".", "_")
         fields[k + "_due"] = date.fromisoformat(row["due"]).strftime("%d/%m/%Y")
@@ -227,6 +233,7 @@ def main():
     add_pilot_evaluation(doc)
     append_acceptance(doc, review)
     append_marketsense(doc)
+    append_schedule(doc, data["schedule"])
     if not args.pdf:
         # A Word-only export can reuse the released field cache without a renderer.
         # New anchors are resolved by Word or by a subsequent --pdf build.

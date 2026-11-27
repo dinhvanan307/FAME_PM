@@ -4,7 +4,7 @@ Các ngày và ngưỡng trong hồ sơ dự án dùng làm đầu vào. Số ng
 
 | Câu hỏi | Bản ghi dùng để chạy | Cách quay lại nguồn độc lập |
 |---|---|---|
-| Giao đúng hạn? | [Năm cặp ngày](deliverables.csv), đối chiếu hai trường Baseline Finish và Actual Finish trong [MS Project XML](../FAME_Lich_MS_Project.xml) | Cột URL dẫn tới bìa đúng sản phẩm. D6.4 có thêm ngày sang phản biện tại [lịch sử v0.6](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=2). Mã UID dùng để định vị, tên sản phẩm được kiểm tra riêng. |
+| Giao đúng hạn? | [32 cặp ngày](deliverables.csv), đối chiếu hai trường Baseline Finish và Actual Finish trong [MS Project XML](../FAME_Lich_MS_Project.xml) | Cột URL dẫn tới bìa đúng sản phẩm. D6.4 có thêm ngày sang phản biện tại [lịch sử v0.6](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=2). Mã UID dùng để định vị, tên sản phẩm được kiểm tra riêng. |
 | Mốc thuộc kỳ nào? | Hai ngày RP2 trong [hồ sơ CORDIS](cordis.json) và dòng 24–26 của XML | Kỳ 2 trong [báo cáo định kỳ](https://cordis.europa.eu/project/id/101092639/reporting). RP2 là khoảng báo cáo. |
 | Ai tài trợ? | Mỗi hàng tài chính trong JSON lần lượt ghi tên, tổng chi phí và đóng góp EU bằng EUR. Dòng đầu là toàn dự án, bốn dòng tiếp theo là bốn tổ chức được chọn | Tra trường Total cost và EU contribution ở đầu [hồ sơ CORDIS](https://cordis.europa.eu/project/id/101092639), trường Net EU contribution ở từng tổ chức. Các tổ chức được chọn đã nằm trong tổng dự án. |
 | Mục tiêu và kết quả Pilot 5? | Các dòng 5–10, trang Nguon_KPI của [sổ nghiệm thu](../FAME_Nghiem_thu_6_KPI.xlsx). Số phần trăm lưu dưới dạng tỷ lệ 0–1. Cột M là đánh giá tính so sánh của người viết | [D6.4 Bảng 43](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=69) công bố mục tiêu. [D6.3 Bảng 5](https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=52) ghi kết quả. Liên kết đến trang PDF đúng cho từng KPI nằm trong [bảng kết quả](../results/ket-qua.md). |
@@ -55,3 +55,26 @@ python -m fame_pm.kpi_review --source-dir du_lieu/ra-soat-25 --download
 ```
 
 Lệnh thứ hai lấy 17 tệp công khai, kiểm tra 31 vị trí trích dẫn, đối chiếu mã SHA-256, trang PDF, đường dẫn trong ZIP và chín tiêu đề bảng xếp hạng trong D1.4. Mã còn xác minh ba số đếm 28, 25 và 9 trên đúng dòng bảng 5 của D6.3. Có thể chạy ngoại tuyến bằng cách bỏ `--download` khi thư mục đã có tệp. Mã kiểm tra xác nhận danh tính dữ liệu và vị trí trích dẫn. Quyết định nghiệm thu là đánh giá của người viết. FAME công bố mã chung trong các gói FAME-integration, FDAC-Open-API và FAME-dashboard. Với Pilot 7, mã nguồn được ghim tới commit của đối tác. Với Pilot 5, D1.4 bảng 36 xác định API KM/JRC là tài sản độc quyền. [Phần mềm FAME công bố](https://www.fame-horizon.eu/index.html%40p%3D3257.html) · [D1.4 tr. 58](https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=58)
+
+
+## Đối chiếu 32 bìa báo cáo
+
+[Sổ bàn giao](deliverables.csv) ghi mã sản phẩm, UID của mốc ProjectLibre, tiêu đề, phiên bản, hai ngày ISO, sai lệch theo ngày lịch, tháng dự án, liên kết trang 1 và ghi chú. Danh mục kiểm kê dùng lại [32 URL, số trang và SHA-256](pilot5_esg_pdf_screen.csv) của các PDF trên [trang sản phẩm chính thức](https://www.fame-horizon.eu/deliverables-download/). Các cột tìm kiếm ESG của danh mục phục vụ một phép rà riêng.
+
+Chạy từ thư mục gốc. Lệnh đầu lấy các PDF còn thiếu vào thư mục dữ liệu cục bộ. Chương trình kiểm mã SHA-256, số trang và hai trường ngày trên từng bìa trước khi so sánh với CSV đã công bố.
+
+```bash
+python -m pip install -r report/requirements.txt
+python -m fame_pm.schedule_sources --download
+python -m fame_pm --check
+```
+
+Trong ProjectLibre, mở [lịch .pod](../FAME_Lich_ProjectLibre.pod) và xem **Baseline Finish**, **Actual Finish**, **Deadline** và **Notes** của mốc. Mỗi sản phẩm có một UID riêng, kể cả khi tên sản phẩm cũng xuất hiện ở dòng tổng hợp. Đơn vị trong phép trừ là ngày lịch, mốc 08:00 trong XML là quy ước hiển thị. Trang Lich_giao của sổ Excel ban đầu và Hình 3.1 minh họa năm sản phẩm. Bảng đủ 32 nằm ở Phụ lục L và [kết quả tính lại](../results/ket-qua.md).
+
+Để dựng lại tệp native từ XML, đặt `PROJECTLIBRE_JAR` trỏ tới JAR của ProjectLibre 1.9.8 rồi chạy dưới Java 21. Lệnh thứ hai mở lại tệp bằng bộ đọc native để kiểm tra ngày của từng mốc, hạn, nguồn trong Notes và các liên kết tiền nhiệm.
+
+```bash
+mkdir -p build
+java -Djava.awt.headless=true -Duser.timezone=UTC -cp "$PROJECTLIBRE_JAR" bsh.Interpreter fame_pm/projectlibre_schedule.bsh write "$PWD/FAME_Lich_MS_Project.xml" "$PWD/build/FAME.pod"
+java -Djava.awt.headless=true -Duser.timezone=UTC -cp "$PROJECTLIBRE_JAR" bsh.Interpreter fame_pm/projectlibre_schedule.bsh check "$PWD/FAME_Lich_MS_Project.xml" "$PWD/build/FAME.pod"
+```

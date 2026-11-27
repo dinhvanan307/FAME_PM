@@ -40,9 +40,14 @@ class EvidenceTests(unittest.TestCase):
 
     def test_case_distinguishes_study_types(self):
         p = pm_results()
-        self.assertEqual(
-            [r["variance_days"] for r in p["schedule"]["deliverables"]], [-1, 31, 53, 143, -8]
-        )
+        schedule = p["schedule"]
+        days = {r["deliverable"]: r["variance_days"] for r in schedule["deliverables"]}
+        self.assertEqual(len(days), 32)
+        self.assertEqual([days[k] for k in ("D1.2", "D2.1", "D4.2", "D6.4", "D6.3")],
+                         [-1, 31, 53, 143, -8])
+        self.assertEqual((days["D7.2"], days["D5.4"], days["D7.4"]), (333, 182, 0))
+        self.assertEqual((schedule["late"], schedule["early"], schedule["on_deadline"],
+                          schedule["median_signed_days"]), (22, 9, 1, 22))
         self.assertEqual(p["retrospective"]["A"]["matches"], 6)
         self.assertEqual(p["retrospective"]["B"]["with_owner"], 3)
         self.assertEqual(p["independent_review"]["B"]["matches"], 3)

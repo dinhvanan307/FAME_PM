@@ -1,0 +1,72 @@
+// Java 21 and ProjectLibre 1.9.8. Run write then check in separate processes.
+import com.projectlibre1.util.Environment;
+import com.projectlibre1.exchange.*;
+import com.projectlibre1.pm.task.ProjectFactory;
+import com.projectlibre1.session.CreateOptions;
+import java.util.*;
+
+Environment.setStandAlone(true);
+Environment.setBatchMode(true);
+Environment.setVisible(false);
+try {
+    mode = bsh.args[0]; xml = bsh.args[1]; pod = bsh.args[2];
+    factory = ProjectFactory.getInstance();
+    if ("write".equals(mode)) {
+        options = new CreateOptions();
+        options.setLocal(true); options.setSync(false); options.setVerify(false);
+        options.setName("FAME | Lịch bàn giao và mốc kiểm soát");
+        project = factory.createProject(options);
+        importer = new MicrosoftImporter();
+        importer.setProjectFactory(factory); importer.setFileName(xml); importer.importProject(project);
+        source = new net.sf.mpxj.mspdi.MSPDIReader().read(xml);
+        for (task : project.getTasks()) {
+            row = source.getTaskByID((int) task.getId());
+            if (row.getSummary()) continue;
+            task.setDuration(0L); task.setPercentComplete(1.0);
+            if (row.getDeadline() != null) {
+                task.setDeadline(row.getDeadline().getTime());
+            }
+        }
+        project.setFileName(pod); project.setFileType(1);
+        writer = new LocalFileImporter();
+        writer.setProject(project); writer.setFileName(pod); writer.exportFile();
+    } else if ("check".equals(mode)) {
+        reader = new LocalFileImporter(); reader.setProjectFactory(factory);
+        reader.setFileName(pod); reader.importFile(); project = reader.getProject();
+        count = 0; baselines = 0; milestones = 0; dependencies = 0;
+        source = new net.sf.mpxj.mspdi.MSPDIReader().read(xml);
+        for (task : project.getTasks()) {
+            row = source.getTaskByID((int) task.getId());
+            if (!task.getName().equals(row.getName())) throw new Exception("Name mismatch at "+task.getId());
+            if (task.getStart() != row.getStart().getTime() || task.getEnd() != row.getFinish().getTime())
+                throw new Exception("Scheduled dates mismatch at "+task.getId());
+            if (!row.getSummary()) {
+                if (task.getActualStart() != row.getActualStart().getTime() ||
+                    task.getActualFinish() != row.getActualFinish().getTime() ||
+                    task.getDuration() != 0L || !task.isMilestone() || task.getPercentComplete() != 1.0)
+                    throw new Exception("Actual milestone mismatch at "+task.getId());
+                milestones++;
+            }
+            if (row.getDeadline() != null) {
+                if (task.getDeadline() != row.getDeadline().getTime() ||
+                    task.getBaselineFinish(0) != row.getBaselineFinish().getTime() ||
+                    task.getBaselineStart(0) != row.getBaselineStart().getTime())
+                    throw new Exception("Baseline mismatch at "+task.getId());
+                notes = row.getNotes(); url = notes.substring(notes.lastIndexOf("https://"));
+                if (task.getNotes().indexOf(url) < 0 || !url.endsWith("#page=1"))
+                    throw new Exception("Missing source at "+task.getId());
+                baselines++;
+            }
+            upstream = new TreeSet();
+            for (dep : task.getPredecessorList()) upstream.add(""+dep.getPredecessor().getId());
+            expected = new TreeSet();
+            for (dep : row.getPredecessors()) expected.add(""+dep.getTargetTask().getID());
+            if (!upstream.equals(expected)) throw new Exception("Dependency mismatch at "+task.getId());
+            dependencies += upstream.size(); count++;
+        }
+        if (count != source.getTasks().size() || baselines != 32)
+            throw new Exception("Incomplete schedule: "+count+" rows and "+baselines+" baselines");
+        print("VERIFIED "+count+" rows, "+milestones+" milestones, "+baselines+" cover pairs, "+dependencies+" predecessor links");
+    } else throw new Exception("Expected write or check");
+} catch (Throwable e) { e.printStackTrace(); System.exit(1); }
+System.exit(0);

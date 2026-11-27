@@ -39,3 +39,5 @@ python report/build_report.py --pdf
 Mỗi lần dựng, chương trình kiểm tra phiếu, đếm số phiếu hoàn tất và quyết định hợp lệ. Khi đủ 12 quyết định, Phụ lục K thêm bảng A/B về duyệt nhầm, từ chối nhầm, thời gian và mức đồng thuận. PM ghi nhận quyết định ký sau khi đối soát căn cứ. Các phiếu điền sai trường hoặc sai danh tính cần được sửa trước khi xuất báo cáo.
 
 Nếu lưu phiếu ở thư mục riêng khác, dùng `--pilot5-ballots "/đường/dẫn/tới/thư mục"`. Dùng `--out build` để xuất thử. Bộ dựng đặt [bản tổng hợp ẩn danh](../results/pilot5_review.json) dưới `results/` trong thư mục đầu ra. Khi phát hành, đưa bản tổng hợp lên GitHub cùng Word/PDF. Một bản clone sạch sẽ dựng lại Phụ lục K từ số liệu đã công bố. Hai tệp Excel có lý do và giờ chấm chi tiết được giữ ở thư mục riêng.
+
+Chương 3 và Phụ lục L lấy số liệu từ [32 cặp ngày đã đối chiếu](../evidence/deliverables.csv). [Cách kiểm lại bìa PDF, lịch XML và bản ProjectLibre](../evidence/README.md#đối-chiếu-32-bìa-báo-cáo).

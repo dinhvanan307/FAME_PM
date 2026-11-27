@@ -33,17 +33,29 @@ def summary_markdown(p):
         "",
         "## Ngày bàn giao",
         "",
-        "| Sản phẩm | Hạn gốc | Giao thực tế | Lệch ngày lịch |",
+        "| Sản phẩm | Hạn ghi trên bìa | Ngày giao trên bìa | Lệch ngày lịch |",
         "|---|---|---|---:|",
     ]
     for r in s["deliverables"]:
+        variance = f"{r['variance_days']:+d}" if r['variance_days'] else "0"
         lines.append(
-            f"| [{r['deliverable']}]({r['source_url']}) | {r['due']} | {r['delivered']} | {r['variance_days']:+} |"
+            f"| [{r['deliverable']}]({r['source_url']}) | {r['due']} | {r['delivered']} | {variance} |"
         )
+    subset = s["excluding_annotated_covers"]
     lines += [
         "",
         f"Hạn đến bản phản biện D6.4: {s['d64_before_review_days']} ngày. Từ đó đến bàn giao: "
-        f"{s['d64_after_review_days']} ngày. Trung vị sai lệch có dấu của năm sản phẩm: {s['median_signed_days']} ngày.",
+        f"{s['d64_after_review_days']} ngày. Trên {len(s['deliverables'])} sản phẩm có {s['late']} trễ, {s['early']} sớm, "
+        f"{s['on_deadline']} đúng ngày. Trung vị có dấu {s['median_signed_days']:+g} ngày.",
+        "",
+        "D7.2 ghi ngày giao bản nộp lại. D3.5, D3.6 và D5.4 có hạn ghi ngày khác tháng dự án trên cùng bìa. "
+        "D6.1 có thông tin khác nhau giữa các phiên bản tài liệu. Xem [sổ nguồn và ghi chú](../evidence/deliverables.csv).",
+        "",
+        "Số bản giao trễ theo gói công việc (mẫu số là tổng số báo cáo có bìa): "
+        + ", ".join(f"{wp} {counts['late']}/{counts['reports']}" for wp, counts in s["by_work_package"].items()) + ".",
+        "",
+        f"Khi tách các bìa có ghi chú về hạn hoặc phiên bản, còn {subset['late']}/{subset['reports']} bản "
+        f"giao trễ, trung vị {subset['median_signed_days']:+g} ngày.",
         "",
         "## Nghiệm thu Pilot 5",
         "",

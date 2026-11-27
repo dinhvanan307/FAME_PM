@@ -5,47 +5,428 @@
       {
         "deliverable": "D1.2",
         "task_uid": "6",
+        "title": "Data Management Plan",
+        "revision": "3.0",
         "due": "2023-06-30",
         "delivered": "2023-06-29",
+        "variance_days": -1,
+        "due_month": "6",
         "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2023/05/FAME-D1.2-Data-Management-Plan-v3.0.pdf#page=1",
-        "variance_days": -1
+        "note": ""
+      },
+      {
+        "deliverable": "D1.4",
+        "task_uid": "28",
+        "title": "Data Management Plan II",
+        "revision": "3.0",
+        "due": "2025-12-31",
+        "delivered": "2025-12-19",
+        "variance_days": -12,
+        "due_month": "36",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D1.4-Data-Management-Plan-II.pdf#page=1",
+        "note": ""
       },
       {
         "deliverable": "D2.1",
         "task_uid": "7",
+        "title": "Requirements Analysis, Specifications and Co-Creation",
+        "revision": "1.0",
         "due": "2023-06-30",
         "delivered": "2023-07-31",
+        "variance_days": 31,
+        "due_month": "6",
         "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2023/05/FAME-D2.1-_-Requirements-Analysis-Specifications-and-Co_Creation.pdf#page=1",
-        "variance_days": 31
+        "note": ""
+      },
+      {
+        "deliverable": "D2.2",
+        "task_uid": "29",
+        "title": "Technical Specifications and Platform Architecture I",
+        "revision": "1.0",
+        "due": "2023-09-30",
+        "delivered": "2023-09-28",
+        "variance_days": -2,
+        "due_month": "9",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2023/05/D2.2-Technical-Specifications-and-Platform-Architecture-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D2.3",
+        "task_uid": "30",
+        "title": "Integrated FAME Data Marketplace I",
+        "revision": "1.0",
+        "due": "2024-06-30",
+        "delivered": "2024-08-09",
+        "variance_days": 40,
+        "due_month": "18",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D2.3-_-Integrated-FAME-Data-Marketplace-I-.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D2.4",
+        "task_uid": "31",
+        "title": "Integrated FAME Data Marketplace II",
+        "revision": "2.0",
+        "due": "2025-06-30",
+        "delivered": "2025-07-31",
+        "variance_days": 31,
+        "due_month": "30",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D2.4-Integrated-FAME-Data-Marketplace-II.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D2.5",
+        "task_uid": "32",
+        "title": "Requirements Analysis, Specifications and Co-Creation II",
+        "revision": "1.0",
+        "due": "2024-06-30",
+        "delivered": "2024-07-24",
+        "variance_days": 24,
+        "due_month": "18",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D2.5-Requirements-Analysis-Specifications-and-Co-Creation-II-1.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D2.6",
+        "task_uid": "33",
+        "title": "Technical Specifications and Platform Architecture II",
+        "revision": "1.0",
+        "due": "2024-06-30",
+        "delivered": "2024-06-28",
+        "variance_days": -2,
+        "due_month": "18",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D2.6-Technical-Specifications-and-Platform-Architecture-II-1.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D3.1",
+        "task_uid": "34",
+        "title": "Secure Federated Data Management I",
+        "revision": "3.0",
+        "due": "2023-12-31",
+        "delivered": "2024-02-02",
+        "variance_days": 33,
+        "due_month": "12",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D3.1-_-Secure-Federated-Data-Management-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D3.2",
+        "task_uid": "35",
+        "title": "Federated Data Assets Catalogue I",
+        "revision": "1.0",
+        "due": "2024-02-29",
+        "delivered": "2024-05-28",
+        "variance_days": 89,
+        "due_month": "14",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D3.2-_-Federated-Data-Assets-Catalogue-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D3.3",
+        "task_uid": "36",
+        "title": "Mechanisms and Tools for Regulatory Compliance I",
+        "revision": "1.0",
+        "due": "2024-03-31",
+        "delivered": "2024-08-02",
+        "variance_days": 124,
+        "due_month": "15",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D3.3-_-Mechanisms-and-Tools-for-Regulatory-Compliance-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D3.4",
+        "task_uid": "37",
+        "title": "Secure Federated Data Management II",
+        "revision": "1.0",
+        "due": "2024-12-31",
+        "delivered": "2025-01-20",
+        "variance_days": 20,
+        "due_month": "24",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.4-Secure-Federated-Data-Management-II-1.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D3.5",
+        "task_uid": "38",
+        "title": "Federated Data Assets Catalogue II",
+        "revision": "1.0",
+        "due": "2025-03-31",
+        "delivered": "2025-07-31",
+        "variance_days": 122,
+        "due_month": "30",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.5-Federated-Data-Assets-Catalogue-II.pdf#page=1",
+        "note": "Hạn ghi ngày và M30 khác tháng. Nếu lấy cuối M30 (2025-06-30), sai lệch là +31 ngày."
+      },
+      {
+        "deliverable": "D3.6",
+        "task_uid": "39",
+        "title": "Mechanisms and Tools for Regulatory Compliance II",
+        "revision": "1.0",
+        "due": "2025-03-31",
+        "delivered": "2025-07-31",
+        "variance_days": 122,
+        "due_month": "30",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D3.6-Mechanisms-and-Tools-for-Regulatory-Compliance-II.pdf#page=1",
+        "note": "Hạn ghi ngày và M30 khác tháng. Nếu lấy cuối M30 (2025-06-30), sai lệch là +31 ngày."
+      },
+      {
+        "deliverable": "D4.1",
+        "task_uid": "40",
+        "title": "Blockchain-based Data Provenance Infrastructure I",
+        "revision": "1.0",
+        "due": "2023-12-31",
+        "delivered": "2024-01-15",
+        "variance_days": 15,
+        "due_month": "12",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D4.1-Blockchain-based-Data-Provenance-Infrastructure-I.pdf#page=1",
+        "note": ""
       },
       {
         "deliverable": "D4.2",
         "task_uid": "8",
+        "title": "Pricing, Trading and Monetization Techniques I",
+        "revision": "1.2",
         "due": "2024-03-31",
         "delivered": "2024-05-23",
+        "variance_days": 53,
+        "due_month": "15",
         "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D4.2-Pricing-Trading-and-Monetization-Techniques-I.pdf#page=1",
-        "variance_days": 53
+        "note": ""
       },
       {
-        "deliverable": "D6.4",
-        "task_uid": "17",
-        "due": "2024-09-30",
-        "delivered": "2025-02-20",
-        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=1",
-        "variance_days": 143
+        "deliverable": "D4.3",
+        "task_uid": "41",
+        "title": "Operational Models, Business Models and Governance I",
+        "revision": "1.0",
+        "due": "2024-04-30",
+        "delivered": "2024-05-31",
+        "variance_days": 31,
+        "due_month": "16",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D4.3-Operational-Models-Business-Models-and-Governance-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D4.4",
+        "task_uid": "42",
+        "title": "Blockchain-based Data Provenance Infrastructure",
+        "revision": "1.0",
+        "due": "2024-12-31",
+        "delivered": "2025-01-20",
+        "variance_days": 20,
+        "due_month": "24",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D4.4-Blockchain-based-Data-Provenance-Infrastructure-1.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D4.5",
+        "task_uid": "43",
+        "title": "Pricing, Trading and Monetization Techniques II",
+        "revision": "1.0",
+        "due": "2025-03-31",
+        "delivered": "2025-04-01",
+        "variance_days": 1,
+        "due_month": "27",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D4.5-Pricing-Trading-and-Monetization-Techniques-II-1-1.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D4.6",
+        "task_uid": "44",
+        "title": "Operational Models, Business Models and Governance II",
+        "revision": "3.0",
+        "due": "2025-06-30",
+        "delivered": "2025-07-30",
+        "variance_days": 30,
+        "due_month": "30",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D4.6-_-Operational-Models-Business-Models-and-Governance-II.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D5.1",
+        "task_uid": "45",
+        "title": "Trusted and Explainable AI Techniques I",
+        "revision": "1.0",
+        "due": "2024-03-31",
+        "delivered": "2024-03-25",
+        "variance_days": -6,
+        "due_month": "15",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D5.1-Trusted-and-Explainable-AI-Techniques-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D5.2",
+        "task_uid": "46",
+        "title": "Energy Efficient Analytics Toolbox . I",
+        "revision": "3.0",
+        "due": "2024-03-31",
+        "delivered": "2024-03-22",
+        "variance_days": -9,
+        "due_month": "15",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D5.2-Energy-Efficient-Analytics-Toolbox-I.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D5.3",
+        "task_uid": "47",
+        "title": "Trusted and Explainable AI Techniques. II",
+        "revision": "3.0",
+        "due": "2025-09-30",
+        "delivered": "2025-09-12",
+        "variance_days": -18,
+        "due_month": "33",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D5.3-Trusted-and-Explainable-AI-Techniques.-II.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D5.4",
+        "task_uid": "48",
+        "title": "Energy Efficient Analytics Toolbox. II",
+        "revision": "3.0",
+        "due": "2025-03-31",
+        "delivered": "2025-09-29",
+        "variance_days": 182,
+        "due_month": "33",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D5.4-Energy-Efficient-Analytics-Toolbox.-II.pdf#page=1",
+        "note": "Hạn ghi ngày và M33 khác tháng. Nếu lấy cuối M33 (2025-09-30), sai lệch là -1 ngày."
+      },
+      {
+        "deliverable": "D6.1",
+        "task_uid": "49",
+        "title": "Use Cases Specification and Pilot Sites Preparation. I",
+        "revision": "1.0",
+        "due": "2023-10-31",
+        "delivered": "2023-12-23",
+        "variance_days": 53,
+        "due_month": "10",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.1-Use-Cases-Specification-and-Pilot-Sites-Preparation-I.pdf#page=1",
+        "note": "D6.4 trang PDF 88 mô tả D6.1 nộp M10 và nộp lại M20. Số ngày ở đây chỉ áp dụng cho cặp ngày trên bìa D6.1."
+      },
+      {
+        "deliverable": "D6.2",
+        "task_uid": "50",
+        "title": "Integrated Pilot Systems and Pilot Operations",
+        "revision": "3.0",
+        "due": "2025-09-30",
+        "delivered": "2025-10-04",
+        "variance_days": 4,
+        "due_month": "33",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.2-_-Integrated-Pilot-Systems-and-Pilot-Operations.pdf#page=1",
+        "note": ""
       },
       {
         "deliverable": "D6.3",
         "task_uid": "23",
+        "title": "Techno-Economic Evaluation and Stakeholders’ Feedback",
+        "revision": "3.0",
         "due": "2025-12-31",
         "delivered": "2025-12-23",
+        "variance_days": -8,
+        "due_month": "36",
         "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2025/05/FAME-D6.3-Techno-Economic-Evaluation-and-Stakeholders-Feedback.pdf#page=1",
-        "variance_days": -8
+        "note": ""
+      },
+      {
+        "deliverable": "D6.4",
+        "task_uid": "17",
+        "title": "Use Cases Specification and Pilot Sites Preparation. II",
+        "revision": "1.0",
+        "due": "2024-09-30",
+        "delivered": "2025-02-20",
+        "variance_days": 143,
+        "due_month": "21",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D7.1",
+        "task_uid": "51",
+        "title": "Dissemination and Community Building Plan",
+        "revision": "3.0",
+        "due": "2023-04-30",
+        "delivered": "2023-05-03",
+        "variance_days": 3,
+        "due_month": "4",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2023/05/FAME-D7.1-Dissemination-and-Community-Building-Plan.v3.0.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D7.2",
+        "task_uid": "52",
+        "title": "Dissemination, Communication, and Standardization Activities. I",
+        "revision": "1.1",
+        "due": "2023-12-31",
+        "delivered": "2024-11-28",
+        "variance_days": 333,
+        "due_month": "12",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D7.2-Dissemination-Communication-and-Standardization-Activities-I-v1.1.pdf.pdf#page=1",
+        "note": "Bản 1.1 nộp lại sau phản biện. Trang 2 ghi bản 1.0 chuẩn bị nộp ngày 2024-01-15; chưa có biên nhận lần đầu."
+      },
+      {
+        "deliverable": "D7.4",
+        "task_uid": "53",
+        "title": "Training Programs and Learning Centre",
+        "revision": "6.0",
+        "due": "2025-12-31",
+        "delivered": "2025-12-31",
+        "variance_days": 0,
+        "due_month": "36",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D7.4-Training-Programs-and-Learning-Centre.pdf#page=1",
+        "note": ""
+      },
+      {
+        "deliverable": "D7.5",
+        "task_uid": "54",
+        "title": "Dissemination, Communication, and Standardization Activities. II",
+        "revision": "3.0",
+        "due": "2025-12-31",
+        "delivered": "2025-12-30",
+        "variance_days": -1,
+        "due_month": "36",
+        "source_url": "https://www.fame-horizon.eu/wp-content/uploads/2026/02/FAME-D7.5-Dissemination-Communication-and-Standardization-Activities.-II-1.pdf#page=1",
+        "note": ""
       }
     ],
-    "late": 3,
-    "on_time": 2,
-    "median_signed_days": 31,
+    "by_work_package": {
+      "WP1": {
+        "reports": 2,
+        "late": 0
+      },
+      "WP2": {
+        "reports": 6,
+        "late": 4
+      },
+      "WP3": {
+        "reports": 6,
+        "late": 6
+      },
+      "WP4": {
+        "reports": 6,
+        "late": 6
+      },
+      "WP5": {
+        "reports": 4,
+        "late": 1
+      },
+      "WP6": {
+        "reports": 4,
+        "late": 3
+      },
+      "WP7": {
+        "reports": 4,
+        "late": 2
+      }
+    },
+    "excluding_annotated_covers": {
+      "reports": 27,
+      "late": 17,
+      "median_signed_days": 15
+    },
+    "late": 22,
+    "early": 9,
+    "on_deadline": 1,
+    "on_time": 10,
+    "median_signed_days": 22.0,
     "d64_before_review_days": 126,
     "d64_after_review_days": 17,
     "rp2": [

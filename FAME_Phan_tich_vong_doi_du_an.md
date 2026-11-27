@@ -48,7 +48,7 @@ Trong kỳ báo cáo cuối, FAME mô tả cơ chế điều phối qua các cu�
 
 ## 4. Cuối 2024 đến đầu 2025 — Ngày giao trễ nói lên điều gì?
 
-Bảng dưới so sánh trường ngày đến hạn và ngày bàn giao trên bìa cùng một tài liệu. **Chênh lệch do người viết tính theo ngày lịch.** Đây là các mốc có thể kiểm tra, không phải toàn bộ lịch dự án.
+Bảng dưới trích năm ví dụ từ [sổ 32 sản phẩm](evidence/deliverables.csv), đối chiếu hạn và ngày giao trên bìa cùng một phiên bản. **Chênh lệch do người viết tính theo ngày lịch.** Đây là các mốc có thể kiểm tra, không phải toàn bộ lịch dự án.
 
 | Sản phẩm | Đến hạn | Bàn giao | Chênh lệch |
 |---|---|---|---|
@@ -62,7 +62,7 @@ D6.4 cho biết nhóm tiếp tục cập nhật tài sản dữ liệu ngày **2
 
 **Phép tính và diễn giải của người viết.** Từ hạn giao đến khi có bản sẵn sàng phản biện là **126 ngày**. Từ mốc này đến khi bàn giao là **17 ngày**. Điểm đáng điều tra nằm ở quá trình chuẩn bị đầu vào trước phản biện. Hồ sơ không cho biết một nhóm cụ thể đã gây chậm, chi phí làm lại là bao nhiêu hoặc lịch kết thúc dự án sẽ thay đổi thế nào nếu D6.4 giao đúng hạn. Muốn trả lời, cần nhật ký vấn đề, chi phí và lịch cơ sở có quan hệ phụ thuộc. [D6.4, lịch sử phiên bản][hist]
 
-**Lịch ProjectLibre do người viết dựng.** Lịch ghi 19 mốc lịch sử trong bốn nhóm. Các dòng 24–26 trình bày riêng kỳ báo cáo RP2 từ 01/07/2024 đến 31/12/2025, gồm một thanh tổng hợp và hai mốc ranh giới. D6.4 và D6.3 được bàn giao trong kỳ. [CORDIS, kỳ 2](https://cordis.europa.eu/project/id/101092639/reporting). Năm sản phẩm có cả hạn gốc và ngày giao, trong đó ba sản phẩm giao muộn và hai sản phẩm giao sớm. Mở tệp .pod trong ProjectLibre để đối chiếu Baseline Finish (hạn trên bìa) với Actual Finish (ngày bàn giao). Notes trên từng mốc ghi nguồn. Đã mở lại tệp .pod và kiểm tra 19 ngày thực tế, 5 hạn gốc và 11 liên kết trong các chuỗi phiên bản. Những liên kết này biểu diễn thứ tự bản thảo do người viết dựng lại. [Lịch ProjectLibre](./FAME_Lich_ProjectLibre.pod) · [Bản trao đổi Microsoft Project XML](./FAME_Lich_MS_Project.xml) · [Sổ ngày nguồn và phép tính](./FAME_Nghiem_thu_6_KPI.xlsx)
+**Lịch ProjectLibre do người viết dựng.** Lịch gồm 48 mốc và 6 dòng tổng hợp. Dòng 24–26 giữ kỳ RP2, dòng 27 nhóm 27 lần giao bổ sung. Khi mở lại tệp .pod, 32 hạn, 32 ngày giao và 11 liên kết thứ tự giữa các phiên bản đều khớp lịch XML. Trong danh mục công khai có 22 bản giao trễ, 9 bản giao sớm, một bản đúng ngày, trung vị +22 ngày. D7.2 (+333 ngày) ghi lần nộp lại. D3.5, D3.6 và D5.4 có tháng dự án khác với hạn ghi ngày. Chi tiết ở Chương 3 và Phụ lục L. [Lịch ProjectLibre](./FAME_Lich_ProjectLibre.pod) · [Bản trao đổi Microsoft Project XML](./FAME_Lich_MS_Project.xml) · [Bìa và ghi chú từng hồ sơ](./evidence/deliverables.csv) · [Kỳ RP2 trên CORDIS](https://cordis.europa.eu/project/id/101092639/reporting)
 
 ## 5. Năm 2025 — Theo dấu Pilot 5 từ đầu vào đến người sử dụng
 
@@ -153,7 +153,7 @@ Báo cáo kỳ cuối ghi nhận **7 thí điểm đã triển khai**, **21 mô 
 | Miền | Kết quả áp dụng của người viết |
 |---|---|
 | Tích hợp và phạm vi | Nối WBS với phiên bản đặc tả và sáu KPI thuộc Pilot 5. Tách phê duyệt dữ liệu, chức năng và lợi ích kinh doanh. |
-| Tiến độ và chi phí | Đối chiếu năm cặp hạn–giao trong ProjectLibre. Tách chi phí đối tác với chi phí pilot. Hồ sơ hiện có chưa đủ để tính CPI hay chi phí vượt ngân sách. |
+| Tiến độ và chi phí | Đối chiếu 32 cặp hạn–giao trong ProjectLibre. Tách chi phí đối tác với chi phí pilot. Hồ sơ hiện có chưa đủ để tính CPI hay chi phí vượt ngân sách. |
 | Chất lượng và rủi ro | Chấm lại sáu KPI và giữ ba hồ sơ thiếu dữ liệu ở trạng thái mở. Theo dõi sai lệch do thiếu mẫu số, khóa ngày và danh mục so sánh. |
 | Nguồn lực và truyền thông | Xác định người soạn, phản biện, kiểm tra chất lượng từ hồ sơ. Ghi đầu mối và dữ liệu còn thiếu ở từng dòng chưa nghiệm thu. |
 | Mua sắm và các bên liên quan | Đánh giá mua sắm cần hợp đồng, phạm vi cấp phép và đơn giá. Ba vai trò nhận yêu cầu bổ sung là đề xuất để xác nhận với bên nghiệp vụ. |
