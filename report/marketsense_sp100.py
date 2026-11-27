@@ -1,4 +1,4 @@
-"""Render the two Pilot 5 evidence pages from the published signal audit."""
+"""Render the Pilot 5 evidence pages from the published signal audit."""
 import csv
 import json
 from pathlib import Path
@@ -105,3 +105,53 @@ def append_marketsense(doc):
     source_link(p, "Bộ ESG v1", "https://zenodo.org/records/17175084")
     p.add_run("   ·   ")
     source_link(p, "Bảng ghép và bản chép từng dòng", AUDIT)
+
+    review = data["source_review"]
+    heading(doc, "K  Rà nguồn bổ sung cho các tín hiệu còn thiếu ESG")
+    end_date = data["date_range"][-1]
+    with (ROOT / "evidence/pilot5_esg_pdf_screen.csv").open(encoding="utf-8", newline="") as stream:
+        reports = list(csv.DictReader(stream))
+    doc.add_paragraph(
+        f"Ngày 27/11/2026, người viết sàng lọc lớp văn bản của {len(reports)} báo cáo FAME "
+        f"({integer(sum(int(r['pdf_pages']) for r in reports))} trang PDF), xem hình ở các trang liên quan, "
+        "đối chiếu bản giới thiệu Pilot 5, ba bộ slide webinar, ảnh Showcase và năm video. "
+        f"Trước khi rà có {review['baseline']} khóa đã xác minh. Số khóa mới đủ điều kiện là "
+        f"{review['added']}. Tổng sau khi rà là {review['verified']}/{integer(n)}."
+    )
+    t = table(doc, ["Nguồn gốc", "Điều đọc được từ FAME", "Kết luận của người viết"], [3.3, 6.6, 5.5])
+    items = [
+        ("KM Cube, slide 14", "Ví dụ NVIDIA có E/S/G riêng cho các năm 2016, 2017 và 2018.",
+         "Chỉ có năm và cả ba năm đều trước 31/12/2022."),
+        ("D6.2, hình 41, tr. 46", "ABBV.US xuất hiện trong bảng. Ngày lọc 21/09/2025, ngày dữ liệu 19/09/2025.",
+         "Ngoài kỳ. ESG Rank là điểm xếp hạng tổng hợp."),
+        ("Webinar 4, 30:18 và 31:52", "Màn hình xếp hạng tháng 9/2025, tiếp theo là cơ cấu danh mục tối ưu.",
+         "Các cột xếp hạng và tỷ trọng không cung cấp bộ điểm E/S/G theo mã."),
+        ("D1.4, bảng 27, tr. 47", "Mô tả một bản xếp hạng JSON được tái tạo hằng tháng.",
+         "Cần lấy bản xuất có mã, ngày và ba điểm để kiểm chứng từng dòng."),
+    ]
+    for item in items:
+        for cell, value in zip(t.add_row().cells, item):
+            td(cell, value)
+    verified = review["verified"]
+    remaining = review["open"]
+    final_month = sum(data["by_date"][end_date].values()) - len(joined)
+    doc.add_paragraph(
+        f"Quyết định nghiệm thu của người viết. Bảng D6.4 vẫn cung cấp {verified} khóa có "
+        f"nguồn cấp dòng. Trong {integer(remaining)} khóa còn mở, {final_month} thuộc "
+        "ngày 29/02/2024, phần còn lại thuộc 14 kỳ trước. Muốn bổ sung cần bảng thành phần "
+        "theo mã, ngày dự báo hoặc ngày hiệu lực, kèm định nghĩa thang điểm. "
+        "Các video bổ trợ được lấy mẫu theo thời gian nên có thể bỏ sót khung hình ngắn."
+    )
+    p = doc.add_paragraph(style="Minicap")
+    for i, (label, url) in enumerate([
+        ("Slide 14", "https://zenodo.org/records/17937391/files/fame_presentation%20%282%29.pdf#page=14"),
+        ("D6.2, tr. 46", next(r["url"] for r in reports if r["report"] == "D6.2") + "#page=46"),
+        ("Video 30:18", "https://www.youtube.com/watch?v=cmfj7OEz2Ow&t=1818s"),
+        ("Video 31:52", "https://www.youtube.com/watch?v=cmfj7OEz2Ow&t=1912s"),
+        ("D1.4, tr. 47", next(r["url"] for r in reports if r["report"] == "D1.4") + "#page=47"),
+        ("Sổ rà nguồn", "https://github.com/dinhvanan307/FAME_PM/blob/main/esg-data-audit/marketsense-sp100/ra-soat-nguon.md"),
+        ("CSV từng mã, ngày và nguồn", "https://github.com/dinhvanan307/FAME_PM/blob/main/results/marketsense_esg_matches.csv"),
+    ]):
+        if i:
+            p.add_run("   ·   ")
+        source_link(p, label, url)

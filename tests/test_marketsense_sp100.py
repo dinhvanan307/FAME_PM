@@ -15,6 +15,30 @@ def read_csv(path):
 
 
 class MarketSenseRelease(unittest.TestCase):
+    def test_public_source_review_preserves_exact_keys_and_exclusions(self):
+        summary = json.loads((ROOT / "results/marketsense_sp100.json").read_text())
+        review = summary["source_review"]
+        verified = read_csv("results/marketsense_esg_matches.csv")
+        by_key = {(r["ticker"], r["date"]): r for r in verified}
+        d64 = read_csv("evidence/pilot5_d64_p64.csv")
+        self.assertEqual(len(by_key), len(verified))
+        self.assertEqual(set(by_key), {(r["ticker"], r["predicted_at"]) for r in d64})
+        for row in d64:
+            match = by_key[row["ticker"], row["predicted_at"]]
+            self.assertEqual([match[p] for p in ("env", "soc", "gov")],
+                             [row[p] for p in ("env", "soc", "gov")])
+            self.assertTrue(match["url"].endswith("#page=64"))
+            self.assertEqual(match["date_role"], "predicted_at")
+            self.assertEqual(match["locator"], "PDF 64, display ID " + row["display_id"])
+        self.assertEqual((review["baseline"], review["added"], review["verified"], review["open"]),
+                         (len(d64), 0, len(verified), summary["observations"] - len(verified)))
+        reasons = {(r["ticker"], r["period"]): r["decision_reasons"] for r in review["candidate_review"]}
+        for year in ("2016", "2017", "2018"):
+            self.assertIn("year_only", reasons["NVDA.US", year])
+            self.assertIn("illustrative_example", reasons["NVDA.US", year])
+        self.assertIn("no_separate_pillars", reasons["ABBV.US", "2025-09-19"])
+        self.assertIn("no_exact_signal_key", reasons["ABBV.US", "2025-09-19"])
+
     def test_dated_evidence_stays_with_its_original_key(self):
         signal_file = "esg-data-audit/marketsense-sp100/MarketSenseAI_data_SP100.csv"
         self.assertEqual(hashlib.md5((ROOT / signal_file).read_bytes()).hexdigest(),

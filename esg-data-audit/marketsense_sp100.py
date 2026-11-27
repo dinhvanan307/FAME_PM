@@ -7,6 +7,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from datetime import date
+from decimal import Decimal
 from pathlib import Path
 from statistics import median
 
@@ -15,6 +16,9 @@ from reproduce_pilot5 import load_exports
 ROOT = Path(__file__).resolve().parents[1]
 SIGNALS = ROOT / "esg-data-audit/marketsense-sp100/MarketSenseAI_data_SP100.csv"
 SNAPSHOT = ROOT / "evidence/pilot5_d64_p64.csv"
+CANDIDATES = ROOT / "evidence/pilot5_esg_candidates.csv"
+D64_URL = ("https://www.fame-horizon.eu/wp-content/uploads/2026/02/"
+           "FAME-D6.4-Use-Cases-Specification-and-Pilot-Sites-Preparation.-II.pdf#page=64")
 SIGNAL_SHA256 = "5b8b9bf3ac7a073939a67299d00dfbb766c9f396e8c7fae1b8d735dfbde2f6d0"
 LABELS = ("buy", "hold", "sell")
 # Each rule is an observable text marker, counted once per explanation.
@@ -32,6 +36,62 @@ def dated_key(ticker, day):
     if not ticker or date.fromisoformat(day).isoformat() != day:
         raise ValueError(f"Invalid key: {ticker}, {day}")
     return ticker, day
+
+
+def review_sources(rows, candidate_path=CANDIDATES):
+    signals = {(r["ticker"], r["date"]): r for r in rows}
+    eligible = {}
+    baseline = set()
+    for key, stock in signals.items():
+        if int(stock["d64_key_matched"]):
+            baseline.add(key)
+            eligible[key] = dict(ticker=key[0], date=key[1], signal_id=stock["source_id"],
+                                 decision=stock["decision"], date_role="predicted_at",
+                                 env=stock["d64_env"], soc=stock["d64_soc"], gov=stock["d64_gov"],
+                                 source="D6.4", locator="PDF 64, display ID " + stock["d64_display_id"],
+                                 url=D64_URL)
+    decisions = []
+    with candidate_path.open(encoding="utf-8", newline="") as stream:
+        for row in csv.DictReader(stream):
+            key = row["ticker"], row["period"]
+            if not all(row[f].strip() for f in ("ticker", "source", "locator", "url")):
+                raise ValueError(f"Missing source or ticker for {key}")
+            reasons = []
+            if row["kind"] == "illustrative_stock_pillars":
+                reasons.append("illustrative_example")
+            if row["date_role"] == "year":
+                if not re.fullmatch(r"[0-9]{4}", row["period"]):
+                    raise ValueError(f"Invalid reference year: {key}")
+                reasons.append("year_only")
+            elif row["date_role"] in {"predicted_at", "data_as_of"}:
+                dated_key(*key)
+            else:
+                raise ValueError(f"Unknown date meaning for {key}")
+            if row["kind"] not in {"stock_pillars", "illustrative_stock_pillars", "stock_ranking"}:
+                raise ValueError(f"Unknown observation type for {key}")
+            if row["kind"] == "stock_ranking" or not all(row[p] for p in ("env", "soc", "gov")):
+                reasons.append("no_separate_pillars")
+            if key not in signals:
+                reasons.append("no_exact_signal_key")
+            if not reasons:
+                scores = tuple(Decimal(row[p]) for p in ("env", "soc", "gov"))
+                if not all(x.is_finite() for x in scores):
+                    raise ValueError(f"Invalid pillar score: {key}")
+                if key in eligible:
+                    if scores != tuple(Decimal(eligible[key][p]) for p in ("env", "soc", "gov")):
+                        raise ValueError(f"Conflicting pillar scores; inspect sources for {key}")
+                    reasons.append("already_verified")
+                else:
+                    eligible[key] = dict(ticker=key[0], date=key[1], signal_id=signals[key]["source_id"],
+                                         decision=signals[key]["decision"],
+                                         **{f: row[f] for f in ("date_role", "env", "soc", "gov",
+                                                                "source", "locator", "url")})
+            decisions.append({f: row[f] for f in ("ticker", "period", "source", "locator", "url")}
+                             | {"decision_reasons": reasons or ["new_match"]})
+    review = {"baseline": len(baseline), "added": len(eligible.keys() - baseline),
+              "verified": len(eligible), "open": len(signals) - len(eligible),
+              "candidate_review": decisions}
+    return review, [eligible[k] for k in sorted(eligible, key=lambda k: (k[1], k[0]))]
 
 
 def analyze(esg_dir):
@@ -124,18 +184,24 @@ def analyze(esg_dir):
     return summary, output
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--esg-dir", type=Path, default=ROOT / "du_lieu/zenodo")
-    parser.add_argument("--check", action="store_true", help="Compare both results to the published files")
-    args = parser.parse_args()
-    summary, rows = analyze(args.esg_dir)
+def render_csv(rows):
     buffer = io.StringIO(newline="")
     writer = csv.DictWriter(buffer, fieldnames=rows[0], lineterminator="\n")
     writer.writeheader()
     writer.writerows(rows)
+    return buffer.getvalue()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--esg-dir", type=Path, default=ROOT / "du_lieu/zenodo")
+    parser.add_argument("--check", action="store_true", help="Compare all results to the published files")
+    args = parser.parse_args()
+    summary, rows = analyze(args.esg_dir)
+    summary["source_review"], verified = review_sources(rows)
     artifacts = {"marketsense_sp100.json": json.dumps(summary, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
-                 "marketsense_sp100.csv": buffer.getvalue()}
+                 "marketsense_sp100.csv": render_csv(rows),
+                 "marketsense_esg_matches.csv": render_csv(verified)}
     for name, content in artifacts.items():
         path = ROOT / "results" / name
         if args.check:
@@ -143,7 +209,8 @@ def main():
                 parser.exit(1, f"Published result differs: {name}\n")
         else:
             path.write_bytes(content.encode())
-    print(f"{len(rows)} signals, {summary['d64_pdf_page_64']['matched_ticker_date']} dated image matches")
+    result = summary["source_review"]
+    print(f"{len(rows)} signals, {result['verified']} verified, {result['added']} added, {result['open']} open")
 
 
 if __name__ == "__main__":

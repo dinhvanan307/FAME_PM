@@ -46,7 +46,9 @@ Trong [bảng 1.500 dòng](../../results/marketsense_sp100.csv), `source_id` n�
 
 ## Chạy lại
 
-Từ thư mục gốc FAME_PM, nếu máy chưa có bản ESG, chạy lệnh đầu để tải nguồn. CSV MarketSenseAI đã có sẵn trong repo. Lệnh thứ hai kiểm lại từng byte của hai đầu ra so với kết quả đã công bố. Bỏ `--check` để dựng lại CSV và JSON.
+Lượt rà báo cáo, slide và video ngày 27/11/2026 bổ sung 0 khóa. [Sổ rà nguồn và mốc video](ra-soat-nguon.md) ghi căn cứ loại các bảng có năm hoặc ngày. [Danh sách nghiệm thu](../../results/marketsense_esg_matches.csv) ghi đủ 22 mã–ngày đã ghép, ba điểm gốc, ý nghĩa của ngày và liên kết đến đúng trang cho mỗi dòng.
+
+Từ thư mục gốc FAME_PM, nếu máy chưa có bản ESG, chạy lệnh đầu để tải nguồn. CSV MarketSenseAI đã có sẵn trong repo. Lệnh thứ hai kiểm lại từng byte của cả ba đầu ra. Bỏ `--check` để dựng lại hai CSV và JSON.
 
 ```bash
 python esg-data-audit/reproduce_pilot5.py --data-dir du_lieu/zenodo --download
